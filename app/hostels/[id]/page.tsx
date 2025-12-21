@@ -20,7 +20,8 @@ export default function HostelDetailsPage() {
     const { hostels, addBooking } = useData();
     const { currentUser } = useAuth();
 
-    const hostelId = parseInt(Array.isArray(id) ? id[0] : id);
+    const idString = Array.isArray(id) ? id[0] : id;
+    const hostelId = idString ? parseInt(idString) : -1;
     const hostel = hostels.find(h => h.id === hostelId);
 
     const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
