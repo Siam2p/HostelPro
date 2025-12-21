@@ -66,7 +66,7 @@ export default function HostelDetailsPage() {
 
         if (selectedRoomId && selectedBedId) {
             addBooking({
-                id: Date.now(),
+                id: new Date().getTime(),
                 userId: currentUser.id,
                 hostelId: hostel.id,
                 roomId: selectedRoomId,
