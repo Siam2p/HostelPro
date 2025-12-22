@@ -58,5 +58,5 @@ export interface MockData {
     users: User[];
     hostels: Hostel[];
     bookings: Booking[];
-    notices: Notice[];
+    notices?: Notice[];
 }
