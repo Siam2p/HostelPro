@@ -1,59 +1,46 @@
 "use client";
 
-import React, { useState, useCallback } from 'react';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import React, { useState } from 'react';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
-const containerStyle = {
-    width: '100%',
-    height: '100%',
-    borderRadius: '0.5rem'
-};
+// Fix for default marker icon missing in React Leaflet
+const icon = L.icon({
+    iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+    iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
+    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+});
 
-// Dhaka, Bangladesh
-const defaultCenter = {
-    lat: 23.8103,
-    lng: 90.4125
-};
+function LocationMarker({ onSelect }: { onSelect: (lat: number, lng: number) => void }) {
+    const [position, setPosition] = useState<L.LatLng | null>(null);
 
-interface MapPickerProps {
-    onLocationSelect: (lat: number, lng: number) => void;
-}
-
-export default function MapPicker({ onLocationSelect }: MapPickerProps) {
-    const { isLoaded } = useJsApiLoader({
-        id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyD4fQbqgfndoWT-hLG0XMkIcdSg0OaJARA"
+    useMapEvents({
+        click(e) {
+            setPosition(e.latlng);
+            onSelect(e.latlng.lat, e.latlng.lng);
+        },
     });
 
-    const [markerPosition, setMarkerPosition] = useState<google.maps.LatLngLiteral | null>(null);
+    return position === null ? null : (
+        <Marker position={position} icon={icon}></Marker>
+    );
+}
 
-    const onMapClick = useCallback((e: google.maps.MapMouseEvent) => {
-        if (e.latLng) {
-            const lat = e.latLng.lat();
-            const lng = e.latLng.lng();
-            setMarkerPosition({ lat, lng });
-            onLocationSelect(lat, lng);
-        }
-    }, [onLocationSelect]);
-
-    if (!isLoaded) {
-        return <div className="h-full w-full bg-gray-100 animate-pulse flex items-center justify-center rounded-lg">Loading Maps...</div>;
-    }
-
+export default function MapPicker({ onLocationSelect }: { onLocationSelect: (lat: number, lng: number) => void }) {
     return (
-        <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={defaultCenter}
-            zoom={12}
-            onClick={onMapClick}
-            options={{
-                streetViewControl: false,
-                mapTypeControl: false,
-            }}
+        <MapContainer
+            center={[23.8103, 90.4125]} // Dhaka
+            zoom={13}
+            style={{ height: "100%", width: "100%", borderRadius: "0.5rem" }}
         >
-            {markerPosition && (
-                <Marker position={markerPosition} />
-            )}
-        </GoogleMap>
+            <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <LocationMarker onSelect={onLocationSelect} />
+        </MapContainer>
     );
 }
