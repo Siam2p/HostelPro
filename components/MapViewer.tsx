@@ -1,19 +1,13 @@
 "use client";
 
 import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
-const icon = L.icon({
-    iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-    iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-    shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-});
+const containerStyle = {
+    width: '100%',
+    height: '300px',
+    borderRadius: '1rem'
+};
 
 interface MapViewerProps {
     lat: number;
@@ -22,19 +16,31 @@ interface MapViewerProps {
 }
 
 export default function MapViewer({ lat, lng, name }: MapViewerProps) {
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: "AIzaSyD4fQbqgfndoWT-hLG0XMkIcdSg0OaJARA"
+    });
+
+    const center = { lat, lng };
+
+    if (!isLoaded) {
+        return <div className="h-[300px] w-full bg-gray-100 animate-pulse flex items-center justify-center rounded-2xl">Loading Maps...</div>;
+    }
+
     return (
-        <div className="h-[300px] w-full rounded-xl overflow-hidden border border-border shadow-sm">
-            <MapContainer center={[lat, lng]} zoom={15} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[lat, lng]} icon={icon}>
-                    <Popup>
-                        {name}
-                    </Popup>
-                </Marker>
-            </MapContainer>
-        </div>
+        <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={15}
+            options={{
+                streetViewControl: false,
+                mapTypeControl: false,
+            }}
+        >
+            <Marker
+                position={center}
+                title={name}
+            />
+        </GoogleMap>
     );
 }

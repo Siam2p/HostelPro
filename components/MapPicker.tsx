@@ -1,52 +1,59 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import React, { useState, useCallback } from 'react';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
-// Fix for Leaflet marker icons in Next.js
-const icon = L.icon({
-    iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-    iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-    shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-});
+const containerStyle = {
+    width: '100%',
+    height: '100%',
+    borderRadius: '0.5rem'
+};
 
-function LocationMarker({ onSelect }: { onSelect: (lat: number, lng: number) => void }) {
-    const [position, setPosition] = useState<L.LatLng | null>(null);
-    const map = useMapEvents({
-        click(e) {
-            setPosition(e.latlng);
-            onSelect(e.latlng.lat, e.latlng.lng);
-            map.flyTo(e.latlng, map.getZoom());
-        },
-    });
+// Dhaka, Bangladesh
+const defaultCenter = {
+    lat: 23.8103,
+    lng: 90.4125
+};
 
-    return position === null ? null : (
-        <Marker position={position} icon={icon}></Marker>
-    );
+interface MapPickerProps {
+    onLocationSelect: (lat: number, lng: number) => void;
 }
 
-export default function MapPicker({ onSelect }: { onSelect: (lat: number, lng: number) => void }) {
-    // Default to Dhaka coordinates
-    const center = { lat: 23.8103, lng: 90.4125 };
+export default function MapPicker({ onLocationSelect }: MapPickerProps) {
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: "AIzaSyD4fQbqgfndoWT-hLG0XMkIcdSg0OaJARA"
+    });
+
+    const [markerPosition, setMarkerPosition] = useState<google.maps.LatLngLiteral | null>(null);
+
+    const onMapClick = useCallback((e: google.maps.MapMouseEvent) => {
+        if (e.latLng) {
+            const lat = e.latLng.lat();
+            const lng = e.latLng.lng();
+            setMarkerPosition({ lat, lng });
+            onLocationSelect(lat, lng);
+        }
+    }, [onLocationSelect]);
+
+    if (!isLoaded) {
+        return <div className="h-full w-full bg-gray-100 animate-pulse flex items-center justify-center rounded-lg">Loading Maps...</div>;
+    }
 
     return (
-        <div className="h-[300px] w-full rounded-lg overflow-hidden border border-border mt-4">
-            <MapContainer center={center} zoom={13} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <LocationMarker onSelect={onSelect} />
-            </MapContainer>
-            <div className="text-xs text-text-muted mt-2 text-center">
-                ম্যাপে ক্লিক করে লোকেশন সিলেক্ট করুন 📍
-            </div>
-        </div>
+        <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={defaultCenter}
+            zoom={12}
+            onClick={onMapClick}
+            options={{
+                streetViewControl: false,
+                mapTypeControl: false,
+            }}
+        >
+            {markerPosition && (
+                <Marker position={markerPosition} />
+            )}
+        </GoogleMap>
     );
 }
