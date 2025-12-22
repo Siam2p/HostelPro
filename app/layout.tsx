@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+const hindSiliguri = Hind_Siliguri({
+  variable: "--font-hind-siliguri",
+  subsets: ["bengali", "latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -61,7 +62,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning={true}
-        className={`${inter.variable} antialiased flex flex-col min-h-screen`}
+        className={`${hindSiliguri.variable} antialiased flex flex-col min-h-screen font-[family-name:var(--font-hind-siliguri)]`}
       >
         <AuthProvider>
           <DataProvider>

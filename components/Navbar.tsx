@@ -2,12 +2,19 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import { Button } from './ui/Button';
 
 export function Navbar() {
     const { currentUser, logout } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const pathname = usePathname();
+
+    const isActive = (path: string) => pathname === path;
+    const baseLinkClass = "font-medium transition-colors hover:text-primary";
+    const activeLinkClass = "text-primary font-bold";
+    const inactiveLinkClass = "text-text-muted";
 
     return (
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-border">
@@ -19,11 +26,17 @@ export function Navbar() {
 
                 {/* Desktop Links */}
                 <div className="hidden md:flex gap-8">
-                    <Link href="/" className="font-medium text-text-muted hover:text-primary transition-colors">
+                    <Link href="/" className={`${baseLinkClass} ${isActive('/') ? activeLinkClass : inactiveLinkClass}`}>
                         হোম
                     </Link>
-                    <Link href="/#hostels" className="font-medium text-text-muted hover:text-primary transition-colors">
+                    <Link href="/about" className={`${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
+                        আমাদের সম্পর্কে
+                    </Link>
+                    <Link href="/hostels" className={`${baseLinkClass} ${isActive('/hostels') ? activeLinkClass : inactiveLinkClass}`}>
                         হোস্টেলসমূহ
+                    </Link>
+                    <Link href="/contact" className={`${baseLinkClass} ${isActive('/contact') ? activeLinkClass : inactiveLinkClass}`}>
+                        যোগাযোগ
                     </Link>
                 </div>
 

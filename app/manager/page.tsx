@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
@@ -20,8 +20,13 @@ export default function ManagerDashboard() {
     const [newHostelPrice, setNewHostelPrice] = useState('');
     const [newHostelLoc, setNewHostelLoc] = useState('');
 
+    useEffect(() => {
+        if (!currentUser || currentUser.role !== 'manager') {
+            router.push('/login');
+        }
+    }, [currentUser, router]);
+
     if (!currentUser || currentUser.role !== 'manager') {
-        if (typeof window !== 'undefined') router.push('/login'); // Basic protection
         return null;
     }
 
