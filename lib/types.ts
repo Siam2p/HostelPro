@@ -17,6 +17,10 @@ export interface Hostel {
     id: number;
     name: string;
     location: string;
+    coordinates?: {
+        lat: number;
+        lng: number;
+    };
     price: number;
     description: string;
     image: string;

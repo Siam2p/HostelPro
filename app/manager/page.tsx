@@ -8,6 +8,12 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Hostel } from '@/lib/types';
+import dynamic from 'next/dynamic';
+
+const MapPicker = dynamic(() => import('@/components/MapPicker'), {
+    ssr: false,
+    loading: () => <div className="h-[300px] w-full bg-gray-100 animate-pulse rounded-lg mt-4">Loading Map...</div>
+});
 
 export default function ManagerDashboard() {
     const { currentUser } = useAuth();
@@ -19,6 +25,7 @@ export default function ManagerDashboard() {
     const [newHostelName, setNewHostelName] = useState('');
     const [newHostelPrice, setNewHostelPrice] = useState('');
     const [newHostelLoc, setNewHostelLoc] = useState('');
+    const [newHostelCoords, setNewHostelCoords] = useState<{ lat: number, lng: number } | null>(null);
 
     useEffect(() => {
         if (!currentUser || currentUser.role !== 'manager') {
@@ -40,6 +47,7 @@ export default function ManagerDashboard() {
             id: newId,
             name: newHostelName,
             location: newHostelLoc,
+            coordinates: newHostelCoords || undefined,
             price: Number(newHostelPrice),
             description: "নতুন হোস্টেল",
             image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -55,6 +63,7 @@ export default function ManagerDashboard() {
         setNewHostelName('');
         setNewHostelPrice('');
         setNewHostelLoc('');
+        setNewHostelCoords(null);
     };
 
     return (
@@ -148,6 +157,17 @@ export default function ManagerDashboard() {
                                 value={newHostelLoc}
                                 onChange={e => setNewHostelLoc(e.target.value)}
                             />
+
+                            {/* Map Picker */}
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-text-muted">ম্যাপে লোকেশন পিন করুন (অপশনাল)</label>
+                                <MapPicker onSelect={(lat, lng) => setNewHostelCoords({ lat, lng })} />
+                                {newHostelCoords && (
+                                    <p className="text-xs text-green-600">
+                                        লোকেশন সিলেক্টেড: {newHostelCoords.lat.toFixed(4)}, {newHostelCoords.lng.toFixed(4)}
+                                    </p>
+                                )}
+                            </div>
                             <input
                                 type="number"
                                 className="p-3 border border-border rounded-lg"

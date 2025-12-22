@@ -12,6 +12,7 @@ export const initialData: MockData = {
             id: 101,
             name: "Oceanic Student Living",
             location: "Downtown, Metro City",
+            coordinates: { lat: 23.8103, lng: 90.4125 }, // Dhaka coordinates
             price: 150,
             description: "A premium hostel with ocean views and high-speed wifi. Perfect for students who love serenity.",
             image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",

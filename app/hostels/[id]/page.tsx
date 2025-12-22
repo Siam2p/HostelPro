@@ -9,6 +9,12 @@ import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import JsonLd from '@/components/JsonLd';
+import dynamic from 'next/dynamic';
+
+const MapViewer = dynamic(() => import('@/components/MapViewer'), {
+    ssr: false,
+    loading: () => <div className="h-[300px] w-full bg-gray-100 animate-pulse rounded-2xl">Loading Map...</div>
+});
 
 // Metadata generation would typically be server-side, but this is a client component.
 // For a real app, we'd separate the page into a server component layout or similar.
@@ -162,6 +168,27 @@ export default function HostelDetailsPage() {
                                 আমাদের হোস্টেলে আপনি পাবেন সম্পূর্ণ ঘরোয়া পরিবেশ। ছাত্র এবং চাকরিজীদের জন্য আদর্শ। ২৪ ঘণ্টা নিরাপত্তা, ওয়াইফাই এবং সুস্বাদু খাবারের ব্যবস্থা রয়েছে।
                             </p>
                         </div>
+
+                        {/* Location Map */}
+                        {hostel.coordinates && (
+                            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                                <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                                    <span>📍</span> লোকেশন
+                                </h2>
+                                <p className="text-gray-600 mb-4">{hostel.location}</p>
+                                <MapViewer lat={hostel.coordinates.lat} lng={hostel.coordinates.lng} name={hostel.name} />
+                                <div className="mt-4 flex justify-end">
+                                    <a
+                                        href={`https://www.google.com/maps/search/?api=1&query=${hostel.coordinates.lat},${hostel.coordinates.lng}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 text-primary font-bold hover:underline"
+                                    >
+                                        <span>🗺️</span> Google Maps-এ দেখুন
+                                    </a>
+                                </div>
+                            </div>
+                        )}
 
                         {/* Room Selection */}
                         <div>
