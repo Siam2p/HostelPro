@@ -25,19 +25,48 @@ export function Navbar() {
                 </Link>
 
                 {/* Desktop Links */}
+                {/* Role Based Navigation */}
                 <div className="hidden md:flex gap-8">
-                    <Link href="/" className={`${baseLinkClass} ${isActive('/') ? activeLinkClass : inactiveLinkClass}`}>
-                        হোম
-                    </Link>
-                    <Link href="/about" className={`${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
-                        আমাদের সম্পর্কে
-                    </Link>
-                    <Link href="/hostels" className={`${baseLinkClass} ${isActive('/hostels') ? activeLinkClass : inactiveLinkClass}`}>
-                        হোস্টেলসমূহ
-                    </Link>
-                    <Link href="/contact" className={`${baseLinkClass} ${isActive('/contact') ? activeLinkClass : inactiveLinkClass}`}>
-                        যোগাযোগ
-                    </Link>
+                    {currentUser?.role === 'admin' ? (
+                        <>
+                            <Link href="/admin" className={`${baseLinkClass} ${isActive('/admin') ? activeLinkClass : inactiveLinkClass}`}>
+                                ড্যাশবোর্ড
+                            </Link>
+                            <Link href="/admin/users" className={`${baseLinkClass} ${isActive('/admin/users') ? activeLinkClass : inactiveLinkClass}`}>
+                                ব্যবহারকারী
+                            </Link>
+                            <Link href="/admin/hostels" className={`${baseLinkClass} ${isActive('/admin/hostels') ? activeLinkClass : inactiveLinkClass}`}>
+                                সব হোস্টেল
+                            </Link>
+                        </>
+                    ) : currentUser?.role === 'manager' ? (
+                        <>
+                            <Link href="/manager" className={`${baseLinkClass} ${isActive('/manager') ? activeLinkClass : inactiveLinkClass}`}>
+                                ড্যাশবোর্ড
+                            </Link>
+                            <Link href="/about" className={`${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
+                                আমাদের সম্পর্কে
+                            </Link>
+                            <Link href="/contact" className={`${baseLinkClass} ${isActive('/contact') ? activeLinkClass : inactiveLinkClass}`}>
+                                যোগাযোগ
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link href="/" className={`${baseLinkClass} ${isActive('/') ? activeLinkClass : inactiveLinkClass}`}>
+                                হোম
+                            </Link>
+                            <Link href="/about" className={`${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
+                                আমাদের সম্পর্কে
+                            </Link>
+                            <Link href="/hostels" className={`${baseLinkClass} ${isActive('/hostels') ? activeLinkClass : inactiveLinkClass}`}>
+                                হোস্টেলসমূহ
+                            </Link>
+                            <Link href="/contact" className={`${baseLinkClass} ${isActive('/contact') ? activeLinkClass : inactiveLinkClass}`}>
+                                যোগাযোগ
+                            </Link>
+                        </>
+                    )}
                 </div>
 
                 {/* Auth Buttons */}
@@ -59,6 +88,11 @@ export function Navbar() {
                             {currentUser.role === 'admin' && (
                                 <Link href="/admin">
                                     <Button className="py-2 px-4 text-sm">অ্যাডমিন</Button>
+                                </Link>
+                            )}
+                            {currentUser.role === 'user' && (
+                                <Link href="/profile">
+                                    <Button className="py-2 px-4 text-sm">প্রোফাইল</Button>
                                 </Link>
                             )}
                         </div>
@@ -88,18 +122,46 @@ export function Navbar() {
             {/* Mobile Menu Overlay */}
             {isMenuOpen && (
                 <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-b border-border shadow-lg p-6 flex flex-col gap-4 animate-in slide-in-from-top-2">
-                    <Link href="/" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/') ? activeLinkClass : inactiveLinkClass}`}>
-                        হোম
-                    </Link>
-                    <Link href="/about" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
-                        আমাদের সম্পর্কে
-                    </Link>
-                    <Link href="/hostels" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/hostels') ? activeLinkClass : inactiveLinkClass}`}>
-                        হোস্টেলসমূহ
-                    </Link>
-                    <Link href="/contact" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/contact') ? activeLinkClass : inactiveLinkClass}`}>
-                        যোগাযোগ
-                    </Link>
+                    {currentUser?.role === 'admin' ? (
+                        <>
+                            <Link href="/admin" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/admin') ? activeLinkClass : inactiveLinkClass}`}>
+                                ড্যাশবোর্ড
+                            </Link>
+                            <Link href="/admin/users" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/admin/users') ? activeLinkClass : inactiveLinkClass}`}>
+                                ব্যবহারকারী
+                            </Link>
+                            <Link href="/admin/hostels" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/admin/hostels') ? activeLinkClass : inactiveLinkClass}`}>
+                                সব হোস্টেল
+                            </Link>
+                        </>
+                    ) : currentUser?.role === 'manager' ? (
+                        <>
+                            <Link href="/manager" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/manager') ? activeLinkClass : inactiveLinkClass}`}>
+                                ড্যাশবোর্ড
+                            </Link>
+                            <Link href="/about" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
+                                আমাদের সম্পর্কে
+                            </Link>
+                            <Link href="/contact" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/contact') ? activeLinkClass : inactiveLinkClass}`}>
+                                যোগাযোগ
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link href="/" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/') ? activeLinkClass : inactiveLinkClass}`}>
+                                হোম
+                            </Link>
+                            <Link href="/about" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
+                                আমাদের সম্পর্কে
+                            </Link>
+                            <Link href="/hostels" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/hostels') ? activeLinkClass : inactiveLinkClass}`}>
+                                হোস্টেলসমূহ
+                            </Link>
+                            <Link href="/contact" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/contact') ? activeLinkClass : inactiveLinkClass}`}>
+                                যোগাযোগ
+                            </Link>
+                        </>
+                    )}
 
                     <hr className="border-border my-2" />
 
@@ -130,9 +192,27 @@ export function Navbar() {
                             </Button>
                         </div>
                     ) : (
-                        <Link href="/login" onClick={() => setIsMenuOpen(false)}>
-                            <Button variant="primary" fullWidth className="py-2">লগইন</Button>
-                        </Link>
+                        (() => {
+                            if (pathname.startsWith('/manager')) {
+                                return (
+                                    <Link href="/manager/login" onClick={() => setIsMenuOpen(false)}>
+                                        <Button variant="primary" fullWidth className="py-2">ম্যানেজার লগইন</Button>
+                                    </Link>
+                                );
+                            } else if (pathname.startsWith('/admin')) {
+                                return (
+                                    <Link href="/admin/login" onClick={() => setIsMenuOpen(false)}>
+                                        <Button variant="primary" fullWidth className="py-2">অ্যাডমিন লগইন</Button>
+                                    </Link>
+                                );
+                            } else {
+                                return (
+                                    <Link href="/login" onClick={() => setIsMenuOpen(false)}>
+                                        <Button variant="primary" fullWidth className="py-2">লগইন</Button>
+                                    </Link>
+                                );
+                            }
+                        })()
                     )}
                 </div>
             )}

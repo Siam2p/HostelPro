@@ -1,7 +1,11 @@
-"use client";
-
 import React from 'react';
 import { Button } from '@/components/ui/Button';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Contact Us | HostelPro',
+    description: 'Get in touch with HostelPro team. We are here to help you 24/7.',
+};
 
 export default function ContactPage() {
     return (
@@ -101,19 +105,7 @@ export default function ContactPage() {
                 </div>
             </div>
 
-            {/* Map Placeholder */}
-            <div className="container mx-auto px-6 mt-16">
-                <div className="rounded-3xl overflow-hidden shadow-lg border border-border h-80 relative bg-slate-200 group">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-text-muted font-bold text-xl group-hover:scale-110 transition-transform">Google Map Placeholder</span>
-                    </div>
-                    {/* Simulated Map UI */}
-                    <div className="absolute top-4 right-4 bg-white p-2 rounded shadow-md z-10 space-y-2">
-                        <div className="w-8 h-8 bg-slate-100 rounded flex items-center justify-center text-xl">+</div>
-                        <div className="w-8 h-8 bg-slate-100 rounded flex items-center justify-center text-xl">-</div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     );
 }

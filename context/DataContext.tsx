@@ -1,17 +1,21 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Hostel, Booking, MockData, User } from '@/lib/types';
+import { Hostel, Booking, MockData, User, Notice } from '@/lib/types';
 import { initialData } from '@/lib/data';
 
 interface DataContextType {
     users: User[];
     hostels: Hostel[];
     bookings: Booking[];
+    notices: Notice[];
     addBooking: (booking: Booking) => void;
     updateBookingStatus: (id: number, status: Booking['status']) => void;
     addHostel: (hostel: Hostel) => void;
     updateHostel: (hostel: Hostel) => void;
+    deleteHostel: (id: number) => void;
+    addNotice: (notice: Notice) => void;
+    deleteNotice: (id: number) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -20,6 +24,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     const [hostels, setHostels] = useState<Hostel[]>([]);
     const [bookings, setBookings] = useState<Booking[]>([]);
     const [users, setUsers] = useState<User[]>([]);
+    const [notices, setNotices] = useState<Notice[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     // Load from local storage on mount
@@ -30,11 +35,13 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
             setHostels(data.hostels);
             setBookings(data.bookings);
             setUsers(data.users || initialData.users);
+            setNotices(data.notices || []);
         } else {
             setHostels(initialData.hostels);
             setBookings(initialData.bookings);
             setUsers(initialData.users);
-            localStorage.setItem('hostelData', JSON.stringify(initialData));
+            setNotices([]);
+            localStorage.setItem('hostelData', JSON.stringify({ ...initialData, notices: [] }));
         }
         setIsLoaded(true);
     }, []);
@@ -46,11 +53,12 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
                 currentUser: null, // User is handled by AuthContext
                 users,
                 hostels,
-                bookings
+                bookings,
+                notices
             };
             localStorage.setItem('hostelData', JSON.stringify(data));
         }
-    }, [hostels, bookings, users, isLoaded]);
+    }, [hostels, bookings, users, notices, isLoaded]);
 
     const addBooking = (booking: Booking) => {
         setBookings(prev => [...prev, booking]);
@@ -68,8 +76,22 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         setHostels(prev => prev.map(h => h.id === hostel.id ? hostel : h));
     };
 
+    const deleteHostel = (id: number) => {
+        setHostels(prev => prev.filter(h => h.id !== id));
+        // Optionally remove associated bookings? For now keep them or filter them in UI.
+        // setBookings(prev => prev.filter(b => ...));
+    };
+
+    const addNotice = (notice: Notice) => {
+        setNotices(prev => [notice, ...prev]);
+    };
+
+    const deleteNotice = (id: number) => {
+        setNotices(prev => prev.filter(n => n.id !== id));
+    };
+
     return (
-        <DataContext.Provider value={{ users, hostels, bookings, addBooking, updateBookingStatus, addHostel, updateHostel }}>
+        <DataContext.Provider value={{ users, hostels, bookings, notices, addBooking, updateBookingStatus, addHostel, updateHostel, deleteHostel, addNotice, deleteNotice }}>
             {children}
         </DataContext.Provider>
     );

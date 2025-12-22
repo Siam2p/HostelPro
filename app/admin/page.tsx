@@ -18,14 +18,14 @@ export default function AdminDashboard() {
     }
 
     // Stats
-    const totalUsers = 3; // Mock static count or from context
+    const totalUsers = users.length;
     const totalHostels = hostels.length;
     const totalBookings = bookings.length;
 
     return (
         <div className="container mx-auto px-6 py-12 flex flex-col lg:flex-row gap-8">
             {/* Sidebar Mock */}
-            <div className="w-full lg:w-64 flex-shrink-0">
+            <div className="w-full lg:w-64 shrink-0 hidden lg:block">
                 <div className="bg-slate-900 text-white rounded-xl p-6 h-full min-h-[500px]">
                     <h2 className="text-2xl font-bold mb-8">হোস্টেল<span className="text-primary">অ্যাডমিন</span></h2>
                     <nav className="flex flex-col gap-4">
@@ -38,7 +38,7 @@ export default function AdminDashboard() {
             </div>
 
             {/* Main Content */}
-            <div className="flex-grow">
+            <div className="grow">
                 <h1 className="text-3xl font-bold mb-8">সিস্টেম ওভারভিউ</h1>
 
                 {/* Stats Grid */}
@@ -68,7 +68,7 @@ export default function AdminDashboard() {
 
                 {/* Recent Users Table */}
                 <Card>
-                    <h2 className="text-xl font-bold mb-4">সাম্প্রতিক ব্যবহারকারী</h2>
+                    <h2 className="text-xl font-bold mb-4">নিবন্ধিত ব্যবহারকারী</h2>
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
@@ -80,30 +80,21 @@ export default function AdminDashboard() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* Mock Users from Context (actually initialData.users) */}
-                                {/* Since we don't expose users in DataContext yet, I'll mock render or update Context. 
-                    Actually, DataContext persistence logic saved users but didn't expose them in value.
-                    I'll implement a static list for now or assume DataContext needs update.
-                    For prototype speed, I'll just render a few static rows matching data.ts
-                */}
-                                <tr className="border-b border-border">
-                                    <td className="p-4 text-text-muted">#1</td>
-                                    <td className="p-4 font-bold">Alice Student</td>
-                                    <td className="p-4">user@test.com</td>
-                                    <td className="p-4"><Badge variant="default">user</Badge></td>
-                                </tr>
-                                <tr className="border-b border-border">
-                                    <td className="p-4 text-text-muted">#2</td>
-                                    <td className="p-4 font-bold">Bob Manager</td>
-                                    <td className="p-4">manager@test.com</td>
-                                    <td className="p-4"><Badge variant="default">manager</Badge></td>
-                                </tr>
-                                <tr className="border-b border-border">
-                                    <td className="p-4 text-text-muted">#3</td>
-                                    <td className="p-4 font-bold">Super Admin</td>
-                                    <td className="p-4">admin@test.com</td>
-                                    <td className="p-4"><Badge variant="success">admin</Badge></td>
-                                </tr>
+                                {users.map(user => (
+                                    <tr key={user.id} className="border-b border-border hover:bg-gray-50">
+                                        <td className="p-4 text-text-muted">#{user.id}</td>
+                                        <td className="p-4 font-bold">{user.name}</td>
+                                        <td className="p-4">{user.email}</td>
+                                        <td className="p-4">
+                                            <Badge variant={
+                                                user.role === 'admin' ? 'success' :
+                                                    user.role === 'manager' ? 'warning' : 'default'
+                                            }>
+                                                {user.role}
+                                            </Badge>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>

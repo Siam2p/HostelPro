@@ -41,6 +41,16 @@ export interface Booking {
     status: 'pending' | 'approved' | 'rejected';
     userName: string;
     hostelName: string;
+    monthlyFeeStatus?: 'paid' | 'unpaid' | 'pending';
+    lastPaymentDate?: string;
+}
+
+export interface Notice {
+    id: number;
+    hostelId: number;
+    date: string;
+    content: string;
+    title: string;
 }
 
 export interface MockData {
@@ -48,4 +58,5 @@ export interface MockData {
     users: User[];
     hostels: Hostel[];
     bookings: Booking[];
+    notices: Notice[];
 }

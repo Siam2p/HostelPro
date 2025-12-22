@@ -1,7 +1,11 @@
-"use client";
-
 import React from 'react';
 import { Button } from '@/components/ui/Button';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'About Us | HostelPro',
+    description: 'Learn about HostelPro, our mission to help students find safe and affordable hostels in Bangladesh.',
+};
 
 export default function AboutPage() {
     return (
