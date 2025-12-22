@@ -8,13 +8,16 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import Image from 'next/image';
+import EditResidentModal from '../../components/EditResidentModal';
 
 export default function ResidentDetailsPage() {
     const { id } = useParams();
     const router = useRouter();
     const { currentUser } = useAuth();
-    const { bookings, hostels, updateBookingStatus } = useData();
+    const { bookings, hostels, updateBookingStatus, users } = useData();
     const [resident, setResident] = useState<any | null>(null);
+    const [user, setUser] = useState<any | null>(null);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     // Mock Payment History State (Jan-Dec)
     const [paymentHistory, setPaymentHistory] = useState<Record<string, 'paid' | 'unpaid' | 'pending'>>({
@@ -48,6 +51,10 @@ export default function ResidentDetailsPage() {
             const foundResident = bookings.find(b => String(b.id) === String(id));
             if (foundResident) {
                 setResident(foundResident);
+                // Find associated user
+                const foundUser = users.find(u => u.id === foundResident.userId);
+                setUser(foundUser || null);
+
                 // Sync current month status from context if available
                 if (foundResident.monthlyFeeStatus) {
                     const currentMonth = new Date().toLocaleString('default', { month: 'long' });
@@ -60,7 +67,7 @@ export default function ResidentDetailsPage() {
                 // Handle not found
             }
         }
-    }, [id, bookings, currentUser, router]);
+    }, [id, bookings, currentUser, router, users]);
 
     const handleStatusChange = (month: string, status: 'paid' | 'unpaid') => {
         setPaymentHistory(prev => ({
@@ -114,28 +121,64 @@ export default function ResidentDetailsPage() {
                     <div className="space-y-8">
                         {/* Personal Info */}
                         <Card className="p-6 shadow-lg border-none">
-                            <h3 className="text-lg font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800">ব্যক্তিগত তথ্য</h3>
+                            <div className="flex justify-between items-center border-b border-gray-100 pb-3 mb-4">
+                                <h3 className="text-lg font-bold text-gray-800">ব্যক্তিগত তথ্য</h3>
+                                <button
+                                    onClick={() => setIsEditModalOpen(true)}
+                                    className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1 hover:bg-blue-50 px-2 py-1 rounded-lg transition-colors"
+                                >
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                    Edit
+                                </button>
+                            </div>
                             <div className="space-y-4">
                                 <div>
                                     <label className="text-xs text-gray-400 uppercase font-bold block mb-1">Full Name</label>
-                                    <p className="font-medium text-gray-700">{resident.userName}</p>
+                                    <p className="font-medium text-gray-700">{user?.name || resident.userName}</p>
                                 </div>
                                 <div>
                                     <label className="text-xs text-gray-400 uppercase font-bold block mb-1">Phone</label>
-                                    <p className="font-medium text-gray-700">017XXXXXXXX</p>
+                                    <p className="font-medium text-gray-700">{user?.phone || 'N/A'}</p>
                                 </div>
                                 <div>
                                     <label className="text-xs text-gray-400 uppercase font-bold block mb-1">Email</label>
-                                    <p className="font-medium text-gray-700">student@example.com</p>
+                                    <p className="font-medium text-gray-700">{user?.email || 'student@example.com'}</p>
                                 </div>
                                 <div>
                                     <label className="text-xs text-gray-400 uppercase font-bold block mb-1">Guardian Contact</label>
-                                    <p className="font-medium text-gray-700">019XXXXXXXX (Father)</p>
+                                    <p className="font-medium text-gray-700">{user?.guardianContact || 'N/A'}</p>
                                 </div>
                             </div>
-                            <div className="mt-6 pt-4 border-t border-gray-100 flex gap-2">
-                                <Button className="w-full text-xs" variant="outline">Call Guardian</Button>
-                                <Button className="w-full text-xs" variant="outline">Message</Button>
+
+                            {/* Action Buttons */}
+                            <div className="flex flex-col sm:flex-row gap-3 mt-6 pt-4 border-t border-gray-100">
+                                <a
+                                    href={user?.guardianContact ? `tel:${user.guardianContact.replace(/[^\d+]/g, '')}` : '#'}
+                                    className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full font-bold text-sm text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]
+                                        ${user?.guardianContact
+                                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:shadow-blue-500/40 cursor-pointer'
+                                            : 'bg-gray-400 cursor-not-allowed opacity-70'}`}
+                                    onClick={(e) => !user?.guardianContact && e.preventDefault()}
+                                >
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                    </svg>
+                                    <span>Call Guardian</span>
+                                </a>
+
+                                <a
+                                    href={user?.phone ? `tel:${user.phone.replace(/[^\d+]/g, '')}` : '#'}
+                                    className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full font-bold text-sm border-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]
+                                        ${user?.phone
+                                            ? 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50 cursor-pointer'
+                                            : 'border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed'}`}
+                                    onClick={(e) => !user?.phone && e.preventDefault()}
+                                >
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                    </svg>
+                                    <span>Call {user?.name ? user.name.split(' ')[0] : 'Resident'}</span>
+                                </a>
                             </div>
                         </Card>
 
@@ -217,6 +260,12 @@ export default function ResidentDetailsPage() {
                     </div>
                 </div>
             </div>
-        </div>
+
+            <EditResidentModal
+                isOpen={isEditModalOpen}
+                onClose={() => setIsEditModalOpen(false)}
+                residentId={resident ? resident.id : null}
+            />
+        </div >
     );
 }

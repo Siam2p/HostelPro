@@ -41,6 +41,29 @@ export default function UserProfilePage() {
                     </div>
                 </div>
 
+                {/* Personal Info Section */}
+                <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 mb-8">
+                    <h2 className="text-xl font-bold mb-6 text-gray-800 border-b pb-4">ব্যক্তিগত তথ্য</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Full Name</label>
+                            <div className="text-lg font-medium text-gray-900">{currentUser.name}</div>
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Phone</label>
+                            <div className="text-lg font-medium text-gray-900">{currentUser.phone || 'N/A'}</div>
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Email</label>
+                            <div className="text-lg font-medium text-gray-900">{currentUser.email}</div>
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Guardian Contact</label>
+                            <div className="text-lg font-medium text-gray-900">{currentUser.guardianContact || 'N/A'}</div>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Notice Board Section */}
                 <div className="mb-8">
                     <h2 className="text-2xl font-bold mb-6">নোটিশ বোর্ড</h2>

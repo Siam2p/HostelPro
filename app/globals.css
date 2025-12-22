@@ -37,4 +37,41 @@
 body {
   background-color: var(--color-bg-body);
   color: var(--color-text-main);
+  overflow-x: hidden;
+  /* Hide horizontal scrollbar globally */
+}
+
+/* Custom "Bountiful" Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  /* Slightly wider for better usability */
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-block: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  /* Slate 400 with opacity */
+  border-radius: 99px;
+  border: 2px solid transparent;
+  /* Creates padding effect */
+  background-clip: content-box;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary);
+  /* Brand Primary Color */
+  border: 0px solid transparent;
+  /* Full width on hover */
+}
+
+/* Firefox Support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
 }

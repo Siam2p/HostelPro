@@ -4,6 +4,9 @@ export interface User {
     email: string;
     role: 'user' | 'manager' | 'admin';
     password?: string;
+    guardianContact?: string;
+    phone?: string;
+    isManaged?: boolean; // True if the user was created by an admin/manager without self-registration
 }
 
 export interface Room {
@@ -29,6 +32,8 @@ export interface Hostel {
     features: string[];
     managerId: number;
     rooms: Room[];
+    gallery?: string[]; // For storing multiple images/videos
+    contact?: string;
 }
 
 export interface Booking {
@@ -43,6 +48,7 @@ export interface Booking {
     hostelName: string;
     monthlyFeeStatus?: 'paid' | 'unpaid' | 'pending';
     lastPaymentDate?: string;
+    isActive?: boolean;
 }
 
 export interface Notice {

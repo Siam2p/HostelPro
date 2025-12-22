@@ -14,8 +14,13 @@ const icon = L.icon({
     iconAnchor: [12, 41]
 });
 
-function LocationMarker({ onSelect }: { onSelect: (lat: number, lng: number) => void }) {
-    const [position, setPosition] = useState<L.LatLng | null>(null);
+interface MapPickerProps {
+    onLocationSelect: (lat: number, lng: number) => void;
+    initialLocation?: { lat: number, lng: number };
+}
+
+function LocationMarker({ onSelect, initialPos }: { onSelect: (lat: number, lng: number) => void, initialPos?: L.LatLng | null }) {
+    const [position, setPosition] = useState<L.LatLng | null>(initialPos || null);
 
     useMapEvents({
         click(e) {
@@ -29,10 +34,16 @@ function LocationMarker({ onSelect }: { onSelect: (lat: number, lng: number) => 
     );
 }
 
-export default function MapPicker({ onLocationSelect }: { onLocationSelect: (lat: number, lng: number) => void }) {
+export default function MapPicker({ onLocationSelect, initialLocation }: MapPickerProps) {
+    const defaultCenter: [number, number] = initialLocation
+        ? [initialLocation.lat, initialLocation.lng]
+        : [23.8103, 90.4125]; // Dhaka
+
+    const initialLatLng = initialLocation ? new L.LatLng(initialLocation.lat, initialLocation.lng) : null;
+
     return (
         <MapContainer
-            center={[23.8103, 90.4125]} // Dhaka
+            center={defaultCenter}
             zoom={13}
             style={{ height: "100%", width: "100%", borderRadius: "0.5rem" }}
         >
@@ -40,7 +51,7 @@ export default function MapPicker({ onLocationSelect }: { onLocationSelect: (lat
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <LocationMarker onSelect={onLocationSelect} />
+            <LocationMarker onSelect={onLocationSelect} initialPos={initialLatLng} />
         </MapContainer>
     );
 }

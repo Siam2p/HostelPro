@@ -16,6 +16,11 @@ interface DataContextType {
     deleteHostel: (id: number) => void;
     addNotice: (notice: Notice) => void;
     deleteNotice: (id: number) => void;
+    deleteBooking: (id: number) => void;
+    updateBooking: (booking: Booking) => void;
+    addUser: (user: User) => void;
+    deleteUser: (id: number) => void;
+    updateUser: (user: User) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -68,6 +73,14 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         setBookings(prev => prev.map(b => b.id === id ? { ...b, status } : b));
     };
 
+    const updateBooking = (booking: Booking) => {
+        setBookings(prev => prev.map(b => b.id === booking.id ? booking : b));
+    };
+
+    const deleteBooking = (id: number) => {
+        setBookings(prev => prev.filter(b => b.id !== id));
+    };
+
     const addHostel = (hostel: Hostel) => {
         setHostels(prev => [...prev, hostel]);
     };
@@ -90,8 +103,26 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         setNotices(prev => prev.filter(n => n.id !== id));
     };
 
+    const addUser = (user: User) => {
+        setUsers(prev => [...prev, user]);
+    };
+
+    const updateUser = (user: User) => {
+        setUsers(prev => prev.map(u => u.id === user.id ? user : u));
+    };
+
+    const deleteUser = (id: number) => {
+        setUsers(prev => prev.filter(u => u.id !== id));
+    };
+
     return (
-        <DataContext.Provider value={{ users, hostels, bookings, notices, addBooking, updateBookingStatus, addHostel, updateHostel, deleteHostel, addNotice, deleteNotice }}>
+        <DataContext.Provider value={{
+            users, hostels, bookings, notices,
+            addBooking, updateBookingStatus, updateBooking, deleteBooking,
+            addHostel, updateHostel, deleteHostel,
+            addNotice, deleteNotice,
+            addUser, updateUser, deleteUser
+        }}>
             {children}
         </DataContext.Provider>
     );
