@@ -30,6 +30,7 @@ export const initialData: MockData = {
             id: 102,
             name: "Greenwood Backpackers",
             location: "Uptown, Green Valley",
+            coordinates: { lat: 23.8223, lng: 90.4285 }, // Mock
             price: 80,
             description: "Affordable and eco-friendly hostel surrounded by nature.",
             image: "https://images.unsplash.com/photo-1596276020587-8044fe049813?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -46,6 +47,7 @@ export const initialData: MockData = {
             id: 103,
             name: "Urban  Hub",
             location: "City Center, Metro City",
+            coordinates: { lat: 23.7937, lng: 90.4043 }, // Mock
             price: 120,
             description: "Modern living in the heart of the city. Close to all universities.",
             image: "https://images.unsplash.com/photo-1520277739336-7bf67edfa768?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -62,6 +64,7 @@ export const initialData: MockData = {
             id: 104,
             name: "Sunset Villa Student Home",
             location: "Westside, Metro City",
+            coordinates: { lat: 23.7500, lng: 90.3500 }, // Mock
             price: 180,
             description: "Luxury student villa with private pool access and premium amenities.",
             image: "https://images.unsplash.com/photo-1512918760532-3edbed135119?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -78,6 +81,7 @@ export const initialData: MockData = {
             id: 105,
             name: "Campus Corner",
             location: "North Gate, University Park",
+            coordinates: { lat: 23.7200, lng: 90.3900 }, // Mock
             price: 100,
             description: "Right next to the university gate. Best for students who want to save commute time.",
             image: "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -94,6 +98,7 @@ export const initialData: MockData = {
             id: 106,
             name: "Blue Sky Hostel",
             location: "East District, Quiet Zone",
+            coordinates: { lat: 23.8500, lng: 90.4000 }, // Mock
             price: 90,
             description: "A peaceful place for joyful studying.",
             image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
