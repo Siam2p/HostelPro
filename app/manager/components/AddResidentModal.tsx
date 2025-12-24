@@ -3,6 +3,7 @@ import { useData } from '@/context/DataContext';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { useAuth } from '@/context/AuthContext';
+import { isValidBangladeshiPhone } from '@/lib/validation';
 
 interface AddResidentModalProps {
     isOpen: boolean;
@@ -34,6 +35,14 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
         setLoading(true);
 
         try {
+            // Phone Validation
+            if (!isValidBangladeshiPhone(phone)) {
+                throw new Error("শিক্ষার্থীর সঠিক বাংলাদেশী মোবাইল নাম্বার দিন");
+            }
+            if (guardianContact && !isValidBangladeshiPhone(guardianContact)) {
+                throw new Error("গার্ডিয়ানের সঠিক বাংলাদেশী মোবাইল নাম্বার দিন");
+            }
+
             // 1. Check if user exists
             let targetUserId;
             const existingUser = users.find(u => u.email === email);
@@ -83,9 +92,9 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
             setRoomId('');
             setBedId('');
             setPrice('');
-        } catch (error) {
+        } catch (error: any) {
             console.error("Failed to add resident", error);
-            alert("Failed to add resident. Please try again.");
+            alert(error.message || "Failed to add resident. Please try again.");
         } finally {
             setLoading(false);
         }

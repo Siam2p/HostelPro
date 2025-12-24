@@ -56,11 +56,11 @@ export function Navbar() {
                             <Link href="/" className={`${baseLinkClass} ${isActive('/') ? activeLinkClass : inactiveLinkClass}`}>
                                 হোম
                             </Link>
-                            <Link href="/about" className={`${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
-                                আমাদের সম্পর্কে
-                            </Link>
                             <Link href="/hostels" className={`${baseLinkClass} ${isActive('/hostels') ? activeLinkClass : inactiveLinkClass}`}>
                                 হোস্টেলসমূহ
+                            </Link>
+                            <Link href="/about" className={`${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
+                                আমাদের সম্পর্কে
                             </Link>
                             <Link href="/contact" className={`${baseLinkClass} ${isActive('/contact') ? activeLinkClass : inactiveLinkClass}`}>
                                 যোগাযোগ
@@ -151,11 +151,11 @@ export function Navbar() {
                             <Link href="/" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/') ? activeLinkClass : inactiveLinkClass}`}>
                                 হোম
                             </Link>
-                            <Link href="/about" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
-                                আমাদের সম্পর্কে
-                            </Link>
                             <Link href="/hostels" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/hostels') ? activeLinkClass : inactiveLinkClass}`}>
                                 হোস্টেলসমূহ
+                            </Link>
+                            <Link href="/about" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
+                                আমাদের সম্পর্কে
                             </Link>
                             <Link href="/contact" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/contact') ? activeLinkClass : inactiveLinkClass}`}>
                                 যোগাযোগ

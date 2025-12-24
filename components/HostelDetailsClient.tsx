@@ -164,12 +164,35 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
                             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                                 <span>📝</span> বর্ণনা
                             </h2>
-                            <p className="text-lg text-gray-600 leading-relaxed">
-                                {hostel.description}
-                                <br /><br />
-                                আমাদের হোস্টেলে আপনি পাবেন সম্পূর্ণ ঘরোয়া পরিবেশ। ছাত্র এবং চাকরিজীদের জন্য আদর্শ। ২৪ ঘণ্টা নিরাপত্তা, ওয়াইফাই এবং সুস্বাদু খাবারের ব্যবস্থা রয়েছে।
-                            </p>
+                            <div
+                                className="text-lg text-gray-600 leading-relaxed prose prose-slate max-w-none"
+                                dangerouslySetInnerHTML={{ __html: hostel.description || 'দুঃখিত, কোনো বর্ণনা পাওয়া যায়নি।' }}
+                            />
                         </div>
+
+                        {/* Media Gallery */}
+                        {hostel.gallery && hostel.gallery.length > 0 && (
+                            <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100">
+                                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-slate-900">
+                                    <span>🖼️</span> ফটো গ্যালারি
+                                </h2>
+                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    {hostel.gallery.map((img, idx) => (
+                                        <div key={idx} className="relative aspect-4/3 rounded-xl overflow-hidden group cursor-pointer border border-gray-100 shadow-sm transition-all hover:shadow-md hover:-translate-y-1">
+                                            <Image
+                                                src={img}
+                                                alt={`${hostel.name} gallery ${idx + 1}`}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                            />
+                                            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                <span className="text-white bg-black/40 px-3 py-1 rounded-full text-xs backdrop-blur-sm">বড় করে দেখুন</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         {/* Location Map */}
                         {hostel.coordinates && (
@@ -313,13 +336,15 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
                                 </div>
                             </Card>
 
-                            <div className="mt-6 p-6 bg-blue-50 rounded-2xl border border-blue-100">
-                                <h3 className="font-bold text-blue-900 mb-2">সাহায্য প্রয়োজন?</h3>
-                                <p className="text-blue-700 text-sm mb-4">যেকোনো তথ্যের জন্য আমাদের কল করুন</p>
-                                <a href="tel:01700000000" className="flex items-center justify-center gap-2 w-full py-3 bg-white text-blue-600 font-bold rounded-xl border border-blue-200 hover:bg-blue-600 hover:text-white transition-colors">
-                                    📞 ০১৭০০-০০০০০০
-                                </a>
-                            </div>
+                            {hostel.contact && (
+                                <div className="mt-6 p-6 bg-blue-50 rounded-2xl border border-blue-100">
+                                    <h3 className="font-bold text-blue-900 mb-2">ম্যানেজারের সাথে যোগাযোগ</h3>
+                                    <p className="text-blue-700 text-sm mb-4">যেকোনো তথ্যের জন্য সরাসরি কল করুন</p>
+                                    <a href={`tel:${hostel.contact}`} className="flex items-center justify-center gap-2 w-full py-3 bg-white text-blue-600 font-bold rounded-xl border border-blue-200 hover:bg-blue-600 hover:text-white transition-colors">
+                                        📞 {hostel.contact}
+                                    </a>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

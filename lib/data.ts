@@ -27,7 +27,14 @@ export const initialData: MockData = {
             category: 'Male',
             division: 'ঢাকা',
             district: 'ঢাকা',
-            upazila: 'ধানমণ্ডি'
+            upazila: 'ধানমণ্ডি',
+            contact: '01711-223344',
+            gallery: [
+                "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1520277739336-7bf67edfa768?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1512918760532-3edbed135119?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            ]
         },
         {
             id: 202,
@@ -47,7 +54,8 @@ export const initialData: MockData = {
             category: 'Male',
             division: 'ঢাকা',
             district: 'গাজীপুর',
-            upazila: 'গাজীপুর সদর'
+            upazila: 'গাজীপুর সদর',
+            contact: '01822-334455'
         },
         {
             id: 203,
@@ -67,7 +75,13 @@ export const initialData: MockData = {
             category: 'Female',
             division: 'চট্টগ্রাম',
             district: 'কুমিল্লা',
-            upazila: 'কুমিল্লা সদর'
+            upazila: 'কুমিল্লা সদর',
+            contact: '01933-445566',
+            gallery: [
+                "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1596276020587-8044fe049813?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            ]
         },
         {
             id: 204,
@@ -107,7 +121,8 @@ export const initialData: MockData = {
             category: 'Male',
             division: 'বরিশাল',
             district: 'বরিশাল',
-            upazila: 'বরিশাল সদর'
+            upazila: 'বরিশাল সদর',
+            contact: '01711-234567'
         },
         {
             id: 206,
@@ -127,7 +142,8 @@ export const initialData: MockData = {
             category: 'Female',
             division: 'রাজশাহী',
             district: 'বগুড়া',
-            upazila: 'বগুড়া সদর'
+            upazila: 'বগুড়া সদর',
+            contact: '01822-345678'
         },
         {
             id: 207,
@@ -147,7 +163,8 @@ export const initialData: MockData = {
             category: 'Male',
             division: 'খুলনা',
             district: 'যশোর',
-            upazila: 'যশোর সদর'
+            upazila: 'যশোর সদর',
+            contact: '01933-456789'
         },
         {
             id: 208,
@@ -167,7 +184,8 @@ export const initialData: MockData = {
             category: 'Male',
             division: 'ময়মনসিংহ',
             district: 'ময়মনসিংহ',
-            upazila: 'ময়মনসিংহ সদর'
+            upazila: 'ময়মনসিংহ সদর',
+            contact: '01577-889900'
         }
     ],
     bookings: [

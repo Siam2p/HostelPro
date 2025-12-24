@@ -4,18 +4,64 @@ import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { HostelCard } from '@/components/HostelCard';
 import { Button } from '@/components/ui/Button';
+import { Search, MapPin, Users, ArrowRight, Filter } from 'lucide-react';
+import { BANGLADESH_LOCATIONS } from '@/lib/locations';
 
 export default function HostelListClient() {
     const { hostels } = useData();
     const [searchTerm, setSearchTerm] = useState('');
     const [filterType, setFilterType] = useState<'all' | 'price_low' | 'rating'>('all');
 
+    // New Filters State 
+    const [category, setCategory] = useState<'all' | 'Male' | 'Female'>('all');
+    const [division, setDivision] = useState('');
+    const [district, setDistrict] = useState('');
+    const [upazila, setUpazila] = useState('');
+    const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+
+    // Draft states for "Search" button behavior
+    const [draftSearchTerm, setDraftSearchTerm] = useState('');
+    const [draftCategory, setDraftCategory] = useState<'all' | 'Male' | 'Female'>('all');
+    const [draftDivision, setDraftDivision] = useState('');
+    const [draftDistrict, setDraftDistrict] = useState('');
+    const [draftUpazila, setDraftUpazila] = useState('');
+
+    const handleSearch = () => {
+        setSearchTerm(draftSearchTerm);
+        setCategory(draftCategory);
+        setDivision(draftDivision);
+        setDistrict(draftDistrict);
+        setUpazila(draftUpazila);
+    };
+
+    const handleDivisionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setDraftDivision(e.target.value);
+        setDraftDistrict('');
+        setDraftUpazila('');
+    };
+
+    const handleDistrictChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setDraftDistrict(e.target.value);
+        setDraftUpazila('');
+    };
+
+    const availableDistricts = draftDivision ? Object.keys(BANGLADESH_LOCATIONS[draftDivision] || {}) : [];
+    const availableUpazilas = (draftDivision && draftDistrict) ? (BANGLADESH_LOCATIONS[draftDivision][draftDistrict] || []) : [];
+
     // Filter & Sort Logic
     const filteredHostels = hostels
-        .filter(h =>
-            h.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            h.location.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+        .filter(h => {
+            const searchTermMatch = !searchTerm ||
+                h.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                h.location.toLowerCase().includes(searchTerm.toLowerCase());
+
+            const categoryMatch = category === 'all' || h.category === category;
+            const divisionMatch = !division || h.division === division;
+            const districtMatch = !district || h.district === district;
+            const upazilaMatch = !upazila || h.upazila === upazila;
+
+            return searchTermMatch && categoryMatch && divisionMatch && districtMatch && upazilaMatch;
+        })
         .sort((a, b) => {
             if (filterType === 'price_low') return a.price - b.price;
             if (filterType === 'rating') return b.rating - a.rating;
@@ -25,57 +71,186 @@ export default function HostelListClient() {
     return (
         <div className="min-h-screen bg-bg-body pb-20">
             {/* Hero Section */}
-            <section className="relative py-24 text-center overflow-hidden bg-slate-900 text-white">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/30 rounded-full filter blur-[100px] animate-pulse"></div>
-                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/30 rounded-full filter blur-[100px] animate-pulse delay-700"></div>
-                </div>
+            <section className="relative pt-10 pb-10 md:pt-24 md:pb-16 overflow-hidden bg-slate-50">
+                {/* Abstract Background */}
+                <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-secondary/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2" />
 
                 <div className="container mx-auto px-6 relative z-10">
-                    <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
-                        খুঁজে নিন আপনার <br />
-                        <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-                            সেরা হোস্টেল
-                        </span>
-                    </h1>
-                    <p className="text-lg text-slate-300 mb-10 max-w-2xl mx-auto">
-                        আমাদের ভেরিফাইড হোস্টেল তালিকা থেকে আপনার পছন্দের সিট বা রুম বেছে নিন। নিরাপদ, সাশ্রয়ী এবং আরামদায়ক।
-                    </p>
+                    <div className="max-w-4xl mx-auto text-center mb-12">
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tight leading-tight text-slate-900">
+                            খুঁজে নিন আপনার <br />
+                            <span className="bg-linear-to-r from-primary via-blue-600 to-secondary bg-clip-text text-transparent">
+                                সেরা হোস্টেলটি
+                            </span>
+                        </h1>
+                    </div>
 
-                    {/* Search & Filter Bar */}
-                    <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl shadow-2xl max-w-4xl mx-auto flex flex-col md:flex-row gap-4">
-                        <div className="grow relative group">
-                            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">🔍</span>
-                            <input
-                                type="text"
-                                placeholder="হোস্টেলের নাম বা লোকেশন লিখুন..."
-                                className="w-full pl-12 pr-6 py-4 rounded-xl bg-white/10 border border-white/10 text-white placeholder-slate-400 focus:outline-none focus:bg-white focus:text-slate-900 focus:ring-2 focus:ring-primary transition-all duration-300"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
-                        </div>
-                        <div className="min-w-[200px] relative">
-                            <select
-                                className="w-full px-6 py-4 rounded-xl bg-white/10 border border-white/10 text-white focus:outline-none focus:bg-white focus:text-slate-900 focus:ring-2 focus:ring-primary transition-all duration-300 appearance-none cursor-pointer"
-                                value={filterType}
-                                onChange={(e) => setFilterType(e.target.value as any)}
-                            >
-                                <option value="all" className="text-slate-900">সব দেখুন</option>
-                                <option value="price_low" className="text-slate-900">দাম (কম থেকে বেশি)</option>
-                                <option value="rating" className="text-slate-900">সেরা রেটিং</option>
-                            </select>
-                            <span className="absolute right-6 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none">▼</span>
+                    <div className="bg-white p-4 md:p-8 rounded-4xl md:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] max-w-5xl mx-auto border border-white/50 ring-1 ring-black/5 animate-fade-in-up">
+                        <div className="space-y-4 md:space-y-6">
+                            {/* Row 1: Primary Search Bar - Responsive */}
+                            <div className="flex flex-row gap-2 md:gap-3">
+                                <div className="relative grow group">
+                                    <div className="absolute inset-y-0 left-0 pl-4 md:pl-5 flex items-center pointer-events-none group-focus-within:text-primary transition-colors text-gray-400">
+                                        <Search size={18} className="md:w-[22px] md:h-[22px]" />
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder="হোস্টেলের নাম বা লোকেশন..."
+                                        className="w-full pl-10 md:pl-13 pr-4 md:pr-6 py-3 md:py-4 rounded-xl md:rounded-full bg-white border border-gray-100 shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all text-slate-900 text-sm md:text-lg placeholder:text-gray-400"
+                                        value={draftSearchTerm}
+                                        onChange={(e) => setDraftSearchTerm(e.target.value)}
+                                        onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                                    />
+                                </div>
+                                <Button
+                                    onClick={handleSearch}
+                                    className="shrink-0 rounded-xl md:rounded-full px-5 md:px-10 py-3 md:py-4 text-sm md:text-lg group bg-linear-to-r from-primary to-blue-600 hover:shadow-glow transition-all active:scale-95 text-white"
+                                >
+                                    <span className="hidden sm:inline">খুঁজুন</span>
+                                    <Search size={20} className="sm:hidden" />
+                                    <ArrowRight className="hidden sm:inline ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                                </Button>
+                            </div>
+
+                            {/* Mobile Only: Category & Location Toggle Row */}
+                            <div className="flex md:hidden items-center gap-3 py-1">
+                                <Button
+                                    variant="outline"
+                                    onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
+                                    className={`grow flex items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition-all ${isMobileFilterOpen ? 'bg-primary/5 border-primary text-primary' : 'bg-gray-50/50'}`}
+                                >
+                                    <Filter size={14} />
+                                    ফিল্টার
+                                    <span className={`ml-auto transition-transform duration-300 ${isMobileFilterOpen ? 'rotate-180' : ''}`}>
+                                        <ArrowRight size={12} className="rotate-90" />
+                                    </span>
+                                </Button>
+                                <div className="relative grow">
+                                    <select
+                                        className="w-full pl-4 pr-10 py-3 rounded-xl border border-gray-100 bg-gray-50/50 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer text-slate-700"
+                                        value={filterType}
+                                        onChange={(e) => setFilterType(e.target.value as any)}
+                                    >
+                                        <option value="all">সব দেখুন</option>
+                                        <option value="price_low">কম দাম</option>
+                                        <option value="rating">সেরা রেটিং</option>
+                                    </select>
+                                    <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400">
+                                        <ArrowRight size={12} className="rotate-90" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Row 2: Secondary Filters - Desktop Grid / Mobile Stack */}
+                            <div className={`${isMobileFilterOpen ? 'flex flex-col animate-fade-in' : 'hidden'} md:grid md:grid-cols-4 gap-3 md:gap-4`}>
+                                {/* Category Picker */}
+                                <div className="space-y-1.5 md:space-y-0">
+                                    <label className="md:hidden text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">ক্যাটাগরি</label>
+                                    <div className="relative group">
+                                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">
+                                            <Users size={18} />
+                                        </div>
+                                        <select
+                                            className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-gray-50/50 md:bg-gray-50/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer text-slate-700"
+                                            value={draftCategory}
+                                            onChange={(e) => setDraftCategory(e.target.value as any)}
+                                        >
+                                            <option value="all">সকল ক্যাটাগরি</option>
+                                            <option value="Male">ছাত্র (Male)</option>
+                                            <option value="Female">ছাত্রী (Female)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {/* Division */}
+                                <div className="space-y-1.5 md:space-y-0">
+                                    <label className="md:hidden text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">বিভাগ</label>
+                                    <div className="relative group">
+                                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">
+                                            <MapPin size={18} />
+                                        </div>
+                                        <select
+                                            className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-gray-50/50 md:bg-gray-50/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer text-slate-700"
+                                            value={draftDivision}
+                                            onChange={handleDivisionChange}
+                                        >
+                                            <option value="">বিভাগ নির্বাচন</option>
+                                            {Object.keys(BANGLADESH_LOCATIONS).map(div => (
+                                                <option key={div} value={div}>{div}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {/* District */}
+                                <div className="space-y-1.5 md:space-y-0">
+                                    <label className="md:hidden text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">জেলা</label>
+                                    <div className="relative group">
+                                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">
+                                            <MapPin size={18} />
+                                        </div>
+                                        <select
+                                            className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-gray-50/50 md:bg-gray-50/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer disabled:opacity-50 text-slate-700"
+                                            value={draftDistrict}
+                                            onChange={handleDistrictChange}
+                                            disabled={!draftDivision}
+                                        >
+                                            <option value="">জেলা নির্বাচন</option>
+                                            {availableDistricts.map(dist => (
+                                                <option key={dist} value={dist}>{dist}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {/* Upazila */}
+                                <div className="space-y-1.5 md:space-y-0">
+                                    <label className="md:hidden text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">উপজেলা</label>
+                                    <div className="relative group">
+                                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">
+                                            <MapPin size={18} />
+                                        </div>
+                                        <select
+                                            className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-gray-50/50 md:bg-gray-50/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer disabled:opacity-50 text-slate-700"
+                                            value={draftUpazila}
+                                            onChange={(e) => setDraftUpazila(e.target.value)}
+                                            disabled={!draftDistrict}
+                                        >
+                                            <option value="">উপজেলা নির্বাচন</option>
+                                            {availableUpazilas.map(upz => (
+                                                <option key={upz} value={upz}>{upz}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Content Section */}
-            <div className="container mx-auto px-6 py-16">
-                <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-2xl font-bold text-text-main">
+            <div className="container mx-auto px-6 py-12">
+                <div className="hidden md:flex flex-row justify-between items-center gap-4 mb-8">
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-800">
                         মোট হোস্টেল পাওয়া গেছে: <span className="text-primary">{filteredHostels.length}</span> টি
                     </h2>
+
+                    <div className="relative min-w-[200px]">
+                        <select
+                            className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer"
+                            value={filterType}
+                            onChange={(e) => setFilterType(e.target.value as any)}
+                        >
+                            <option value="all">সর্ট করুন: সব দেখুন</option>
+                            <option value="price_low">দাম: কম থেকে বেশি</option>
+                            <option value="rating">সেরা রেটিং</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400">
+                            <ArrowRight size={14} className="rotate-90" />
+                        </div>
+                    </div>
                 </div>
 
                 {filteredHostels.length > 0 ? (
