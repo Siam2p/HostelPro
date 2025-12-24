@@ -8,6 +8,7 @@ interface AuthContextType {
     currentUser: User | null;
     login: (role: User['role']) => void;
     logout: () => void;
+    updateCurrentUser: (user: User) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -25,7 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const login = (role: User['role']) => {
         // Find mock user by role
-        const user = initialData.users.find(u => u.role === role);
+        const user = initialData.users.find((u: User) => u.role === role);
         if (user) {
             setCurrentUser(user);
             sessionStorage.setItem('currentUser', JSON.stringify(user));
@@ -37,8 +38,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         sessionStorage.removeItem('currentUser');
     };
 
+    const updateCurrentUser = (user: User) => {
+        setCurrentUser(user);
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
+    };
+
     return (
-        <AuthContext.Provider value={{ currentUser, login, logout }}>
+        <AuthContext.Provider value={{ currentUser, login, logout, updateCurrentUser }}>
             {children}
         </AuthContext.Provider>
     );

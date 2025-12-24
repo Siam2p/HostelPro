@@ -7,7 +7,14 @@ export interface User {
     guardianContact?: string;
     phone?: string;
     isManaged?: boolean; // True if the user was created by an admin/manager without self-registration
+    profileImage?: string;
+    address?: string;
+    gender?: 'Male' | 'Female' | 'Other';
+    bio?: string;
+    emergencyContact?: string;
 }
+
+export type DashboardView = 'overview' | 'hostels' | 'bookings' | 'residents' | 'profile';
 
 export interface Room {
     id: string;

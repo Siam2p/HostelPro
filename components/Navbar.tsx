@@ -20,7 +20,7 @@ export function Navbar() {
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-border">
             <div className="container mx-auto px-6 py-4 flex items-center justify-between">
                 {/* Brand */}
-                <Link href="/" className="text-2xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                <Link href="/" className="text-2xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                     Hostel<span className="text-primary">Pro</span>
                 </Link>
 
@@ -72,29 +72,43 @@ export function Navbar() {
                 {/* Auth Buttons */}
                 <div className="hidden md:flex items-center gap-4">
                     {currentUser ? (
-                        <div className="flex items-center gap-4">
-                            <div className="text-right hidden lg:block">
-                                <div className="text-sm font-bold text-text-main">{currentUser.name}</div>
-                                <div className="text-xs text-text-muted capitalize">{currentUser.role}</div>
+                        <div className="flex items-center gap-6">
+                            <Link href="/profile" className="flex items-center gap-3 group/avatar transition-all hover:opacity-80">
+                                <div className="h-10 w-10 rounded-full border-2 border-primary/20 bg-primary/5 p-0.5 overflow-hidden shadow-sm group-hover/avatar:border-primary/50 transition-colors">
+                                    {currentUser.profileImage ? (
+                                        <img src={currentUser.profileImage} alt={currentUser.name} className="w-full h-full object-cover rounded-full" />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center font-bold text-primary bg-primary/10 rounded-full text-lg">
+                                            {currentUser.name[0]}
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="text-left hidden lg:block">
+                                    <div className="text-sm font-black text-gray-900 leading-none mb-0.5 group-hover/avatar:text-primary transition-colors">{currentUser.name}</div>
+                                    <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{currentUser.role}</div>
+                                </div>
+                            </Link>
+
+                            <div className="flex items-center gap-3">
+                                <Button
+                                    onClick={logout}
+                                    variant="outline"
+                                    className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full border-gray-200 text-gray-600 hover:bg-gray-50 transition-all h-auto"
+                                >
+                                    লগআউট
+                                </Button>
+
+                                {currentUser.role === 'manager' && (
+                                    <Link href="/manager">
+                                        <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-blue-600 to-indigo-600 shadow-md shadow-blue-100 h-auto">ড্যাশবোর্ড</Button>
+                                    </Link>
+                                )}
+                                {currentUser.role === 'admin' && (
+                                    <Link href="/admin">
+                                        <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-blue-600 to-indigo-600 shadow-md shadow-blue-100 h-auto">অ্যাডমিন</Button>
+                                    </Link>
+                                )}
                             </div>
-                            <Button onClick={logout} variant="outline" className="py-2 px-4 text-sm">
-                                লগআউট
-                            </Button>
-                            {currentUser.role === 'manager' && (
-                                <Link href="/manager">
-                                    <Button className="py-2 px-4 text-sm">ড্যাশবোর্ড</Button>
-                                </Link>
-                            )}
-                            {currentUser.role === 'admin' && (
-                                <Link href="/admin">
-                                    <Button className="py-2 px-4 text-sm">অ্যাডমিন</Button>
-                                </Link>
-                            )}
-                            {currentUser.role === 'user' && (
-                                <Link href="/profile">
-                                    <Button className="py-2 px-4 text-sm">প্রোফাইল</Button>
-                                </Link>
-                            )}
                         </div>
                     ) : (
                         <Link href="/login">
@@ -167,13 +181,17 @@ export function Navbar() {
 
                     {currentUser ? (
                         <div className="flex flex-col gap-3">
-                            <div className="flex items-center gap-3 p-2 bg-bg-body rounded-lg">
-                                <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
-                                    {currentUser.name[0]}
+                            <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-2xl border border-gray-100">
+                                <div className="h-10 w-10 rounded-full border border-primary/20 bg-white overflow-hidden flex items-center justify-center">
+                                    {currentUser.profileImage ? (
+                                        <img src={currentUser.profileImage} alt={currentUser.name} className="w-full h-full object-cover" />
+                                    ) : (
+                                        <div className="text-primary font-black">{currentUser.name[0]}</div>
+                                    )}
                                 </div>
                                 <div>
-                                    <div className="text-sm font-bold text-text-main">{currentUser.name}</div>
-                                    <div className="text-xs text-text-muted capitalize">{currentUser.role}</div>
+                                    <div className="text-sm font-black text-gray-900 leading-none mb-1">{currentUser.name}</div>
+                                    <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{currentUser.role}</div>
                                 </div>
                             </div>
 

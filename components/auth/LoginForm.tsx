@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/Button';
 import { AuthInput } from '@/components/ui/AuthInput';
@@ -57,9 +58,9 @@ export const LoginForm: React.FC = () => {
                 </div>
 
                 <div className="text-sm">
-                    <a href="#" className="font-medium text-primary hover:text-primary-dark transition-colors">
+                    <Link href="/forgot-password" title="পাসওয়ার্ড ভুলে গেছেন" className="font-medium text-primary hover:text-primary-dark transition-colors">
                         পাসওয়ার্ড ভুলে গেছেন?
-                    </a>
+                    </Link>
                 </div>
             </div>
 

@@ -2,17 +2,9 @@
 
 import React, { useState } from 'react';
 
-interface AuthInputProps {
+interface AuthInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     id: string;
     label: string;
-    type?: string;
-    placeholder?: string;
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    required?: boolean;
-    autoComplete?: string;
-    title?: string;
-    className?: string;
     error?: string;
     iconColor?: string;
 }
@@ -21,22 +13,18 @@ export const AuthInput: React.FC<AuthInputProps> = ({
     id,
     label,
     type = 'text',
-    placeholder,
-    value,
-    onChange,
-    required = true,
-    autoComplete,
-    title,
     className = '',
     error,
-    iconColor = 'text-gray-400'
+    iconColor = 'text-gray-400',
+    title,
+    ...props
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const isPassword = type === 'password';
     const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;
 
     return (
-        <div>
+        <div className="w-full">
             <label htmlFor={id} title={title} className="text-sm font-medium text-gray-700 mb-1 block">
                 {label}
             </label>
@@ -45,12 +33,8 @@ export const AuthInput: React.FC<AuthInputProps> = ({
                     id={id}
                     name={id}
                     type={inputType}
-                    autoComplete={autoComplete}
-                    required={required}
-                    value={value}
-                    onChange={onChange}
-                    className={`appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm ${isPassword ? 'pr-10' : ''} ${className}`}
-                    placeholder={placeholder}
+                    className={`appearance-none rounded-lg relative block w-full px-4 py-3 border ${error ? 'border-red-500 ring-1 ring-red-500' : 'border-gray-300'} placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm ${isPassword ? 'pr-10' : ''} ${className} transition-all duration-200`}
+                    {...props}
                 />
 
                 {isPassword && (
@@ -72,6 +56,11 @@ export const AuthInput: React.FC<AuthInputProps> = ({
                     </button>
                 )}
             </div>
+            {error && (
+                <p className="mt-1 text-xs text-red-500 font-medium animate-in fade-in slide-in-from-top-1 duration-200">
+                    {error}
+                </p>
+            )}
         </div>
     );
 };

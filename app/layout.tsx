@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { Hind_Siliguri } from "next/font/google";
+import { Hind_Siliguri, Outfit } from "next/font/google";
 import "./globals.css";
 
 const hindSiliguri = Hind_Siliguri({
   variable: "--font-hind-siliguri",
   subsets: ["bengali", "latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -62,12 +69,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning={true}
-        className={`${hindSiliguri.variable} antialiased flex flex-col min-h-screen font-[family-name:var(--font-hind-siliguri)]`}
+        className={`${hindSiliguri.variable} ${outfit.variable} antialiased flex flex-col min-h-screen font-[family-name:var(--font-outfit),var(--font-hind-siliguri),sans-serif]`}
       >
         <AuthProvider>
           <DataProvider>
             <Navbar />
-            <main className="flex-grow">
+            <main className="grow">
               {children}
             </main>
             <Footer />

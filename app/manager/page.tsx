@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
+import { DashboardView } from '@/lib/types';
 
 // Components
 import Sidebar from './components/Sidebar';
@@ -11,10 +12,11 @@ import OverviewSection from './components/OverviewSection';
 import HostelsSection from './components/HostelsSection';
 import BookingsSection from './components/BookingsSection';
 import ResidentsSection from './components/ResidentsSection';
+import ProfileSection from './components/ProfileSection';
 import AddHostelModal from './components/AddHostelModal';
 import AddNoticeModal from './components/AddNoticeModal';
 
-type DashboardView = 'overview' | 'hostels' | 'bookings' | 'residents';
+// Redundant type removed as it's now imported
 
 export default function ManagerDashboard() {
     const { currentUser } = useAuth();
@@ -106,6 +108,13 @@ export default function ManagerDashboard() {
                     <span className="text-xl">👥</span>
                     <span className="text-[10px] font-medium">Residents</span>
                 </button>
+                <button
+                    onClick={() => setActiveView('profile')}
+                    className={`flex flex-col items-center gap-1 ${activeView === 'profile' ? 'text-blue-600' : 'text-gray-400'}`}
+                >
+                    <span className="text-xl">👤</span>
+                    <span className="text-[10px] font-medium">Profile</span>
+                </button>
             </div>
 
             <main className="flex-1 px-3 sm:px-6 py-6 sm:py-8 overflow-hidden h-screen overflow-x-hidden pb-24">
@@ -127,6 +136,7 @@ export default function ManagerDashboard() {
                 )}
                 {activeView === 'bookings' && <BookingsSection />}
                 {activeView === 'residents' && <ResidentsSection />}
+                {activeView === 'profile' && <ProfileSection />}
             </main>
 
             <AddHostelModal

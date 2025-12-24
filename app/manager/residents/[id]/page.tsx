@@ -156,7 +156,7 @@ export default function ResidentDetailsPage() {
                                     href={user?.guardianContact ? `tel:${user.guardianContact.replace(/[^\d+]/g, '')}` : '#'}
                                     className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full font-bold text-sm text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]
                                         ${user?.guardianContact
-                                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:shadow-blue-500/40 cursor-pointer'
+                                            ? 'bg-linear-to-r from-blue-600 to-indigo-600 hover:shadow-blue-500/40 cursor-pointer'
                                             : 'bg-gray-400 cursor-not-allowed opacity-70'}`}
                                     onClick={(e) => !user?.guardianContact && e.preventDefault()}
                                 >
@@ -215,38 +215,38 @@ export default function ResidentDetailsPage() {
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {months.map((month) => (
-                                    <div key={month} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-blue-200 transition-colors">
-                                        <div className="font-medium text-gray-700">{month}</div>
+                                {months.map((month, idx) => (
+                                    <div key={month} className="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md hover:border-blue-100 transition-all duration-300">
+                                        <div className="flex items-center gap-4">
+                                            <div className="h-10 w-10 rounded-2xl bg-gray-50 flex items-center justify-center font-black text-gray-400 text-xs text-sans">
+                                                {idx + 1}
+                                            </div>
+                                            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                                                <p className="font-bold text-gray-800 text-lg">{month}</p>
+                                            </div>
+                                        </div>
 
                                         <div className="flex items-center gap-2">
-                                            {paymentHistory[month] === 'paid' ? (
-                                                <Badge variant="success" className="px-3 py-1">PAID</Badge>
-                                            ) : paymentHistory[month] === 'unpaid' ? (
-                                                <Badge variant="danger" className="px-3 py-1">UNPAID</Badge>
-                                            ) : (
-                                                <Badge variant="warning" className="px-3 py-1">PENDING</Badge>
-                                            )}
-
-                                            {/* Toggle Actions */}
-                                            <div className="flex flex-col gap-1 ml-2">
-                                                {paymentHistory[month] !== 'paid' && (
-                                                    <button
-                                                        onClick={() => handleStatusChange(month, 'paid')}
-                                                        className="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded hover:bg-green-200 transition-colors"
-                                                    >
-                                                        Mark Paid
-                                                    </button>
-                                                )}
-                                                {paymentHistory[month] !== 'unpaid' && (
-                                                    <button
-                                                        onClick={() => handleStatusChange(month, 'unpaid')}
-                                                        className="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded hover:bg-red-200 transition-colors"
-                                                    >
-                                                        Mark Unpaid
-                                                    </button>
-                                                )}
-                                            </div>
+                                            <button
+                                                onClick={() => handleStatusChange(month, 'paid')}
+                                                className={`h-9 px-5 rounded-full text-[10px] font-black transition-all duration-300 uppercase tracking-widest border shadow-xs ${paymentHistory[month] === 'paid'
+                                                    ? 'bg-green-500 text-white border-green-500'
+                                                    : 'bg-green-500/10 text-green-600 border-green-200/50 hover:bg-green-500 hover:text-white'
+                                                    }`}
+                                            >
+                                                MARK PAID
+                                            </button>
+                                            <button
+                                                onClick={() => handleStatusChange(month, 'unpaid')}
+                                                className={`h-9 px-5 rounded-full text-[10px] font-black transition-all duration-300 uppercase tracking-widest border shadow-xs ${paymentHistory[month] !== 'paid'
+                                                    ? (idx < new Date().getMonth() ? 'bg-red-500 text-white border-red-500' : 'bg-orange-500 text-white border-orange-500')
+                                                    : 'bg-red-500/10 text-red-600 border-red-200/50 hover:bg-red-500 hover:text-white'
+                                                    }`}
+                                            >
+                                                {paymentHistory[month] !== 'paid'
+                                                    ? (idx < new Date().getMonth() ? 'UNPAID' : 'PENDING')
+                                                    : 'MARK UNPAID'}
+                                            </button>
                                         </div>
                                     </div>
                                 ))}

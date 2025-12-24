@@ -3,7 +3,19 @@ import { MockData } from "./types";
 export const initialData: MockData = {
     currentUser: null,
     users: [
-        { id: 1, name: "Alice Student", email: "user@test.com", password: "123", role: "user" },
+        {
+            id: 1,
+            name: "Alice Student",
+            email: "user@test.com",
+            password: "123",
+            role: "user",
+            phone: "01700-000000",
+            guardianContact: "01700-111111",
+            address: "House 12, Road 5, Dhanmondi, Dhaka",
+            gender: "Female",
+            bio: "I am a computer science student looking for a peaceful stay.",
+            profileImage: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+        },
         { id: 2, name: "Bob Manager", email: "manager@test.com", password: "123", role: "manager" },
         { id: 3, name: "Super Admin", email: "admin@test.com", password: "123", role: "admin" }
     ],
@@ -162,8 +174,8 @@ export const initialData: MockData = {
             ],
             category: 'Male',
             division: 'খুলনা',
-            district: 'যশোর',
-            upazila: 'যশোর সদর',
+            district: 'খুলনা',
+            upazila: 'খুলনা সদর',
             contact: '01933-456789'
         },
         {
@@ -190,27 +202,33 @@ export const initialData: MockData = {
     ],
     bookings: [
         {
-            id: 1, // Changed to number to match interface if needed, or update interface. 
-            // Wait, interface said Booking.id is number, but old data has "BK001".
-            // I should update interface to string or keep string. Using number 1 for now to match interface.
-            // Actually, let's update interface to string or data to number. "BK001" implies string.
-            // I'll update interface to string for ID in next step if needed. 
-            // For now I'll use 1. But wait, "BK001" is better.
-            // I will use "BK001" and force cast or update types.ts. 
-            // Let's check types.ts again. types.ts said `id: number`.
-            // I'll stick to number `1` for safety or update types.ts. 
-            // Let's use 1001 for Booking ID.
+            id: 1001,
             userId: 1,
-            hostelId: 101,
-            roomId: "A1",
-            bedId: "S1", // Old data inferred bedId? 
-            // Old data: { id: "BK001", hostelId: 101, roomId: "A1", userId: 1, status: "pending", date: "2024-10-25" }
-            // It didn't have bedId explicitly in the object shown in view_file.
-            // But the interface has bedId. I should add a dummy bedId "S1".
+            hostelId: 201,
+            roomId: "R1-1",
+            bedId: "S1",
             date: "2024-10-25",
-            status: "pending",
-            userName: "Alice Student", // Enriched data
-            hostelName: "Oceanic Student Living" // Enriched data
+            status: "approved",
+            userName: "Alice Student",
+            hostelName: "রূপসী বাংলা ছাত্রনিবাস",
+            monthlyFeeStatus: 'paid',
+            lastPaymentDate: "2024-12-01"
+        }
+    ],
+    notices: [
+        {
+            id: 1,
+            hostelId: 201,
+            title: "শীতকালীন বিশেষ বিজ্ঞপ্তি",
+            content: "শীতকালে গরম পানির ব্যবহারের জন্য গিজার চালু করা হয়েছে। ব্যবহারের পর লাইট ও পানির কল বন্ধ নিশ্চিত করুন।",
+            date: "2024-12-20"
+        },
+        {
+            id: 2,
+            hostelId: 201,
+            title: "ভাড়া পরিশোধ প্রসঙ্গে",
+            content: "আগামী ৫ তারিখের মধ্যে চলতি মাসের হোস্টেল ভাড়া পরিশোধ করার জন্য অনুরোধ করা হলো।",
+            date: "2024-12-22"
         }
     ]
 };

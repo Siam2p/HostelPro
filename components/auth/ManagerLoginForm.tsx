@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/Button';
 import { AuthInput } from '@/components/ui/AuthInput';
@@ -41,6 +42,14 @@ export const ManagerLoginForm: React.FC = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     iconColor="text-blue-400"
                 />
+            </div>
+
+            <div className="flex justify-end">
+                <div className="text-sm text-right">
+                    <Link href="/manager/forgot-password" title="পাসওয়ার্ড ভুলে গেছেন" className="font-medium text-blue-600 hover:text-blue-500 transition-colors">
+                        পাসওয়ার্ড ভুলে গেছেন?
+                    </Link>
+                </div>
             </div>
 
             <div>

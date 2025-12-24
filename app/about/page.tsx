@@ -1,8 +1,13 @@
-"use client";
-
 import React from 'react';
+import { Metadata } from 'next';
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Target, Heart, ShieldCheck, Award, Users, CheckCircle2, ArrowRight } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: 'আমাদের সম্পর্কে | HostelPro',
+    description: 'HostelPro একটি আধুনিক প্ল্যাটফর্ম যা শিক্ষার্থীদের জন্য নিরাপদ এবং সাশ্রয়ী আবাসন খুঁজে পেতে সাহায্য করে। আমাদের লক্ষ্য হলো হোস্টেল বুকিং প্রক্রিয়াকে সহজ এবং ডিজিটাল করা।',
+};
 
 export default function AboutPage() {
     return (
@@ -135,13 +140,17 @@ export default function AboutPage() {
                             হাজার হাজার শিক্ষার্থীদের সাথে যোগ দিন যারা HostelPro-র মাধ্যমে তাদের দ্বিতীয় বাড়ি খুঁজে পেয়েছে। আজই আপনার জার্নি শুরু করুন।
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                            <Button className="bg-white text-primary hover:bg-slate-50 border-none px-12 py-5 rounded-2xl text-xl font-black shadow-xl hover:-translate-y-1 transition-all">
-                                এখন শুরু করুন
-                                <ArrowRight className="ml-2" />
-                            </Button>
-                            <Button variant="ghost" className="text-white hover:bg-white/10 px-10 py-5 rounded-2xl text-lg font-bold border-2 border-white/20">
-                                আরও জানুন
-                            </Button>
+                            <Link href="/hostels">
+                                <Button className="bg-white text-primary hover:bg-slate-50 border-none px-12 py-5 rounded-2xl text-xl font-black shadow-xl hover:-translate-y-1 transition-all">
+                                    এখন শুরু করুন
+                                    <ArrowRight className="ml-2" />
+                                </Button>
+                            </Link>
+                            <Link href="/contact">
+                                <Button variant="ghost" className="text-white hover:bg-white/10 px-10 py-5 rounded-2xl text-lg font-bold border-2 border-white/20">
+                                    আরও জানুন
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>
