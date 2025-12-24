@@ -34,6 +34,10 @@ export interface Hostel {
     rooms: Room[];
     gallery?: string[]; // For storing multiple images/videos
     contact?: string;
+    category?: 'Male' | 'Female';
+    division?: string;
+    district?: string;
+    upazila?: string;
 }
 
 export interface Booking {

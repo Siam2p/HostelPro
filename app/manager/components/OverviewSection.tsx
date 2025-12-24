@@ -52,12 +52,12 @@ export default function OverviewSection({ setActiveView, setShowAddModal, setSho
     };
 
     return (
-        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="space-y-8 relative animate-in fade-in slide-in-from-bottom-4 duration-500">
             <h1 className="text-3xl font-bold text-gray-800">স্বাগতম, {currentUser.name}! 👋</h1>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-linear-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 text-white shadow-xl shadow-blue-200 relative overflow-hidden transform transition hover:scale-105">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                <div className="bg-linear-to-br from-blue-600 to-indigo-700 rounded-2xl p-4 sm:p-6 text-white shadow-xl shadow-blue-200 relative overflow-hidden transform transition hover:scale-105">
                     <div className="text-blue-100 text-sm font-medium mb-1">মোট আয় (এই মাস)</div>
                     <div className="text-3xl font-bold">৳{totalRevenue.toLocaleString()}</div>
                     <div className="mt-4 text-xs bg-white/20 inline-block px-2 py-1 rounded-lg">Last 30 days</div>
@@ -133,7 +133,7 @@ export default function OverviewSection({ setActiveView, setShowAddModal, setSho
 
                                 return (
                                     <>
-                                        <div className="grid grid-cols-2 gap-4">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-100">
                                                 <div className="flex items-center gap-2 mb-1">
                                                     <div className="h-2 w-2 rounded-full bg-emerald-500"></div>

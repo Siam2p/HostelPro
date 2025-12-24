@@ -51,20 +51,20 @@ export default function ResidentsSection() {
 
     return (
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                <h2 className="text-2xl font-bold text-gray-800">বসবাসকারী শিক্ষার্থী (Residents)</h2>
-                <div className="flex w-full md:w-auto gap-3">
-                    <div className="relative w-full md:w-64">
-                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+            <div className="flex flex-col justify-between items-start gap-4">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800">বসবাসকারী শিক্ষার্থী (Residents)</h2>
+                <div className="flex justify-between w-full gap-6">
+                    <div className="relative w-full sm:w-80 flex items-center">
+                        <span className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 bg-gray-200 rounded-r-lg p-2 cursor-pointer">🔍</span>
                         <input
                             type="text"
                             placeholder="শিক্ষার্থী খুঁজুন..."
-                            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full pr-10 pl-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
-                    <Button onClick={() => setIsAddModalOpen(true)}>যুক্ত করুন (Add Resident)</Button>
+                    <Button onClick={() => setIsAddModalOpen(true)} className="text-2xl font-semibold w-12 h-12 rounded-full">+</Button>
                 </div>
             </div>
 

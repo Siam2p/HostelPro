@@ -23,7 +23,27 @@ export default function AdminDashboard() {
     const totalBookings = bookings.length;
 
     return (
-        <div className="container mx-auto px-6 py-12 flex flex-col lg:flex-row gap-8">
+        <div className="container mx-auto px-6 py-12 flex flex-col lg:flex-row gap-8 pb-24 lg:pb-12">
+            {/* Mobile Bottom Navigation */}
+            <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-50 px-6 py-3 flex justify-between items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+                <button className="flex flex-col items-center gap-1 text-primary">
+                    <span className="text-xl">📊</span>
+                    <span className="text-[10px] font-medium">Overview</span>
+                </button>
+                <button className="flex flex-col items-center gap-1 text-gray-400">
+                    <span className="text-xl">👥</span>
+                    <span className="text-[10px] font-medium">Users</span>
+                </button>
+                <button className="flex flex-col items-center gap-1 text-gray-400">
+                    <span className="text-xl">🏨</span>
+                    <span className="text-[10px] font-medium">Hostels</span>
+                </button>
+                <button className="flex flex-col items-center gap-1 text-gray-400">
+                    <span className="text-xl">⚙️</span>
+                    <span className="text-[10px] font-medium">Settings</span>
+                </button>
+            </div>
+
             {/* Sidebar Mock */}
             <div className="w-full lg:w-64 shrink-0 hidden lg:block">
                 <div className="bg-slate-900 text-white rounded-xl p-6 h-full min-h-[500px]">
@@ -57,7 +77,7 @@ export default function AdminDashboard() {
                             <p className="text-3xl font-bold">{totalHostels}</p>
                         </div>
                     </Card>
-                    <Card className="border-l-4 border-l-warning flex items-center p-6">
+                    <Card className="border-l-4 border-l-warning flex items-center p-4 sm:p-6">
                         <div className="rounded-full bg-yellow-100 p-4 mr-4 text-warning font-bold text-xl">📅</div>
                         <div>
                             <p className="text-text-muted text-sm uppercase font-bold">বুকিংসমূহ</p>

@@ -4,6 +4,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { BANGLADESH_LOCATIONS } from '@/lib/locations';
 
 const MapPicker = dynamic(() => import('@/components/MapPicker'), {
     ssr: false,
@@ -23,10 +24,16 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [contact, setContact] = useState('');
-    const [location, setLocation] = useState('');
+    const [address, setAddress] = useState(''); // Specific address line
     const [coords, setCoords] = useState<{ lat: number, lng: number } | null>(null);
     const [mediaPreviews, setMediaPreviews] = useState<string[]>([]);
     const [isEditing, setIsEditing] = useState(false);
+
+    // New Fields
+    const [category, setCategory] = useState<'Male' | 'Female'>('Male');
+    const [division, setDivision] = useState('');
+    const [district, setDistrict] = useState('');
+    const [upazila, setUpazila] = useState('');
 
     useEffect(() => {
         if (editHostelId) {
@@ -35,9 +42,16 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                 setName(hostel.name);
                 setPrice(String(hostel.price));
                 setContact(hostel.contact || '');
-                setLocation(hostel.location);
+                setAddress(hostel.location); // Mapping 'location' to specific address input for now
                 setCoords(hostel.coordinates || null);
                 setMediaPreviews(hostel.gallery || (hostel.image ? [hostel.image] : []));
+
+                // Set new fields if they exist
+                if (hostel.category) setCategory(hostel.category);
+                if (hostel.division) setDivision(hostel.division);
+                if (hostel.district) setDistrict(hostel.district);
+                if (hostel.upazila) setUpazila(hostel.upazila);
+
                 setIsEditing(true);
             }
         } else {
@@ -49,10 +63,25 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
         setName('');
         setPrice('');
         setContact('');
-        setLocation('');
+        setAddress('');
         setCoords(null);
         setMediaPreviews([]);
+        setCategory('Male');
+        setDivision('');
+        setDistrict('');
+        setUpazila('');
         setIsEditing(false);
+    };
+
+    const handleDivisionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setDivision(e.target.value);
+        setDistrict('');
+        setUpazila('');
+    };
+
+    const handleDistrictChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setDistrict(e.target.value);
+        setUpazila('');
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,18 +101,25 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
 
         if (!currentUser) return;
 
+        // Construct full location string for display
+        const fullLocation = `${address}, ${upazila || district}, ${district}`;
+
         if (isEditing && editHostelId) {
             const existingHostel = hostels.find(h => h.id === editHostelId);
             if (existingHostel) {
                 updateHostel({
                     ...existingHostel,
                     name: name,
-                    location: location,
+                    location: fullLocation,
                     contact: contact,
                     coordinates: coords || undefined,
                     price: Number(price),
                     gallery: mediaPreviews,
-                    image: mediaPreviews.length > 0 ? mediaPreviews[0] : existingHostel.image
+                    image: mediaPreviews.length > 0 ? mediaPreviews[0] : existingHostel.image,
+                    category,
+                    division,
+                    district,
+                    upazila
                 });
             }
         } else {
@@ -91,7 +127,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
             addHostel({
                 id: newId,
                 name: name,
-                location: location,
+                location: fullLocation,
                 contact: contact,
                 coordinates: coords || undefined,
                 price: Number(price),
@@ -104,12 +140,19 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                     { id: "A1", capacity: 4, occupied: [], price: Number(price) }
                 ],
                 gallery: mediaPreviews,
-                image: mediaPreviews.length > 0 ? mediaPreviews[0] : "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                image: mediaPreviews.length > 0 ? mediaPreviews[0] : "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category,
+                division,
+                district,
+                upazila
             });
         }
         onClose();
         resetForm();
     };
+
+    const availableDistricts = division && BANGLADESH_LOCATIONS[division] ? Object.keys(BANGLADESH_LOCATIONS[division]) : [];
+    const availableUpazilas = division && district && BANGLADESH_LOCATIONS[division][district] ? BANGLADESH_LOCATIONS[division][district] : [];
 
     if (!isOpen) return null;
 
@@ -152,14 +195,16 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-700">লোকেশন</label>
-                            <input
-                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
-                                placeholder="e.g. আম্বরখানা, সিলেট"
+                            <label className="text-sm font-medium text-gray-700">ক্যাটাগরি</label>
+                            <select
+                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all bg-white"
+                                value={category}
+                                onChange={(e) => setCategory(e.target.value as 'Male' | 'Female')}
                                 required
-                            />
+                            >
+                                <option value="Male">ছাত্র (Male)</option>
+                                <option value="Female">ছাত্রী (Female)</option>
+                            </select>
                         </div>
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">যোগাযোগ নাম্বার</label>
@@ -173,7 +218,63 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                         </div>
                     </div>
 
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-gray-700">বিভাগ</label>
+                            <select
+                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all bg-white"
+                                value={division}
+                                onChange={handleDivisionChange}
+                                required
+                            >
+                                <option value="">নির্বাচন করুন</option>
+                                {Object.keys(BANGLADESH_LOCATIONS).map(div => (
+                                    <option key={div} value={div}>{div}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-gray-700">জেলা</label>
+                            <select
+                                className={`w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all bg-white ${!division ? 'bg-gray-50 text-gray-400' : ''}`}
+                                value={district}
+                                onChange={handleDistrictChange}
+                                disabled={!division}
+                                required
+                            >
+                                <option value="">নির্বাচন করুন</option>
+                                {availableDistricts.map(dist => (
+                                    <option key={dist} value={dist}>{dist}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-gray-700">উপজেলা/থানা</label>
+                            <select
+                                className={`w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all bg-white ${!district ? 'bg-gray-50 text-gray-400' : ''}`}
+                                value={upazila}
+                                onChange={(e) => setUpazila(e.target.value)}
+                                disabled={!district}
+                                required
+                            >
+                                <option value="">নির্বাচন করুন</option>
+                                {availableUpazilas.map(upz => (
+                                    <option key={upz} value={upz}>{upz}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
 
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-700">বিস্তারিত ঠিকানা (Area/Road/House)</label>
+                        <input
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            placeholder="e.g. আম্বরখানা মেইন রোড, হাউজ #১২"
+                            required
+                        />
+                    </div>
 
                     <div className="space-y-2">
                         <label className="text-sm font-medium text-gray-700">ছবি/ভিডিও আপলোড (Media)</label>

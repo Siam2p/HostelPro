@@ -30,12 +30,6 @@ export default function Sidebar({ activeView, setActiveView }: SidebarProps) {
             <button onClick={() => setActiveView('residents')} className={`text-left px-4 py-3 rounded-xl font-medium transition-all duration-200 flex items-center gap-3 ${activeView === 'residents' ? 'bg-blue-50 text-blue-600 shadow-sm' : 'text-gray-500 hover:bg-gray-50'}`}>
                 👥 রেসিডেন্টস
             </button>
-
-            <div className="mt-8 border-t border-gray-100 pt-4">
-                <p className="px-4 text-xs font-bold text-gray-400 mb-2">OTHERS</p>
-                <button onClick={() => router.push('/contact')} className="w-full text-left px-4 py-2 text-sm text-gray-500 hover:text-blue-600 transition-colors">Contact Us</button>
-                <button onClick={() => router.push('/about')} className="w-full text-left px-4 py-2 text-sm text-gray-500 hover:text-blue-600 transition-colors">About Us</button>
-            </div>
         </div>
     );
 }

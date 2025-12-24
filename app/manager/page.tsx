@@ -68,9 +68,8 @@ export default function ManagerDashboard() {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row font-sans container mx-auto">
             <Sidebar activeView={activeView} setActiveView={setActiveView} />
-
             {/* Mobile Bottom Navigation */}
-            <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-50 px-6 py-3 flex justify-between items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+            <div className="lg:hidden w-full fixed bottom-0 left-0 bg-white border-t border-gray-200 z-50 px-6 py-3 flex justify-between items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
                 <button
                     onClick={() => setActiveView('overview')}
                     className={`flex flex-col items-center gap-1 ${activeView === 'overview' ? 'text-blue-600' : 'text-gray-400'}`}
@@ -109,7 +108,7 @@ export default function ManagerDashboard() {
                 </button>
             </div>
 
-            <main className="flex-1 px-6 py-8 overflow-y-auto h-screen pb-24">
+            <main className="flex-1 px-3 sm:px-6 py-6 sm:py-8 overflow-hidden h-screen overflow-x-hidden pb-24">
                 {activeView === 'overview' && (
                     <OverviewSection
                         setActiveView={setActiveView}
