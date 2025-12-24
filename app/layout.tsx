@@ -1,3 +1,4 @@
+import React, { Suspense } from 'react';
 import type { Metadata } from "next";
 import { Hind_Siliguri, Outfit } from "next/font/google";
 import "./globals.css";
@@ -73,7 +74,9 @@ export default function RootLayout({
       >
         <AuthProvider>
           <DataProvider>
-            <Navbar />
+            <Suspense fallback={<div className="h-16" />}>
+              <Navbar />
+            </Suspense>
             <main className="grow">
               {children}
             </main>
