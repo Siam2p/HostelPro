@@ -193,7 +193,8 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                     district,
                     upazila,
                     features: features,
-                    description: description
+                    description: description,
+                    status: 'pending'
                 });
             }
         } else {
@@ -218,7 +219,8 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                 category,
                 division,
                 district,
-                upazila
+                upazila,
+                status: 'pending'
             });
         }
         onClose();

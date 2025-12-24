@@ -14,10 +14,11 @@ export const initialData: MockData = {
             address: "House 12, Road 5, Dhanmondi, Dhaka",
             gender: "Female",
             bio: "I am a computer science student looking for a peaceful stay.",
-            profileImage: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+            profileImage: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+            status: 'active'
         },
-        { id: 2, name: "Bob Manager", email: "manager@test.com", password: "123", role: "manager" },
-        { id: 3, name: "Super Admin", email: "admin@test.com", password: "123", role: "admin" }
+        { id: 2, name: "Bob Manager", email: "manager@test.com", password: "123", role: "manager", status: 'active' },
+        { id: 3, name: "Super Admin", email: "admin@test.com", password: "123", role: "admin", status: 'active' }
     ],
     hostels: [
         {
@@ -41,6 +42,7 @@ export const initialData: MockData = {
             district: 'ঢাকা',
             upazila: 'ধানমণ্ডি',
             contact: '01711-223344',
+            status: 'active',
             gallery: [
                 "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 "https://images.unsplash.com/photo-1520277739336-7bf67edfa768?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -67,7 +69,8 @@ export const initialData: MockData = {
             division: 'ঢাকা',
             district: 'গাজীপুর',
             upazila: 'গাজীপুর সদর',
-            contact: '01822-334455'
+            contact: '01822-334455',
+            status: 'active'
         },
         {
             id: 203,
@@ -89,6 +92,7 @@ export const initialData: MockData = {
             district: 'কুমিল্লা',
             upazila: 'কুমিল্লা সদর',
             contact: '01933-445566',
+            status: 'active',
             gallery: [
                 "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 "https://images.unsplash.com/photo-1596276020587-8044fe049813?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -113,7 +117,8 @@ export const initialData: MockData = {
             category: 'Male',
             division: 'সিলেট',
             district: 'সিলেট',
-            upazila: 'সিলেট সদর'
+            upazila: 'সিলেট সদর',
+            status: 'active'
         },
         {
             id: 205,
@@ -134,7 +139,8 @@ export const initialData: MockData = {
             division: 'বরিশাল',
             district: 'বরিশাল',
             upazila: 'বরিশাল সদর',
-            contact: '01711-234567'
+            contact: '01711-234567',
+            status: 'active'
         },
         {
             id: 206,
@@ -155,7 +161,8 @@ export const initialData: MockData = {
             division: 'রাজশাহী',
             district: 'বগুড়া',
             upazila: 'বগুড়া সদর',
-            contact: '01822-345678'
+            contact: '01822-345678',
+            status: 'active'
         },
         {
             id: 207,
@@ -176,7 +183,8 @@ export const initialData: MockData = {
             division: 'খুলনা',
             district: 'খুলনা',
             upazila: 'খুলনা সদর',
-            contact: '01933-456789'
+            contact: '01933-456789',
+            status: 'active'
         },
         {
             id: 208,
@@ -197,7 +205,8 @@ export const initialData: MockData = {
             division: 'ময়মনসিংহ',
             district: 'ময়মনসিংহ',
             upazila: 'ময়মনসিংহ সদর',
-            contact: '01577-889900'
+            contact: '01577-889900',
+            status: 'active'
         }
     ],
     bookings: [

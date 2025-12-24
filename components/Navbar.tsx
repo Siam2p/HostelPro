@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import { Button } from './ui/Button';
 
@@ -10,6 +10,7 @@ export function Navbar() {
     const { currentUser, logout } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const pathname = usePathname();
+    const searchParams = useSearchParams();
 
     const isActive = (path: string) => pathname === path;
     const baseLinkClass = "font-medium transition-colors hover:text-primary";
@@ -18,7 +19,7 @@ export function Navbar() {
 
     return (
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-border">
-            <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div className={`${pathname.startsWith('/admin') || pathname.startsWith('/manager') ? 'px-6 lg:px-10' : 'container mx-auto px-6'} py-4 flex items-center justify-between`}>
                 {/* Brand */}
                 <Link href="/" className="text-2xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                     Hostel<span className="text-primary">Pro</span>
@@ -29,19 +30,19 @@ export function Navbar() {
                 <div className="hidden md:flex gap-8">
                     {currentUser?.role === 'admin' ? (
                         <>
-                            <Link href="/admin" className={`${baseLinkClass} ${isActive('/admin') ? activeLinkClass : inactiveLinkClass}`}>
+                            <Link href="/admin?view=overview" className={`${baseLinkClass} ${isActive('/admin') ? activeLinkClass : inactiveLinkClass}`}>
                                 ড্যাশবোর্ড
                             </Link>
-                            <Link href="/admin/users" className={`${baseLinkClass} ${isActive('/admin/users') ? activeLinkClass : inactiveLinkClass}`}>
+                            <Link href="/admin?view=users" className={`${baseLinkClass} ${isActive('/admin') && searchParams.get('view') === 'users' ? activeLinkClass : inactiveLinkClass}`}>
                                 ব্যবহারকারী
                             </Link>
-                            <Link href="/admin/hostels" className={`${baseLinkClass} ${isActive('/admin/hostels') ? activeLinkClass : inactiveLinkClass}`}>
+                            <Link href="/admin?view=hostels" className={`${baseLinkClass} ${isActive('/admin') && searchParams.get('view') === 'hostels' ? activeLinkClass : inactiveLinkClass}`}>
                                 সব হোস্টেল
                             </Link>
                         </>
                     ) : currentUser?.role === 'manager' ? (
                         <>
-                            <Link href="/manager" className={`${baseLinkClass} ${isActive('/manager') ? activeLinkClass : inactiveLinkClass}`}>
+                            <Link href="/manager?view=overview" className={`${baseLinkClass} ${isActive('/manager') ? activeLinkClass : inactiveLinkClass}`}>
                                 ড্যাশবোর্ড
                             </Link>
                             <Link href="/about" className={`${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
@@ -73,7 +74,13 @@ export function Navbar() {
                 <div className="hidden md:flex items-center gap-4">
                     {currentUser ? (
                         <div className="flex items-center gap-6">
-                            <Link href="/profile" className="flex items-center gap-3 group/avatar transition-all hover:opacity-80">
+                            <Link
+                                href={
+                                    currentUser.role === 'manager' ? '/manager?view=profile' :
+                                        currentUser.role === 'admin' ? '/admin?view=profile' : '/profile'
+                                }
+                                className="flex items-center gap-3 group/avatar transition-all hover:opacity-80"
+                            >
                                 <div className="h-10 w-10 rounded-full border-2 border-primary/20 bg-primary/5 p-0.5 overflow-hidden shadow-sm group-hover/avatar:border-primary/50 transition-colors">
                                     {currentUser.profileImage ? (
                                         <img src={currentUser.profileImage} alt={currentUser.name} className="w-full h-full object-cover rounded-full" />
@@ -98,12 +105,12 @@ export function Navbar() {
                                     লগআউট
                                 </Button>
 
-                                {currentUser.role === 'manager' && (
+                                {currentUser.role === 'manager' && !pathname.startsWith('/manager') && (
                                     <Link href="/manager">
                                         <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-blue-600 to-indigo-600 shadow-md shadow-blue-100 h-auto">ড্যাশবোর্ড</Button>
                                     </Link>
                                 )}
-                                {currentUser.role === 'admin' && (
+                                {currentUser.role === 'admin' && !pathname.startsWith('/admin') && (
                                     <Link href="/admin">
                                         <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-blue-600 to-indigo-600 shadow-md shadow-blue-100 h-auto">অ্যাডমিন</Button>
                                     </Link>
@@ -138,19 +145,19 @@ export function Navbar() {
                 <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-b border-border shadow-lg p-6 flex flex-col gap-4 animate-in slide-in-from-top-2">
                     {currentUser?.role === 'admin' ? (
                         <>
-                            <Link href="/admin" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/admin') ? activeLinkClass : inactiveLinkClass}`}>
+                            <Link href="/admin?view=overview" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/admin') && !searchParams.get('view') ? activeLinkClass : inactiveLinkClass}`}>
                                 ড্যাশবোর্ড
                             </Link>
-                            <Link href="/admin/users" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/admin/users') ? activeLinkClass : inactiveLinkClass}`}>
+                            <Link href="/admin?view=users" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/admin') && searchParams.get('view') === 'users' ? activeLinkClass : inactiveLinkClass}`}>
                                 ব্যবহারকারী
                             </Link>
-                            <Link href="/admin/hostels" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/admin/hostels') ? activeLinkClass : inactiveLinkClass}`}>
+                            <Link href="/admin?view=hostels" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/admin') && searchParams.get('view') === 'hostels' ? activeLinkClass : inactiveLinkClass}`}>
                                 সব হোস্টেল
                             </Link>
                         </>
                     ) : currentUser?.role === 'manager' ? (
                         <>
-                            <Link href="/manager" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/manager') ? activeLinkClass : inactiveLinkClass}`}>
+                            <Link href="/manager?view=overview" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/manager') ? activeLinkClass : inactiveLinkClass}`}>
                                 ড্যাশবোর্ড
                             </Link>
                             <Link href="/about" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/about') ? activeLinkClass : inactiveLinkClass}`}>
@@ -195,12 +202,12 @@ export function Navbar() {
                                 </div>
                             </div>
 
-                            {currentUser.role === 'manager' && (
+                            {currentUser.role === 'manager' && !pathname.startsWith('/manager') && (
                                 <Link href="/manager" onClick={() => setIsMenuOpen(false)}>
                                     <Button fullWidth className="py-2 text-sm">ড্যাশবোর্ড</Button>
                                 </Link>
                             )}
-                            {currentUser.role === 'admin' && (
+                            {currentUser.role === 'admin' && !pathname.startsWith('/admin') && (
                                 <Link href="/admin" onClick={() => setIsMenuOpen(false)}>
                                     <Button fullWidth className="py-2 text-sm">অ্যাডমিন</Button>
                                 </Link>

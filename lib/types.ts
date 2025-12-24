@@ -12,9 +12,11 @@ export interface User {
     gender?: 'Male' | 'Female' | 'Other';
     bio?: string;
     emergencyContact?: string;
+    status?: 'active' | 'blocked';
 }
 
 export type DashboardView = 'overview' | 'hostels' | 'bookings' | 'residents' | 'profile';
+export type AdminDashboardView = 'overview' | 'users' | 'hostels' | 'bookings' | 'analytics' | 'settings' | 'profile';
 
 export interface Room {
     id: string;
@@ -45,6 +47,7 @@ export interface Hostel {
     division?: string;
     district?: string;
     upazila?: string;
+    status?: 'pending' | 'active' | 'inactive' | 'rejected';
 }
 
 export interface Booking {
@@ -68,6 +71,7 @@ export interface Notice {
     date: string;
     content: string;
     title: string;
+    isGlobal?: boolean;
 }
 
 export interface MockData {

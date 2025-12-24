@@ -335,7 +335,7 @@ function WriteReviewModal({ isOpen, onClose, hostelName, onSubmit }: { isOpen: b
 }
 
 export default function UserProfilePage() {
-    const { currentUser, logout, updateCurrentUser } = useAuth();
+    const { currentUser, isLoading, logout, updateCurrentUser } = useAuth();
     const { bookings, hostels, notices, updateUser } = useData();
     const router = useRouter();
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -352,22 +352,24 @@ export default function UserProfilePage() {
     const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
     useEffect(() => {
-        if (!currentUser) {
-            router.push('/login');
-        } else {
-            setFormData({
-                name: currentUser.name,
-                email: currentUser.email,
-                phone: currentUser.phone || '',
-                guardianContact: currentUser.guardianContact || '',
-                address: currentUser.address || '',
-                gender: currentUser.gender || 'Other',
-                bio: currentUser.bio || '',
-                emergencyContact: currentUser.emergencyContact || '',
-                profileImage: currentUser.profileImage || ''
-            });
+        if (!isLoading) {
+            if (!currentUser) {
+                router.push('/login');
+            } else {
+                setFormData({
+                    name: currentUser.name,
+                    email: currentUser.email,
+                    phone: currentUser.phone || '',
+                    guardianContact: currentUser.guardianContact || '',
+                    address: currentUser.address || '',
+                    gender: currentUser.gender || 'Other',
+                    bio: currentUser.bio || '',
+                    emergencyContact: currentUser.emergencyContact || '',
+                    profileImage: currentUser.profileImage || ''
+                });
+            }
         }
-    }, [currentUser, router]);
+    }, [currentUser, isLoading, router]);
 
     // Clear feedback message after 3s
     useEffect(() => {
@@ -376,6 +378,10 @@ export default function UserProfilePage() {
             return () => clearTimeout(timer);
         }
     }, [message]);
+
+    if (isLoading) {
+        return <div className="min-h-screen bg-gray-50/50 flex items-center justify-center font-bold text-gray-400 animate-pulse">Authenticating...</div>;
+    }
 
     if (!currentUser) return null;
 

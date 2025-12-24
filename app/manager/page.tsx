@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
 import { DashboardView } from '@/lib/types';
+import { Suspense } from 'react';
 
 // Components
 import Sidebar from './components/Sidebar';
@@ -19,10 +20,26 @@ import AddNoticeModal from './components/AddNoticeModal';
 // Redundant type removed as it's now imported
 
 export default function ManagerDashboard() {
-    const { currentUser } = useAuth();
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center font-bold text-gray-400">Loading Dashboard...</div>}>
+            <ManagerDashboardContent />
+        </Suspense>
+    );
+}
+
+function ManagerDashboardContent() {
+    const { currentUser, isLoading } = useAuth();
     const { deleteHostel } = useData();
     const router = useRouter();
+    const searchParams = useSearchParams();
     const [activeView, setActiveView] = useState<DashboardView>('overview');
+
+    useEffect(() => {
+        const view = searchParams.get('view') as DashboardView;
+        if (view && ['overview', 'hostels', 'bookings', 'residents', 'profile'].includes(view)) {
+            setActiveView(view);
+        }
+    }, [searchParams]);
 
     // Modals State
     const [showAddModal, setShowAddModal] = useState(false);
@@ -33,10 +50,14 @@ export default function ManagerDashboard() {
     const [editHostelId, setEditHostelId] = useState<number | null>(null);
 
     useEffect(() => {
-        if (!currentUser || currentUser.role !== 'manager') {
+        if (!isLoading && (!currentUser || currentUser.role !== 'manager')) {
             router.push('/login');
         }
-    }, [currentUser, router]);
+    }, [currentUser, isLoading, router]);
+
+    if (isLoading) {
+        return <div className="min-h-screen bg-gray-50 flex items-center justify-center font-bold text-gray-400 animate-pulse">Authenticating...</div>;
+    }
 
     if (!currentUser || currentUser.role !== 'manager') {
         return null;
@@ -68,7 +89,7 @@ export default function ManagerDashboard() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row font-sans container mx-auto">
+        <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row font-sans">
             <Sidebar activeView={activeView} setActiveView={setActiveView} />
             {/* Mobile Bottom Navigation */}
             <div className="lg:hidden w-full fixed bottom-0 left-0 bg-white border-t border-gray-200 z-50 px-6 py-3 flex justify-between items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
@@ -117,26 +138,28 @@ export default function ManagerDashboard() {
                 </button>
             </div>
 
-            <main className="flex-1 px-3 sm:px-6 py-6 sm:py-8 overflow-hidden h-screen overflow-x-hidden pb-24">
-                {activeView === 'overview' && (
-                    <OverviewSection
-                        setActiveView={setActiveView}
-                        setShowAddModal={setShowAddModal} // Opens in "Add" mode implicitly as editHostelId is mostly null unless set
-                        setShowNoticeModal={setShowNoticeModal}
-                    />
-                )}
-                {activeView === 'hostels' && (
-                    <HostelsSection
-                        selectedHostelId={selectedHostelId}
-                        setSelectedHostelId={setSelectedHostelId}
-                        setShowAddModal={handleCreateHostel}
-                        openEditModal={openEditModal}
-                        handleDeleteHostel={handleDeleteHostel}
-                    />
-                )}
-                {activeView === 'bookings' && <BookingsSection />}
-                {activeView === 'residents' && <ResidentsSection />}
-                {activeView === 'profile' && <ProfileSection />}
+            <main className="flex-1 p-4 lg:p-8 pb-32 lg:pb-8 w-full overflow-x-hidden">
+                <div className="container mx-auto max-w-7xl">
+                    {activeView === 'overview' && (
+                        <OverviewSection
+                            setActiveView={setActiveView}
+                            setShowAddModal={setShowAddModal} // Opens in "Add" mode implicitly as editHostelId is mostly null unless set
+                            setShowNoticeModal={setShowNoticeModal}
+                        />
+                    )}
+                    {activeView === 'hostels' && (
+                        <HostelsSection
+                            selectedHostelId={selectedHostelId}
+                            setSelectedHostelId={setSelectedHostelId}
+                            setShowAddModal={handleCreateHostel}
+                            openEditModal={openEditModal}
+                            handleDeleteHostel={handleDeleteHostel}
+                        />
+                    )}
+                    {activeView === 'bookings' && <BookingsSection />}
+                    {activeView === 'residents' && <ResidentsSection />}
+                    {activeView === 'profile' && <ProfileSection />}
+                </div>
             </main>
 
             <AddHostelModal

@@ -42,8 +42,30 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
 
         updateHostel({
             ...hostel,
-            rooms: [...hostel.rooms, newRoom]
+            rooms: [...hostel.rooms, newRoom],
+            status: 'pending' // Updating rooms might also require re-approval depending on policy, user said "manager post or update hostel then status will be paniding"
         });
+    };
+
+    const toggleHostelStatus = (hostel: any) => {
+        let newStatus: 'pending' | 'inactive';
+        let actionText: string;
+
+        if (hostel.status === 'active' || hostel.status === 'pending') {
+            newStatus = 'inactive';
+            actionText = 'নিষ্ক্রিয়';
+        } else {
+            // covers 'inactive' and 'rejected'
+            newStatus = 'pending';
+            actionText = 'সক্রিয়';
+        }
+
+        if (confirm(`আপনি কি নিশ্চিত যে আপনি এই হোস্টেলটি ${actionText} করতে চান?${newStatus === 'pending' ? ' (এটি অ্যাডমিন অনুমোদনের জন্য পাঠানো হবে)' : ''}`)) {
+            updateHostel({
+                ...hostel,
+                status: newStatus
+            });
+        }
     };
 
     const handleDeleteRoom = (roomId: string) => {
@@ -111,8 +133,14 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                             <div key={hostel.id} className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => setSelectedHostelId(hostel.id)}>
                                 <div className="h-48 overflow-hidden relative">
                                     <img src={hostel.image} alt={hostel.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-800 shadow-sm">
-                                        {hostel.totalRooms} রুম
+                                    <div className="absolute top-4 right-4 flex flex-col gap-2 items-end">
+                                        <div className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-800 shadow-sm">
+                                            {hostel.totalRooms} রুম
+                                        </div>
+                                        {hostel.status === 'pending' && <Badge variant="warning">Pending</Badge>}
+                                        {hostel.status === 'inactive' && <Badge variant="danger">Inactive</Badge>}
+                                        {hostel.status === 'rejected' && <Badge variant="danger">Rejected</Badge>}
+                                        {hostel.status === 'active' && <Badge variant="success">Active</Badge>}
                                     </div>
                                 </div>
                                 <div className="p-5">
@@ -138,10 +166,19 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                         <div className="space-y-8">
                             <div className="flex flex-col md:flex-row justify-between md:items-start gap-4 pb-8 border-b border-gray-100">
                                 <div>
-                                    <h2 className="text-3xl font-bold text-gray-900 mb-2">{selectedHostel.name}</h2>
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <h2 className="text-3xl font-bold text-gray-900">{selectedHostel.name}</h2>
+                                        {selectedHostel.status === 'pending' && <Badge variant="warning">Pending Approval</Badge>}
+                                        {selectedHostel.status === 'inactive' && <Badge variant="danger">Inactive</Badge>}
+                                        {selectedHostel.status === 'rejected' && <Badge variant="danger">Rejected / Blocked</Badge>}
+                                        {selectedHostel.status === 'active' && <Badge variant="success">Active</Badge>}
+                                    </div>
                                     <p className="text-gray-500 flex items-center gap-2">📍 {selectedHostel.location}</p>
                                 </div>
                                 <div className="flex gap-3">
+                                    <Button variant="outline" onClick={() => toggleHostelStatus(selectedHostel)}>
+                                        {(selectedHostel.status === 'inactive' || selectedHostel.status === 'rejected') ? 'সক্রিয় করুন' : 'নিষ্ক্রিয় করুন'}
+                                    </Button>
                                     <Button variant="outline" onClick={openEditModal}>তথ্য এডিট করুন</Button>
                                     <Button className="bg-red-50 text-red-600 hover:bg-red-100 border-red-100" onClick={handleDeleteHostel}>হোস্টেল ডিলিট</Button>
                                 </div>

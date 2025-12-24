@@ -6,6 +6,7 @@ import { initialData } from '@/lib/data';
 
 interface AuthContextType {
     currentUser: User | null;
+    isLoading: boolean;
     login: (role: User['role']) => void;
     logout: () => void;
     updateCurrentUser: (user: User) => void;
@@ -15,6 +16,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         // Restore session
@@ -22,12 +24,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (stored) {
             setCurrentUser(JSON.parse(stored));
         }
+        setIsLoading(false);
     }, []);
 
     const login = (role: User['role']) => {
         // Find mock user by role
         const user = initialData.users.find((u: User) => u.role === role);
         if (user) {
+            if (user.status === 'blocked') {
+                alert('আপনার অ্যাকাউন্টটি ব্লক করা হয়েছে। অনুগ্রহ করে অ্যাডমিনের সাথে যোগাযোগ করুন।');
+                return;
+            }
             setCurrentUser(user);
             sessionStorage.setItem('currentUser', JSON.stringify(user));
         }
@@ -44,7 +51,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     return (
-        <AuthContext.Provider value={{ currentUser, login, logout, updateCurrentUser }}>
+        <AuthContext.Provider value={{ currentUser, isLoading, login, logout, updateCurrentUser }}>
             {children}
         </AuthContext.Provider>
     );
