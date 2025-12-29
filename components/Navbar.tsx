@@ -19,7 +19,7 @@ export function Navbar() {
 
     return (
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-border">
-            <div className={`${pathname.startsWith('/admin') || pathname.startsWith('/manager') ? 'px-6 lg:px-10' : 'container mx-auto px-6'} py-4 flex items-center justify-between`}>
+            <div className={`${pathname.startsWith('/admin') || pathname.startsWith('/manager') ? 'px-3 lg:px-10' : 'container mx-auto px-3'} py-4 flex items-center justify-between`}>
                 {/* Brand */}
                 <Link href="/" className="text-2xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                     Hostel<span className="text-primary">Pro</span>
@@ -142,7 +142,7 @@ export function Navbar() {
 
             {/* Mobile Menu Overlay */}
             {isMenuOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-b border-border shadow-lg p-6 flex flex-col gap-4 animate-in slide-in-from-top-2">
+                <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-b border-border shadow-lg px-3 py-6 flex flex-col gap-4 animate-in slide-in-from-top-2">
                     {currentUser?.role === 'admin' ? (
                         <>
                             <Link href="/admin?view=overview" onClick={() => setIsMenuOpen(false)} className={`py-2 ${baseLinkClass} ${isActive('/admin') && !searchParams.get('view') ? activeLinkClass : inactiveLinkClass}`}>

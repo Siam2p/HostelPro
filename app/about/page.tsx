@@ -10,22 +10,22 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
     return (
-        <div className="min-h-screen pb-20 overflow-hidden">
+        <div className="min-h-screen pb-10 overflow-hidden">
             {/* Hero Section */}
-            <section className="relative pt-10 pb-10 md:pt-24 md:pb-24 text-center overflow-hidden">
+            <section className="relative pt-10 pb-3 md:pt-24 md:pb-24 text-center overflow-hidden">
                 {/* Abstract Background Elements */}
                 <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
                 <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-secondary/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2" />
 
-                <div className="container mx-auto px-6 relative z-10">
+                <div className="container mx-auto px-3 relative z-10">
                     <div className="max-w-4xl mx-auto">
-                        <h1 className="text-5xl md:text-7xl font-black mb-8 tracking-tight leading-tight">
+                        <h1 className="text-4xl md:text-7xl font-black mb-8 tracking-tight leading-tight">
                             আমাদের সম্পর্কে <br />
                             <span className="bg-linear-to-r from-primary via-blue-600 to-secondary bg-clip-text text-transparent">
                                 কিছু কথা
                             </span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-text-muted mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
+                        <p className="text-xl md:text-2xl text-text-muted mb-6 max-w-2xl mx-auto leading-relaxed font-medium">
                             HostelPro একটি আধুনিক প্ল্যাটফর্ম যা শিক্ষার্থীদের জন্য নিরাপদ এবং সাশ্রয়ী আবাসন খুঁজে পেতে সাহায্য করে। আমাদের লক্ষ্য হলো হোস্টেল বুকিং প্রক্রিয়াকে সহজ এবং ডিজিটাল করা।
                         </p>
                     </div>
@@ -34,7 +34,7 @@ export default function AboutPage() {
 
             {/* Mission Section */}
             <section className="py-24 bg-white/40 backdrop-blur-md relative">
-                <div className="container mx-auto px-6">
+                <div className="container mx-auto px-3">
                     <div className="flex flex-col lg:flex-row items-center gap-16">
                         <div className="flex-1 space-y-8 text-left">
                             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm">
@@ -100,7 +100,7 @@ export default function AboutPage() {
 
             {/* Values Section */}
             <section className="py-20 relative">
-                <div className="container mx-auto px-6">
+                <div className="container mx-auto px-3">
                     <div className="text-center max-w-3xl mx-auto mb-20">
                         <h2 className="text-4xl md:text-5xl font-black mb-6">আমাদের <span className="text-secondary">মূল্যবোধ</span></h2>
                         <p className="text-lg text-text-muted">আমরা সততা, স্বচ্ছতা এবং নিরাপত্তার সাথে কাজ করি যাতে আপনার অভিজ্ঞতা হয় সেরা।</p>
@@ -125,7 +125,7 @@ export default function AboutPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-20 container mx-auto px-6">
+            <section className="pt-6 container mx-auto px-3">
                 <div className="relative rounded-[3rem] overflow-hidden bg-linear-to-r from-primary via-blue-600 to-secondary p-12 md:p-24 text-center text-white">
                     {/* Background decorations */}
                     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">

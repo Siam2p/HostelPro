@@ -99,7 +99,7 @@ export default function HomeClient() {
     const availableUpazilas = draftDivision && draftDistrict && BANGLADESH_LOCATIONS[draftDivision][draftDistrict] ? BANGLADESH_LOCATIONS[draftDivision][draftDistrict] : [];
 
     return (
-        <div className="pb-20">
+        <div className="pb-6 md:pb-16">
             <JsonLd data={jsonLd} />
             {/* Hero Section */}
             <section className="relative pt-10 pb-10 md:pt-24 md:pb-16 overflow-hidden">
@@ -107,7 +107,7 @@ export default function HomeClient() {
                 <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
                 <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-secondary/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2" />
 
-                <div className="container mx-auto px-6 relative">
+                <div className="container mx-auto px-3 relative">
                     <div className="max-w-4xl mx-auto text-center mb-12">
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tight leading-tight">
                             আপনার পছন্দের <br />
@@ -159,6 +159,7 @@ export default function HomeClient() {
                                 </Button>
                                 <div className="relative grow">
                                     <select
+                                        title='srot'
                                         className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-gray-100 bg-gray-50/50 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer"
                                         value={filterType}
                                         onChange={(e) => setFilterType(e.target.value as any)}
@@ -181,6 +182,7 @@ export default function HomeClient() {
                                         <Users size={18} />
                                     </div>
                                     <select
+                                        title='category'
                                         className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-white/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer"
                                         value={draftCategory}
                                         onChange={(e) => setDraftCategory(e.target.value as any)}
@@ -197,6 +199,7 @@ export default function HomeClient() {
                                         <MapPin size={18} />
                                     </div>
                                     <select
+                                        title='division'
                                         className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-white/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer"
                                         value={draftDivision}
                                         onChange={handleDivisionChange}
@@ -214,6 +217,7 @@ export default function HomeClient() {
                                         <MapPin size={18} />
                                     </div>
                                     <select
+                                        title='district'
                                         className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-white/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer disabled:bg-gray-50/50 disabled:text-gray-400"
                                         value={draftDistrict}
                                         onChange={handleDistrictChange}
@@ -232,6 +236,7 @@ export default function HomeClient() {
                                         <MapPin size={18} />
                                     </div>
                                     <select
+                                        title='upazila'
                                         className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-white/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer disabled:bg-gray-50/50 disabled:text-gray-400"
                                         value={draftUpazila}
                                         onChange={(e) => setDraftUpazila(e.target.value)}
@@ -250,8 +255,8 @@ export default function HomeClient() {
             </section>
 
             {/* Hostel Grid Section */}
-            <section id="hostels" className="container mx-auto px-6 py-12">
-                <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+            <section id="hostels" className="container mx-auto px-3 py-3 md:py-12">
+                <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:pb-6 gap-4">
                     <h2 className="text-2xl md:text-3xl font-black flex items-center gap-3">
                         <Home className="text-primary" />
                         {activeFilters.searchTerm || activeFilters.category !== 'all' || activeFilters.division ? 'অনুসন্ধান ফলাফল' : 'জনপ্রিয় হোস্টেলসমূহ'}
@@ -259,6 +264,7 @@ export default function HomeClient() {
                     <div className="hidden md:flex items-center gap-3">
                         <span className="text-sm font-bold text-text-muted whitespace-nowrap">সর্ট করুন:</span>
                         <select
+                            title='sort'
                             className="px-4 py-2 rounded-xl border border-gray-100 bg-white shadow-sm focus:outline-none focus:border-primary text-sm font-medium"
                             value={filterType}
                             onChange={(e) => setFilterType(e.target.value as any)}

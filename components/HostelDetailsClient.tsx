@@ -96,7 +96,7 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
     };
 
     return (
-        <div className="pb-20 bg-gray-50/50 min-h-screen">
+        <div className="pb-10 bg-gray-50/50 min-h-screen">
             <JsonLd data={structuredData} />
 
             {/* Immersive Hero Section */}
@@ -109,7 +109,7 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
                     priority
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent flex items-end">
-                    <div className="container mx-auto px-6 pb-12">
+                    <div className="container mx-auto px-3 pb-12">
                         <Badge variant="default" className="mb-4 bg-primary/90 hover:bg-primary border-none text-white px-4 py-1 text-sm font-medium backdrop-blur-sm">
                             ভেরিফাইড হোস্টেল
                         </Badge>
@@ -141,7 +141,7 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
                 </div>
             </div>
 
-            <div className="container mx-auto px-6 -mt-8 relative z-10">
+            <div className="container mx-auto px-3 -mt-8 relative z-10">
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Main Content */}
                     <div className="grow space-y-12">

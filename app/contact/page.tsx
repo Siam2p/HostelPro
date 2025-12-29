@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
     return (
-        <div className="min-h-screen bg-bg-body pb-20">
+        <div className="min-h-screen bg-bg-body pb-10">
             {/* Header */}
             <section className="bg-gradient-to-r from-primary to-secondary py-20 text-center text-white relative overflow-hidden">
-                <div className="relative z-10 container mx-auto px-6">
+                <div className="relative z-10 container mx-auto px-3">
                     <h1 className="text-4xl md:text-6xl font-extrabold mb-4">যোগাযোগ করুন</h1>
                     <p className="text-lg opacity-90 max-w-2xl mx-auto">
                         যেকোনো প্রয়োজনে আমাদের সাথে যোগাযোগ করুন। আমরা আপনার অপেক্ষায় আছি।
@@ -24,7 +24,7 @@ export default function ContactPage() {
                 </div>
             </section>
 
-            <div className="container mx-auto px-6 -mt-10 relative z-20">
+            <div className="container mx-auto px-3 -mt-10 relative z-20">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Contact Info Cards */}
                     <div className="lg:col-span-1 space-y-6">
@@ -48,8 +48,8 @@ export default function ContactPage() {
 
                     {/* Contact Form */}
                     <div className="lg:col-span-2">
-                        <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-border">
-                            <h2 className="text-3xl font-bold mb-8 text-text-main">একটি বার্তা পাঠান</h2>
+                        <div className="bg-white rounded-3xl shadow-xl px-3 py-8 md:p-12 border border-border">
+                            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-text-main">একটি বার্তা পাঠান</h2>
                             <form className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
@@ -79,7 +79,7 @@ export default function ContactPage() {
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium text-text-muted">বিষয়</label>
-                                    <select className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all bg-bg-body font-medium">
+                                    <select title='problems' className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all bg-bg-body font-medium">
                                         <option>বুকিং সংক্রান্ত</option>
                                         <option>পেমেন্ট সমস্যা</option>
                                         <option>অভিযোগ</option>
