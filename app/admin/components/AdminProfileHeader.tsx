@@ -51,11 +51,11 @@ export default function AdminProfileHeader({
                         <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={onPhotoUpload} />
                     </div>
                 </div>
-                <div className="grow pb-2">
+                <div className="grow pb-2 flex flex-col md:block items-center md:items-start w-full md:w-auto">
                     <h1 className="text-3xl font-bold text-gray-900 mb-1">{currentUser.name}</h1>
                     <p className="text-gray-500 font-medium">{currentUser.email}</p>
                     <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-3">
-                        <Badge className="bg-slate-800 text-white">System Administrator</Badge>
+                        <Badge className="bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200 px-4 py-1">System Administrator</Badge>
                     </div>
                 </div>
                 <div className="pb-2 w-full md:w-auto">

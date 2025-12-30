@@ -53,11 +53,11 @@ export default function ProfileHeader({
                         <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={onPhotoUpload} />
                     </div>
                 </div>
-                <div className="grow pb-2">
+                <div className="grow pb-2 flex flex-col md:block items-center md:items-start w-full md:w-auto">
                     <h1 className="text-3xl font-bold text-gray-900 mb-1">{currentUser.name}</h1>
                     <p className="text-gray-500 font-medium">{currentUser.email}</p>
                     <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-3">
-                        <Badge className="bg-blue-600 text-white">আবাসিক সদস্য</Badge>
+                        <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-200 border border-blue-200 px-4 py-1">আবাসিক সদস্য</Badge>
                         {activeBooking && <Badge variant="success">সক্রিয় বরাদ্দ</Badge>}
                     </div>
                 </div>
