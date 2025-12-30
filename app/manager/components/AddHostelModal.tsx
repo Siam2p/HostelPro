@@ -241,10 +241,10 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                 >
                     ✕
                 </button>
-                <h2 className="text-2xl font-bold mb-1 text-gray-800 p-6 pb-0">{isEditing ? 'হোস্টেল তথ্য আপডেট' : 'নতুন হোস্টেল'}</h2>
-                <p className="text-gray-500 px-6 text-sm mb-6">আপনার নতুন প্রপার্টির তথ্য দিন</p>
+                <h2 className="text-2xl font-bold mb-1 text-gray-800 px-3 md:px-6 pt-6 pb-0">{isEditing ? 'হোস্টেল তথ্য আপডেট' : 'নতুন হোস্টেল'}</h2>
+                <p className="text-gray-500 px-3 md:px-6 text-sm mb-6">আপনার নতুন প্রপার্টির তথ্য দিন</p>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 px-6 pb-6">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 md:px-6 pb-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">হোস্টেলের নাম</label>
@@ -455,13 +455,13 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
 
                         <div className="flex gap-2">
                             <input
-                                className="grow p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                                className="grow p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-gray-400"
                                 value={newFeature}
                                 onChange={(e) => setNewFeature(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && addFeature(e)}
                                 placeholder="e.g. ফ্রি ওয়াইফাই"
                             />
-                            <Button type="button" onClick={() => addFeature()} className="shrink-0 h-[48px] px-6">
+                            <Button type="button" onClick={() => addFeature()} className="shrink-0 whitespace-nowrap px-6 py-3 h-[50px]">
                                 যোগ করুন
                             </Button>
                         </div>

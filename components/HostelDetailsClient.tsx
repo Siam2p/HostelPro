@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import JsonLd from '@/components/JsonLd';
+import BookingApplicationModal from '@/components/BookingApplicationModal';
 
 export default function HostelDetailsClient({ initialHostelId }: { initialHostelId: number }) {
     const router = useRouter();
@@ -21,6 +22,7 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
 
     const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
     const [selectedBedId, setSelectedBedId] = useState<string | null>(null);
+    const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
 
     // Scroll to summary when bed is selected
     useEffect(() => {
@@ -60,20 +62,29 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
         }
 
         if (selectedRoomId && selectedBedId) {
-            addBooking({
-                id: new Date().getTime(),
-                userId: currentUser.id,
-                hostelId: hostel.id,
-                roomId: selectedRoomId,
-                bedId: selectedBedId,
-                date: new Date().toISOString().split('T')[0],
-                status: 'pending',
-                userName: currentUser.name,
-                hostelName: hostel.name
-            });
-            alert(`আপনার বুকিং সফল হয়েছে! \nরুম: ${selectedRoomId}, সিট: ${selectedBedId}`);
-            router.push('/');
+            setIsApplicationModalOpen(true);
         }
+    };
+
+    const handleApplicationSubmit = (applicationData: any) => {
+        if (!currentUser || !hostel || !selectedRoomId || !selectedBedId) return;
+
+        addBooking({
+            id: new Date().getTime(),
+            userId: currentUser.id,
+            hostelId: hostel.id,
+            roomId: selectedRoomId,
+            bedId: selectedBedId,
+            date: new Date().toISOString().split('T')[0],
+            status: 'pending',
+            userName: currentUser.name,
+            hostelName: hostel.name,
+            applicationDetails: applicationData
+        });
+
+        setIsApplicationModalOpen(false);
+        alert(`আপনার আবেদন জমা দেওয়া হয়েছে! \nরুম: ${selectedRoomId}, সিট: ${selectedBedId}`);
+        router.push('/');
     };
 
     const structuredData = {
@@ -349,6 +360,17 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
                     </div>
                 </div>
             </div>
+
+            <BookingApplicationModal
+                isOpen={isApplicationModalOpen}
+                onClose={() => setIsApplicationModalOpen(false)}
+                onSubmit={handleApplicationSubmit}
+                initialData={{
+                    fullName: currentUser?.name || '',
+                    phone: currentUser?.phone || '',
+                    email: currentUser?.email || '',
+                }}
+            />
         </div>
     );
 }

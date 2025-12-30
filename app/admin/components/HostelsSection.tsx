@@ -44,7 +44,7 @@ export default function HostelsSection() {
                     <select
                         value={statusFilter}
                         onChange={(e) => setStatusFilter(e.target.value as any)}
-                        className="h-12 px-6 rounded-2xl bg-white border border-slate-200 outline-none font-bold text-sm"
+                        className="h-12 px-3 rounded-2xl bg-white border border-slate-200 outline-none font-bold text-sm"
                     >
                         <option value="all">সব স্ট্যাটাস</option>
                         <option value="pending">পেন্ডিং</option>

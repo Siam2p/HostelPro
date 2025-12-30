@@ -45,7 +45,7 @@ export default function UsersSection() {
                     <select
                         value={roleFilter}
                         onChange={(e) => setRoleFilter(e.target.value as any)}
-                        className="h-12 px-6 rounded-2xl bg-white border border-slate-200 focus:border-blue-500 outline-none transition-all font-bold text-sm text-slate-700"
+                        className="h-12 px-3 rounded-2xl bg-white border border-slate-200 focus:border-blue-500 outline-none transition-all font-bold text-sm text-slate-700"
                     >
                         <option value="all">সব রোল</option>
                         <option value="admin">অ্যাডমিন</option>

@@ -63,6 +63,16 @@ export interface Booking {
     monthlyFeeStatus?: 'paid' | 'unpaid' | 'pending';
     lastPaymentDate?: string;
     isActive?: boolean;
+    applicationDetails?: {
+        fullName: string;
+        phone: string;
+        email: string;
+        fatherName: string;
+        motherName: string;
+        address: string;
+        guardianName: string;
+        guardianPhone: string;
+    };
 }
 
 export interface Notice {
@@ -73,6 +83,20 @@ export interface Notice {
     title: string;
     isGlobal?: boolean;
 }
+
+
+
+export interface ApplicationDetails {
+    fullName: string;
+    phone: string;
+    email: string;
+    fatherName: string;
+    motherName: string;
+    address: string;
+    guardianName: string;
+    guardianPhone: string;
+}
+
 
 export interface MockData {
     currentUser: User | null;

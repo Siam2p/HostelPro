@@ -4,15 +4,28 @@ import { useState } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { useData } from '@/context/DataContext';
+import { Booking } from '@/lib/types';
+import ApplicationDetailsModal from '@/components/ApplicationDetailsModal';
 
 export default function BookingsSection() {
     const { bookings, updateBookingStatus, deleteBooking } = useData();
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedApplication, setSelectedApplication] = useState<Booking['applicationDetails'] | null>(null);
+    const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
     const filteredBookings = bookings.filter(booking =>
         booking.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         booking.hostelName.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const handleViewApplication = (booking: Booking) => {
+        if (booking.applicationDetails) {
+            setSelectedApplication(booking.applicationDetails);
+            setIsDetailsModalOpen(true);
+        } else {
+            alert('বিস্তারিত তথ্য পাওয়া যায়নি');
+        }
+    };
 
     return (
         <div className="animate-in fade-in slide-in-from-right-4 duration-700">
@@ -50,6 +63,14 @@ export default function BookingsSection() {
                                     <td className="p-6">
                                         <p className="font-black text-slate-900 text-sm">{booking.userName}</p>
                                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{booking.date}</p>
+                                        {booking.applicationDetails && (
+                                            <button
+                                                onClick={() => handleViewApplication(booking)}
+                                                className="mt-2 text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded hover:bg-blue-100 transition-colors"
+                                            >
+                                                আবেদন দেখুন
+                                            </button>
+                                        )}
                                     </td>
                                     <td className="p-6">
                                         <p className="text-sm font-bold text-slate-700">{booking.hostelName}</p>
@@ -96,6 +117,12 @@ export default function BookingsSection() {
                     </table>
                 </div>
             </Card>
+
+            <ApplicationDetailsModal
+                isOpen={isDetailsModalOpen}
+                onClose={() => setIsDetailsModalOpen(false)}
+                details={selectedApplication || undefined}
+            />
         </div>
     );
 }

@@ -111,9 +111,9 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
                 </button>
 
                 <h2 className="text-2xl font-bold mb-1 text-gray-800 p-6 pb-0">নতুন বাসিন্দা যুক্ত করুন</h2>
-                <p className="text-gray-500 px-6 text-sm mb-6">শির্ক্ষার্থীর তথ্য এবং সিট বরাদ্দ করুন</p>
+                <p className="text-gray-500 px-3 text-sm mb-6">শির্ক্ষার্থীর তথ্য এবং সিট বরাদ্দ করুন</p>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4 px-6 pb-6">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4 px-3 pb-6">
                     <div className="space-y-4">
                         {/* User Info */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

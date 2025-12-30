@@ -91,7 +91,7 @@ export default function ResidentDetailsPage() {
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
             {/* Header / Hero */}
-            <div className="bg-linear-to-r from-blue-600 to-indigo-700 text-white pb-20 pt-10 px-6">
+            <div className="bg-linear-to-r from-blue-600 to-indigo-700 text-white pb-20 pt-10 px-3">
                 <div className="container mx-auto">
                     <Button
                         variant="outline"
@@ -115,7 +115,7 @@ export default function ResidentDetailsPage() {
                 </div>
             </div>
 
-            <div className="container mx-auto px-6 -mt-16">
+            <div className="container mx-auto px-3 -mt-16">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Left Column: Info */}
                     <div className="space-y-8">

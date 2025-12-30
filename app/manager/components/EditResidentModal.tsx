@@ -93,7 +93,7 @@ export default function EditResidentModal({ isOpen, onClose, residentId }: EditR
 
                 <h2 className="text-2xl font-bold mb-1 text-gray-800 p-6 pb-0">বাসিন্দা তথ্য আপডেট</h2>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4 px-6 py-6">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4 px-3 py-6">
                     <div className="space-y-1">
                         <label className="text-sm font-medium text-gray-700">নাম</label>
                         <input

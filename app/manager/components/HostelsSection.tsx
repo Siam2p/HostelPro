@@ -195,18 +195,18 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                                     <table className="min-w-full divide-y divide-gray-200">
                                         <thead className="bg-gray-50">
                                             <tr>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">রুম নম্বর</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ক্যাপাসিটি</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">সিট ভাড়া</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">স্ট্যাটাস</th>
-                                                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">অ্যাকশন</th>
+                                                <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">রুম নম্বর</th>
+                                                <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ক্যাপাসিটি</th>
+                                                <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">সিট ভাড়া</th>
+                                                <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">স্ট্যাটাস</th>
+                                                <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">অ্যাকশন</th>
                                             </tr>
                                         </thead>
                                         <tbody className="bg-white divide-y divide-gray-200">
                                             {selectedHostel.rooms.map(room => (
                                                 <tr key={room.id} className="hover:bg-gray-50 transition-colors">
-                                                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{room.id}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-gray-500">
+                                                    <td className="px-3 py-4 whitespace-nowrap font-medium text-gray-900">{room.id}</td>
+                                                    <td className="px-3 py-4 whitespace-nowrap text-gray-500">
                                                         {editingRoomId === room.id ? (
                                                             <div className="flex items-center gap-2">
                                                                 <input
@@ -230,7 +230,7 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                                                             `${room.occupied.length} / ${room.capacity} সিট পূর্ণ`
                                                         )}
                                                     </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-gray-500">
+                                                    <td className="px-3 py-4 whitespace-nowrap text-gray-500">
                                                         {editingRoomId === room.id ? (
                                                             <input
                                                                 id={`price-${room.id}`}
@@ -240,14 +240,14 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                                                             />
                                                         ) : `৳${room.price}`}
                                                     </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap">
+                                                    <td className="px-3 py-4 whitespace-nowrap">
                                                         {room.occupied.length >= room.capacity ? (
                                                             <Badge variant="danger">Full</Badge>
                                                         ) : (
                                                             <Badge variant="success">Available</Badge>
                                                         )}
                                                     </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                    <td className="px-3 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                         {editingRoomId === room.id ? (
                                                             <button
                                                                 onClick={() => {

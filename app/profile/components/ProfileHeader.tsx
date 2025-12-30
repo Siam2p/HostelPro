@@ -29,7 +29,7 @@ export default function ProfileHeader({
     return (
         <div className="relative mb-8">
             <div className="h-32 md:h-48 bg-linear-to-r from-blue-600 to-indigo-700 rounded-3xl shadow-lg -mb-16 md:-mb-20"></div>
-            <div className="px-6 md:px-10 flex flex-col md:flex-row items-end gap-6 text-center md:text-left">
+            <div className="px-3 md:px-10 flex flex-col md:flex-row items-end gap-6 text-center md:text-left">
                 <div className="mx-auto md:mx-0">
                     <div className="h-32 w-32 md:h-40 md:w-40 rounded-full border-4 border-white shadow-xl bg-white overflow-hidden relative group">
                         {formData.profileImage ? (

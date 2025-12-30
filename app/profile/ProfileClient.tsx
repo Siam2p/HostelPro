@@ -190,7 +190,7 @@ export default function ProfileClient() {
                 </div>
             )}
 
-            <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
+            <div className="container mx-auto px-4 md:px-3 py-8 md:py-12">
                 <div className="max-w-5xl mx-auto">
                     {/* Hero Profile Header */}
                     <ProfileHeader

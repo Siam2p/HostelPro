@@ -39,7 +39,7 @@ export default function SettingsSection() {
                                     type="text"
                                     value={siteName}
                                     onChange={(e) => setSiteName(e.target.value)}
-                                    className="w-full h-14 px-6 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 outline-none transition-all font-black text-slate-900"
+                                    className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 outline-none transition-all font-black text-slate-900"
                                 />
                             </div>
                             <div>
@@ -47,7 +47,7 @@ export default function SettingsSection() {
                                 <input
                                     type="email"
                                     defaultValue="admin@hostelpro.com"
-                                    className="w-full h-14 px-6 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 outline-none transition-all font-black text-slate-900"
+                                    className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 outline-none transition-all font-black text-slate-900"
                                 />
                             </div>
                         </div>

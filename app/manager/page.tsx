@@ -29,10 +29,13 @@ export default function ManagerDashboard() {
 
 function ManagerDashboardContent() {
     const { currentUser, isLoading } = useAuth();
-    const { deleteHostel } = useData();
+    const { deleteHostel, bookings } = useData();
     const router = useRouter();
     const searchParams = useSearchParams();
     const [activeView, setActiveView] = useState<DashboardView>('overview');
+
+    // Calculate pending bookings
+    const pendingCount = bookings.filter(b => b.status === "pending").length;
 
     useEffect(() => {
         const view = searchParams.get('view') as DashboardView;
@@ -92,7 +95,7 @@ function ManagerDashboardContent() {
         <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row font-sans">
             <Sidebar activeView={activeView} setActiveView={setActiveView} />
             {/* Mobile Bottom Navigation */}
-            <div className="lg:hidden w-full fixed bottom-0 left-0 bg-white border-t border-gray-200 z-50 px-6 py-3 flex justify-between items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+            <div className="lg:hidden w-full fixed bottom-0 left-0 bg-white border-t border-gray-200 z-50 px-3 py-3 flex justify-between items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
                 <button
                     onClick={() => setActiveView('overview')}
                     className={`flex flex-col items-center gap-1 ${activeView === 'overview' ? 'text-blue-600' : 'text-gray-400'}`}
@@ -117,10 +120,15 @@ function ManagerDashboardContent() {
                 </div>
                 <button
                     onClick={() => setActiveView('bookings')}
-                    className={`flex flex-col items-center gap-1 ${activeView === 'bookings' ? 'text-blue-600' : 'text-gray-400'}`}
+                    className={`flex flex-col items-center gap-1 relative ${activeView === 'bookings' ? 'text-blue-600' : 'text-gray-400'}`}
                 >
                     <span className="text-xl">📝</span>
                     <span className="text-[10px] font-medium">Bookings</span>
+                    {pendingCount > 0 && (
+                        <span className="absolute -top-1 right-1 bg-red-500 text-white text-[9px] font-black h-4 w-4 flex items-center justify-center rounded-full shadow-md shadow-red-200 animate-pulse border border-white">
+                            {pendingCount}
+                        </span>
+                    )}
                 </button>
                 <button
                     onClick={() => setActiveView('residents')}

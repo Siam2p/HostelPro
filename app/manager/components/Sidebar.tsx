@@ -1,7 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { DashboardView } from '@/lib/types';
-
-// Redundant type removed
+import { useData } from '@/context/DataContext';
 
 interface SidebarProps {
     activeView: DashboardView;
@@ -10,6 +9,8 @@ interface SidebarProps {
 
 export default function Sidebar({ activeView, setActiveView }: SidebarProps) {
     const router = useRouter();
+    const { bookings } = useData();
+    const pendingCount = bookings.filter(b => b.status === 'pending').length;
 
     return (
         <div className="hidden lg:flex lg:flex-col w-full lg:w-72 bg-white lg:min-h-screen border-r border-gray-100 p-6 gap-2 shadow-sm shrink-0 z-10 sticky top-0 h-screen overflow-y-auto">
@@ -33,9 +34,16 @@ export default function Sidebar({ activeView, setActiveView }: SidebarProps) {
                 </button>
                 <button
                     onClick={() => setActiveView('bookings')}
-                    className={`text-left px-5 py-3.5 rounded-2xl font-bold transition-all duration-300 flex items-center gap-3.5 ${activeView === 'bookings' ? 'bg-blue-50 text-blue-600 shadow-sm' : 'text-gray-500 hover:bg-gray-50'}`}
+                    className={`text-left px-5 py-3.5 rounded-2xl font-bold transition-all duration-300 flex items-center gap-3.5 justify-between ${activeView === 'bookings' ? 'bg-blue-50 text-blue-600 shadow-sm' : 'text-gray-500 hover:bg-gray-50'}`}
                 >
-                    <span className="text-xl">📝</span> বুকিং শিট
+                    <div className="flex items-center gap-3.5">
+                        <span className="text-xl">📝</span> বুকিং শিট
+                    </div>
+                    {pendingCount > 0 && (
+                        <span className="bg-red-500 text-white text-[10px] font-black h-5 w-5 flex items-center justify-center rounded-full shadow-md shadow-red-200 animate-pulse">
+                            {pendingCount}
+                        </span>
+                    )}
                 </button>
                 <button
                     onClick={() => setActiveView('residents')}

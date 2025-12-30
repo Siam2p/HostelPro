@@ -55,7 +55,7 @@ export default function GlobalNoticeSection() {
                                 placeholder="উদা: সার্ভার রক্ষণাবেক্ষণ বিরতি"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
-                                className="w-full h-14 px-6 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-bold text-slate-900"
+                                className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-bold text-slate-900"
                                 required
                             />
                         </div>

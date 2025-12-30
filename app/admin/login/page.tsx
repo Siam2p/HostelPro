@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function AdminLoginPage() {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-3 lg:px-8">
             <Card className="max-w-md w-full space-y-8 p-10 bg-white shadow-xl rounded-2xl border-t-4 border-gray-800">
                 <div className="text-center">
                     <h1 className="mt-6 text-3xl font-extrabold text-gray-900">

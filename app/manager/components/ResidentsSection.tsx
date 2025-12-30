@@ -73,18 +73,18 @@ export default function ResidentsSection() {
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">নাম</th>
-                                <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">হোস্টেল ও রুম</th>
-                                <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">মাসিক ফি</th>
-                                <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">অবস্থান (Status)</th>
-                                <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">পেমেন্ট তারিখ</th>
-                                <th className="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">অ্যাকশন</th>
+                                <th className="px-3 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">নাম</th>
+                                <th className="px-3 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">হোস্টেল ও রুম</th>
+                                <th className="px-3 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">মাসিক ফি</th>
+                                <th className="px-3 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">অবস্থান (Status)</th>
+                                <th className="px-3 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">পেমেন্ট তারিখ</th>
+                                <th className="px-3 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">অ্যাকশন</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
                             {residents.map((resident, idx) => (
                                 <tr key={resident.id} className="hover:bg-gray-50">
-                                    <td className="px-6 py-4 whitespace-nowrap cursor-pointer" onClick={() => router.push(`/manager/residents/${resident.id}`)}>
+                                    <td className="px-3 py-4 whitespace-nowrap cursor-pointer" onClick={() => router.push(`/manager/residents/${resident.id}`)}>
                                         <div className="flex items-center">
                                             <div className="h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold mr-3">
                                                 {resident.userName.charAt(0)}
@@ -95,16 +95,16 @@ export default function ResidentsSection() {
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
+                                    <td className="px-3 py-4 whitespace-nowrap">
                                         <div className="text-sm text-gray-900">{resident.hostelName}</div>
                                         <div className="text-xs text-gray-500">রুম {resident.roomId} • বেড {resident.bedId}</div>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
+                                    <td className="px-3 py-4 whitespace-nowrap">
                                         <Badge variant={resident.monthlyFeeStatus === 'paid' ? 'success' : 'danger'}>
                                             {resident.monthlyFeeStatus === 'paid' ? 'পরিশোধিত' : 'বাকি আছে'}
                                         </Badge>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
+                                    <td className="px-3 py-4 whitespace-nowrap">
                                         <select
                                             value={resident.isActive !== false ? 'active' : 'inactive'}
                                             onChange={(e) => handleStatusUpdate(resident, e.target.value === 'active')}
@@ -116,10 +116,10 @@ export default function ResidentsSection() {
                                             <option value="inactive">Non-Valid (বাতিল)</option>
                                         </select>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {resident.lastPaymentDate || 'N/A'}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <td className="px-3 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div className="flex justify-end gap-2">
                                             <button
                                                 className="text-blue-600 hover:text-blue-900 px-2 py-1 hover:bg-blue-50 rounded"
@@ -154,7 +154,7 @@ export default function ResidentsSection() {
                             ))}
                             {residents.length === 0 && (
                                 <tr>
-                                    <td colSpan={6} className="px-6 py-8 text-center text-gray-400">
+                                    <td colSpan={6} className="px-3 py-8 text-center text-gray-400">
                                         "{searchTerm}" এর জন্য কোনো শিক্ষার্থী পাওয়া যায়নি
                                     </td>
                                 </tr>
