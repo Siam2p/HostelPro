@@ -1,15 +1,16 @@
 "use client"; // Indicates this component runs on the client-side (browser), needed for React hooks and Leaflet
 
 // Importing React and the useState hook to manage component state
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Importing Leaflet components from 'react-leaflet' library wrapper
 // MapContainer: The main wrapper for the map
 // TileLayer: Displays the map tiles (images of the map)
 // Marker: A pin on the map
+// useMap: Hook to access the map instance
 // useMapEvents: Hook to listen to map events like click
 // LayersControl: Control to switch between different map layers (e.g., Satellite vs Street)
-import { MapContainer, TileLayer, Marker, useMapEvents, LayersControl } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents, LayersControl, useMap } from 'react-leaflet';
 
 // Importing Leaflet's default CSS to style the map correctly
 import 'leaflet/dist/leaflet.css';
@@ -39,6 +40,28 @@ interface MapPickerProps {
     initialLocation?: { lat: number, lng: number };
 }
 // ----------------------------------------------------------------------
+
+// ----------------------------------------------------------------------
+// Internal Component: MapInvalidator
+// This component handles the resizing of the map when it's rendered inside a modal or hidden container.
+// It forces the map to recalculate its size effectively.
+function MapInvalidator() {
+    const map = useMap();
+
+    useEffect(() => {
+        // Invalidate size immediately
+        map.invalidateSize();
+        
+        // And/or after a short timeout to account for modal animations
+        const timer = setTimeout(() => {
+            map.invalidateSize();
+        }, 300); // 300ms matches typical CSS transition times
+
+        return () => clearTimeout(timer);
+    }, [map]);
+
+    return null;
+}
 
 // ----------------------------------------------------------------------
 // Internal Component: LocationMarker
@@ -91,6 +114,8 @@ export default function MapPicker({ onLocationSelect, initialLocation }: MapPick
             zoom={13}
             style={{ height: "100%", width: "100%", borderRadius: "0.5rem" }}
         >
+            <MapInvalidator />
+            
             {/* LayersControl allows the user to switch between different map styles (Satellite vs Street) */}
             <LayersControl position="topright">
 

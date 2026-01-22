@@ -91,7 +91,7 @@ export default function ResidentDetailsPage() {
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
             {/* Header / Hero */}
-            <div className="bg-linear-to-r from-blue-600 to-indigo-700 text-white pb-20 pt-10 px-3">
+            <div className="bg-linear-to-r from-primaryDip to-indigo-700 text-white pb-20 pt-10 px-3">
                 <div className="container mx-auto">
                     <Button
                         variant="outline"
@@ -101,7 +101,7 @@ export default function ResidentDetailsPage() {
                         ← Back to Dashboard
                     </Button>
                     <div className="flex flex-col md:flex-row items-center gap-6">
-                        <div className="h-24 w-24 rounded-full bg-white text-blue-600 flex items-center justify-center text-4xl font-bold shadow-xl border-4 border-white/20">
+                        <div className="h-24 w-24 rounded-full bg-white text-primaryDip flex items-center justify-center text-4xl font-bold shadow-xl border-4 border-white/20">
                             {resident.userName.charAt(0)}
                         </div>
                         <div className="text-center md:text-left">
@@ -125,7 +125,7 @@ export default function ResidentDetailsPage() {
                                 <h3 className="text-lg font-bold text-gray-800">ব্যক্তিগত তথ্য</h3>
                                 <button
                                     onClick={() => setIsEditModalOpen(true)}
-                                    className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1 hover:bg-blue-50 px-2 py-1 rounded-lg transition-colors"
+                                    className="text-primaryDip hover:text-blue-700 text-sm font-medium flex items-center gap-1 hover:bg-blue-50 px-2 py-1 rounded-lg transition-colors"
                                 >
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                                     Edit
@@ -154,9 +154,9 @@ export default function ResidentDetailsPage() {
                             <div className="flex flex-col sm:flex-row gap-3 mt-6 pt-4 border-t border-gray-100">
                                 <a
                                     href={user?.guardianContact ? `tel:${user.guardianContact.replace(/[^\d+]/g, '')}` : '#'}
-                                    className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full font-bold text-sm text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]
+                                    className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full font-bold text-sm text-white shadow-lg shadow-primaryLight/25 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]
                                         ${user?.guardianContact
-                                            ? 'bg-linear-to-r from-blue-600 to-indigo-600 hover:shadow-blue-500/40 cursor-pointer'
+                                            ? 'bg-linear-to-r from-primaryDip to-primaryDipTo hover:shadow-primaryLight/40 cursor-pointer'
                                             : 'bg-gray-400 cursor-not-allowed opacity-70'}`}
                                     onClick={(e) => !user?.guardianContact && e.preventDefault()}
                                 >
@@ -192,7 +192,7 @@ export default function ResidentDetailsPage() {
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-500">Room No</span>
-                                    <span className="font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded">{resident.roomId}</span>
+                                    <span className="font-bold text-primaryDip bg-blue-50 px-2 py-1 rounded">{resident.roomId}</span>
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-500">Bed ID</span>
@@ -255,7 +255,7 @@ export default function ResidentDetailsPage() {
 
                         <div className="flex justify-end gap-4">
                             <Button variant="outline" className="text-red-500 hover:bg-red-50 border-red-200">Remove Student</Button>
-                            <Button className="bg-blue-600 hover:bg-blue-700">Save Changes</Button>
+                            <Button className="bg-primaryDip hover:bg-blue-700">Save Changes</Button>
                         </div>
                     </div>
                 </div>

@@ -34,20 +34,22 @@ export default function SettingsSection() {
                     <div className="space-y-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div>
-                                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block px-2">ওয়েবসাইট নাম</label>
+                                <label htmlFor='name' className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block px-2">ওয়েবসাইট নাম</label>
                                 <input
                                     type="text"
+                                    id='name'
                                     value={siteName}
                                     onChange={(e) => setSiteName(e.target.value)}
-                                    className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 outline-none transition-all font-black text-slate-900"
+                                    className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-primaryLight outline-none transition-all font-black text-slate-900"
                                 />
                             </div>
                             <div>
-                                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block px-2">অ্যাডমিন ইমেইল</label>
+                                <label htmlFor='email' className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block px-2">অ্যাডমিন ইমেইল</label>
                                 <input
                                     type="email"
+                                    id='email'
                                     defaultValue="admin@hostelpro.com"
-                                    className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 outline-none transition-all font-black text-slate-900"
+                                    className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-primaryLight outline-none transition-all font-black text-slate-900"
                                 />
                             </div>
                         </div>
@@ -59,7 +61,7 @@ export default function SettingsSection() {
                             </div>
                             <button
                                 onClick={() => setMaintenanceMode(!maintenanceMode)}
-                                className={`w-16 h-8 rounded-full transition-all duration-300 relative ${maintenanceMode ? 'bg-blue-600' : 'bg-slate-300'}`}
+                                className={`w-16 h-8 rounded-full transition-all duration-300 relative ${maintenanceMode ? 'bg-primaryDip' : 'bg-slate-300'}`}
                             >
                                 <div className={`absolute top-1 w-6 h-6 rounded-full bg-white shadow-md transition-all duration-300 ${maintenanceMode ? 'left-9' : 'left-1'}`}></div>
                             </button>

@@ -21,7 +21,7 @@ export default function AboutPage() {
                     <div className="max-w-4xl mx-auto">
                         <h1 className="text-4xl md:text-7xl font-black mb-8 tracking-tight leading-tight">
                             আমাদের সম্পর্কে <br />
-                            <span className="bg-linear-to-r from-primary via-blue-600 to-secondary bg-clip-text text-transparent">
+                            <span className="bg-linear-to-r from-primary via-primaryDip to-secondary bg-clip-text text-transparent">
                                 কিছু কথা
                             </span>
                         </h1>
@@ -126,7 +126,7 @@ export default function AboutPage() {
 
             {/* CTA Section */}
             <section className="pt-6 container mx-auto px-3">
-                <div className="relative rounded-[3rem] overflow-hidden bg-linear-to-r from-primary via-blue-600 to-secondary p-12 md:p-24 text-center text-white">
+                <div className="relative rounded-[3rem] overflow-hidden bg-linear-to-r from-primary via-primaryDip to-secondary p-12 md:p-24 text-center text-white">
                     {/* Background decorations */}
                     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                         <div className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] bg-white opacity-5 rounded-full blur-[100px]" />

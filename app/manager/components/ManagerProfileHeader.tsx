@@ -26,19 +26,20 @@ export default function ManagerProfileHeader({
 }: ManagerProfileHeaderProps) {
     return (
         <div className="relative mb-8">
-            <div className="h-32 md:h-48 bg-linear-to-r from-blue-600 to-indigo-700 rounded-3xl shadow-lg -mb-16 md:-mb-20"></div>
+            <div className="h-32 md:h-48 bg-linear-to-r from-primaryDip to-indigo-700 rounded-3xl shadow-lg -mb-16 md:-mb-20"></div>
             <div className="px-3 md:px-10 flex flex-col md:flex-row items-end gap-6 text-center md:text-left">
                 <div className="mx-auto md:mx-0">
                     <div className="h-32 w-32 md:h-40 md:w-40 rounded-full border-4 border-white shadow-xl bg-white overflow-hidden relative group">
                         {formData.profileImage ? (
                             <img src={formData.profileImage} alt={currentUser.name} className="w-full h-full object-cover" />
                         ) : (
-                            <div className="w-full h-full bg-blue-50 flex items-center justify-center text-5xl font-bold text-blue-600">
+                            <div className="w-full h-full bg-blue-50 flex items-center justify-center text-5xl font-bold text-primaryDip">
                                 {currentUser.name[0]}
                             </div>
                         )}
                         {isEditing && (
                             <button
+                                aria-label='btn'
                                 onClick={() => fileInputRef.current?.click()}
                                 className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                             >
@@ -48,7 +49,7 @@ export default function ManagerProfileHeader({
                                 </svg>
                             </button>
                         )}
-                        <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={onPhotoUpload} />
+                        <input aria-label="Upload profile photo" type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={onPhotoUpload} />
                     </div>
                 </div>
                 <div className="grow pb-2 flex flex-col md:block items-center md:items-start w-full md:w-auto">
@@ -62,7 +63,7 @@ export default function ManagerProfileHeader({
                     {!isEditing ? (
                         <Button
                             onClick={() => setIsEditing(true)}
-                            className="rounded-2xl px-10 w-full md:w-auto h-14 font-black shadow-xl shadow-blue-200 bg-linear-to-r from-blue-600 to-indigo-600 hover:scale-105 transition-all text-xs uppercase tracking-widest"
+                            className="rounded-2xl px-10 w-full md:w-auto h-14 font-black shadow-xl shadow-blue-200 bg-linear-to-r from-primaryDip to-primaryDipTo hover:scale-105 transition-all text-xs uppercase tracking-widest"
                         >
                             তথ্য আপডেট করুন
                         </Button>

@@ -50,7 +50,7 @@ export default function BookingsSection() {
                             </div>
                             <div className="flex gap-3">
                                 {booking.applicationDetails && (
-                                    <Button onClick={() => handleViewApplication(booking)} variant="outline" className="border-blue-200 text-blue-600 hover:bg-blue-50">
+                                    <Button onClick={() => handleViewApplication(booking)} variant="outline" className="border-blue-200 text-primaryDip hover:bg-blue-50">
                                         বিস্তারিত দেখুন
                                     </Button>
                                 )}

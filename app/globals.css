@@ -3,6 +3,9 @@
 @theme {
   /* Brand Colors */
   --color-primary: #4F46E5;
+  --color-primaryLight: #3b82f6;
+  --color-primaryDip: #155dfc;
+  --color-primaryDipTo: #4f39f6;
   /* Indigo 600 */
   --color-primary-hover: #4338ca;
   --color-secondary: #0EA5E9;

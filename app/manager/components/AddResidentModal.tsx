@@ -92,7 +92,7 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
             setRoomId('');
             setBedId('');
             setPrice('');
-        } catch (error: any) {
+        } catch (error: any ) {
             console.error("Failed to add resident", error);
             alert(error.message || "Failed to add resident. Please try again.");
         } finally {
@@ -120,7 +120,7 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
                             <div className="space-y-1">
                                 <label className="text-sm font-medium text-gray-700">নাম</label>
                                 <input
-                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     placeholder="শিক্ষার্থীর নাম"
@@ -130,7 +130,7 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
                             <div className="space-y-1">
                                 <label className="text-sm font-medium text-gray-700">ফোন</label>
                                 <input
-                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
                                     placeholder="01XXXXXXXXX"
@@ -141,7 +141,7 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
                                 <label className="text-sm font-medium text-gray-700">ইমেইল</label>
                                 <input
                                     type="email"
-                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="student@example.com"
@@ -153,7 +153,7 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
                         <div className="space-y-1">
                             <label className="text-sm font-medium text-gray-700">গার্ডিয়ান কন্টাক্ট</label>
                             <input
-                                className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                                 value={guardianContact}
                                 onChange={(e) => setGuardianContact(e.target.value)}
                                 placeholder="01XXXXXXXXX (Father/Mother)"
@@ -162,9 +162,10 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
 
                         {/* Booking Info */}
                         <div className="space-y-1">
-                            <label className="text-sm font-medium text-gray-700">হোস্টেল নির্বাচন করুন</label>
+                            <label htmlFor="hostel-select" className="text-sm font-medium text-gray-700">হোস্টেল নির্বাচন করুন</label>
                             <select
-                                className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+                                id='hostel-select'
+                                className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none bg-white"
                                 value={hostelId}
                                 onChange={(e) => setHostelId(Number(e.target.value))}
                                 required
@@ -180,7 +181,7 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
                             <div className="space-y-1">
                                 <label className="text-sm font-medium text-gray-700">রুম নং</label>
                                 <input
-                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                                     value={roomId}
                                     onChange={(e) => setRoomId(e.target.value)}
                                     placeholder="A-101"
@@ -190,7 +191,7 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
                             <div className="space-y-1">
                                 <label className="text-sm font-medium text-gray-700">বেড নং</label>
                                 <input
-                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                                     value={bedId}
                                     onChange={(e) => setBedId(e.target.value)}
                                     placeholder="01"
@@ -201,7 +202,7 @@ export default function AddResidentModal({ isOpen, onClose }: AddResidentModalPr
                                 <label className="text-sm font-medium text-gray-700">ভাড়া</label>
                                 <input
                                     type="number"
-                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                                     value={price}
                                     onChange={(e) => setPrice(e.target.value)}
                                     placeholder={selectedHostel ? String(selectedHostel.price) : '0'}

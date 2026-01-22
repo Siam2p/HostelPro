@@ -59,6 +59,7 @@ export default function AdminPersonalInfo({
                         <label className="text-sm font-medium text-gray-700 mb-1 block">লিঙ্গ (Gender)</label>
                         <select
                             name="gender"
+                            title='genderType'
                             value={formData.gender}
                             onChange={handleInputChange}
                             className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm transition-all duration-200"

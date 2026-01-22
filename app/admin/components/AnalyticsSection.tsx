@@ -16,7 +16,7 @@ export default function AnalyticsSection() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                 <Card className="p-10 border-none shadow-2xl shadow-slate-200/60 rounded-[3rem] bg-white h-[400px] flex flex-col items-center justify-center relative overflow-hidden">
                     <div className="absolute top-10 left-10 flex items-center gap-3">
-                        <div className="h-3 w-3 rounded-full bg-blue-500"></div>
+                        <div className="h-3 w-3 rounded-full bg-primaryLight"></div>
                         <h4 className="font-black text-slate-900 text-sm uppercase tracking-widest">ইউজার গ্রোথ</h4>
                     </div>
                     <div className="text-6xl mb-4">📈</div>

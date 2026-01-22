@@ -1,9 +1,10 @@
 import React from 'react';
 import { Badge } from '@/components/ui/Badge';
+import { Notice } from '@/lib/types';
 
 interface NoticeBoardProps {
-    notices: any[];
-    activeBooking: any;
+    notices: Notice[];
+    activeBooking: { hostelId: number } | null;
 }
 
 export default function NoticeBoard({ notices, activeBooking }: NoticeBoardProps) {
@@ -31,9 +32,9 @@ export default function NoticeBoard({ notices, activeBooking }: NoticeBoardProps
                     </div>
                 ) : (
                     relevantNotices.map(notice => (
-                        <div key={notice.id} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all relative overflow-hidden group border-l-4 border-l-blue-600">
+                        <div key={notice.id} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all relative overflow-hidden group border-l-4 border-l-primaryDip">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                                <h4 className="font-black text-gray-900 group-hover:text-blue-600 transition-colors uppercase tracking-tight">{notice.title}</h4>
+                                <h4 className="font-black text-gray-900 group-hover:text-primaryDip transition-colors uppercase tracking-tight">{notice.title}</h4>
                                 <Badge variant="default" className="text-[10px] uppercase font-black tracking-widest text-gray-400 border border-gray-100 bg-transparent">
                                     {notice.date}
                                 </Badge>

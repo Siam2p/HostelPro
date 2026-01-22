@@ -40,14 +40,14 @@ export default function AddNoticeModal({ isOpen, onClose }: AddNoticeModalProps)
                 >
                     ✕
                 </button>
-                <h2 className="text-xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-1">নোটিশ যোগ করুন</h2>
+                <h2 className="text-xl font-bold bg-linear-to-r from-primaryDip to-primaryDipTo bg-clip-text text-transparent mb-1">নোটিশ যোগ করুন</h2>
                 <p className="text-gray-500 text-sm mb-6">রেসিডেন্টদের জন্য প্রয়োজনীয় তথ্য শেয়ার করুন</p>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div className="space-y-2">
                         <label className="text-sm font-medium text-gray-700">শিরোনাম (Title)</label>
                         <input
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             placeholder="e.g. বিদ্যুৎ বিল সংক্রান্ত"
@@ -57,7 +57,7 @@ export default function AddNoticeModal({ isOpen, onClose }: AddNoticeModalProps)
                     <div className="space-y-2">
                         <label className="text-sm font-medium text-gray-700">বিস্তারিত (Content)</label>
                         <textarea
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all min-h-[100px]"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all min-h-[100px]"
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                             placeholder="বিস্তারিত লিখুন..."

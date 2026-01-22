@@ -249,7 +249,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">হোস্টেলের নাম</label>
                             <input
-                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="e.g. রূপসী বাংলা ছাত্রাবাস"
@@ -259,7 +259,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">সিট ভাড়া (মাসিক)</label>
                             <input
-                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all"
                                 type="number"
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
@@ -273,7 +273,8 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">ক্যাটাগরি</label>
                             <select
-                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all bg-white"
+                                title='category'
+                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all bg-white"
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value as 'Male' | 'Female')}
                                 required
@@ -285,7 +286,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">যোগাযোগ নাম্বার</label>
                             <input
-                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all"
                                 value={contact}
                                 onChange={(e) => setContact(e.target.value)}
                                 placeholder="e.g. 01712345678"
@@ -298,7 +299,8 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">বিভাগ</label>
                             <select
-                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all bg-white"
+                                title='division'
+                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all bg-white"
                                 value={division}
                                 onChange={handleDivisionChange}
                                 required
@@ -312,7 +314,8 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">জেলা</label>
                             <select
-                                className={`w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all bg-white ${!division ? 'bg-gray-50 text-gray-400' : ''}`}
+                                title='district'
+                                className={`w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all bg-white ${!division ? 'bg-gray-50 text-gray-400' : ''}`}
                                 value={district}
                                 onChange={handleDistrictChange}
                                 disabled={!division}
@@ -327,7 +330,8 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">উপজেলা/থানা</label>
                             <select
-                                className={`w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all bg-white ${!district ? 'bg-gray-50 text-gray-400' : ''}`}
+                                title='upazila'
+                                className={`w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all bg-white ${!district ? 'bg-gray-50 text-gray-400' : ''}`}
                                 value={upazila}
                                 onChange={(e) => setUpazila(e.target.value)}
                                 disabled={!district}
@@ -352,7 +356,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                     type="button"
                                     onClick={() => execCommand('bold')}
                                     onMouseDown={(e) => e.preventDefault()}
-                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.bold ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
+                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.bold ? 'bg-blue-100 text-primaryDip' : 'text-gray-600'}`}
                                     title="Bold (Ctrl+B)"
                                 >
                                     <span className="font-bold">B</span>
@@ -362,7 +366,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                     type="button"
                                     onClick={() => execCommand('italic')}
                                     onMouseDown={(e) => e.preventDefault()}
-                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.italic ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
+                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.italic ? 'bg-blue-100 text-primaryDip' : 'text-gray-600'}`}
                                     title="Italic (Ctrl+I)"
                                 >
                                     <span className="italic">I</span>
@@ -372,7 +376,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                     type="button"
                                     onClick={() => execCommand('underline')}
                                     onMouseDown={(e) => e.preventDefault()}
-                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.underline ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
+                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.underline ? 'bg-blue-100 text-primaryDip' : 'text-gray-600'}`}
                                     title="Underline (Ctrl+U)"
                                 >
                                     <span className="underline">U</span>
@@ -385,7 +389,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                     type="button"
                                     onClick={() => execCommand('insertUnorderedList')}
                                     onMouseDown={(e) => e.preventDefault()}
-                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.insertUnorderedList ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
+                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.insertUnorderedList ? 'bg-blue-100 text-primaryDip' : 'text-gray-600'}`}
                                     title="Bullet List"
                                 >
                                     • List
@@ -395,7 +399,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                     type="button"
                                     onClick={() => execCommand('insertOrderedList')}
                                     onMouseDown={(e) => e.preventDefault()}
-                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.insertOrderedList ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
+                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.insertOrderedList ? 'bg-blue-100 text-primaryDip' : 'text-gray-600'}`}
                                     title="Numbered List"
                                 >
                                     1. List
@@ -428,7 +432,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                 onKeyDown={handleKeyDown}
                                 onKeyUp={updateActiveFormats}
                                 onClick={updateActiveFormats}
-                                className="w-full px-4 py-3 border border-gray-200 rounded-b-xl min-h-[150px] focus:outline-none bg-white transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 relative cursor-text text-gray-700 leading-relaxed text-[15px]"
+                                className="w-full px-4 py-3 border border-gray-200 rounded-b-xl min-h-[150px] focus:outline-none bg-white transition-all focus:ring-2 focus:ring-primaryLight/20 focus:border-primaryLight relative cursor-text text-gray-700 leading-relaxed text-[15px]"
                                 data-placeholder="হোস্টেল সম্পর্কে লিখুন..."
                             />
                             {description.length === 0 && (
@@ -442,7 +446,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                     <div className="space-y-2">
                         <label className="text-sm font-medium text-gray-700">বিস্তারিত ঠিকানা (Area/Road/House)</label>
                         <input
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                             placeholder="e.g. আম্বরখানা মেইন রোড, হাউজ #১২"
@@ -455,7 +459,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
 
                         <div className="flex gap-2">
                             <input
-                                className="grow p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-gray-400"
+                                className="grow p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all placeholder:text-gray-400"
                                 value={newFeature}
                                 onChange={(e) => setNewFeature(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && addFeature(e)}
@@ -478,8 +482,8 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                         }
                                     }}
                                     className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border ${features.includes(suggestion)
-                                        ? 'bg-blue-600 text-white border-blue-600'
-                                        : 'bg-white text-gray-600 border-gray-200 hover:border-blue-400 hover:text-blue-600 shadow-sm'
+                                        ? 'bg-primaryDip text-white border-primaryDip'
+                                        : 'bg-white text-gray-600 border-gray-200 hover:border-blue-400 hover:text-primaryDip shadow-sm'
                                         }`}
                                 >
                                     + {suggestion}
@@ -507,9 +511,10 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-700">ছবি/ভিডিও আপলোড (Media)</label>
+                        <label htmlFor="img" className="text-sm font-medium text-gray-700">ছবি/ভিডিও আপলোড (Media)</label>
                         <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:bg-gray-50 transition-colors cursor-pointer relative">
                             <input
+                                id='img'
                                 type="file"
                                 multiple
                                 accept="image/*,video/*"

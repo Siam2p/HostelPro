@@ -111,7 +111,7 @@ export default function HomeClient() {
                     <div className="max-w-4xl mx-auto text-center mb-12">
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tight leading-tight">
                             আপনার পছন্দের <br />
-                            <span className="bg-linear-to-r from-primary via-blue-600 to-secondary bg-clip-text text-transparent">
+                            <span className="bg-linear-to-r from-primary via-primaryDip to-secondary bg-clip-text text-transparent">
                                 সেরা হোস্টেলটি
                             </span> খুঁজে নিন
                         </h1>
@@ -136,7 +136,7 @@ export default function HomeClient() {
                                 </div>
                                 <Button
                                     onClick={handleSearch}
-                                    className="shrink-0 rounded-xl md:rounded-full px-5 md:px-10 py-3 md:py-4 text-sm md:text-lg group bg-linear-to-r from-primary to-blue-600 hover:shadow-glow transition-all active:scale-95"
+                                    className="shrink-0 rounded-xl md:rounded-full px-5 md:px-10 py-3 md:py-4 text-sm md:text-lg group bg-linear-to-r from-primary to-primaryDip hover:shadow-glow transition-all active:scale-95"
                                 >
                                     <span className="hidden sm:inline">খুঁজুন</span>
                                     <Search size={20} className="sm:hidden" />
@@ -162,7 +162,7 @@ export default function HomeClient() {
                                         title='srot'
                                         className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-gray-100 bg-gray-50/50 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer"
                                         value={filterType}
-                                        onChange={(e) => setFilterType(e.target.value as any)}
+                                        onChange={(e) => setFilterType(e.target.value as 'all' | 'price_low' | 'rating')}
                                     >
                                         <option value="all">সব দেখুন</option>
                                         <option value="price_low">কম দাম</option>
@@ -185,7 +185,7 @@ export default function HomeClient() {
                                         title='category'
                                         className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-white/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer"
                                         value={draftCategory}
-                                        onChange={(e) => setDraftCategory(e.target.value as any)}
+                                        onChange={(e) => setDraftCategory(e.target.value as 'all' | 'Male' | 'Female')}
                                     >
                                         <option value="all">সকল ক্যাটাগরি</option>
                                         <option value="Male">ছাত্র (Male)</option>
@@ -267,7 +267,7 @@ export default function HomeClient() {
                             title='sort'
                             className="px-4 py-2 rounded-xl border border-gray-100 bg-white shadow-sm focus:outline-none focus:border-primary text-sm font-medium"
                             value={filterType}
-                            onChange={(e) => setFilterType(e.target.value as any)}
+                            onChange={(e) => setFilterType(e.target.value as 'all' | 'price_low' | 'rating')}
                         >
                             <option value="all">সব দেখুন</option>
                             <option value="price_low">দাম (কম থেকে বেশি)</option>

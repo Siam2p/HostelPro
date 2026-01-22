@@ -128,7 +128,7 @@ export const ManagerSignupForm: React.FC = () => {
                     type="submit"
                     fullWidth
                     disabled={isLoading}
-                    className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all active:scale-[0.98] py-3 font-medium rounded-lg"
+                    className="bg-primaryDip hover:bg-blue-700 text-white shadow-lg transition-all active:scale-[0.98] py-3 font-medium rounded-lg"
                 >
                     {isLoading ? 'প্রসেস করা হচ্ছে...' : 'রেজিস্ট্রেশন করুন'}
                 </Button>

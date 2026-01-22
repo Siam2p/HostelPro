@@ -30,7 +30,7 @@ export default function ContactPage() {
                     <div className="lg:col-span-1 space-y-6">
                         {[
                             { title: "ঠিকানা", info: "হাউজ #১২, রোড #৫, ধানমন্ডি, ঢাকা-১২০৯", icon: "📍", color: "text-red-500", bg: "bg-red-50" },
-                            { title: "ইমেইল", info: "support@hostelpro.com", icon: "✉️", color: "text-blue-500", bg: "bg-blue-50" },
+                            { title: "ইমেইল", info: "support@hostelpro.com", icon: "✉️", color: "text-primaryLight", bg: "bg-blue-50" },
                             { title: "ফোন", info: "+৮৮০ ১৭১১ ২২ গগ ৫৫", icon: "📞", color: "text-green-500", bg: "bg-green-50" },
                             { title: "অফিস সময়", info: "শনি - বৃহস্পতি (সকাল ১০টা - সন্ধ্যা ৬টা)", icon: "⏰", color: "text-purple-500", bg: "bg-purple-50" }
                         ].map((item, idx) => (

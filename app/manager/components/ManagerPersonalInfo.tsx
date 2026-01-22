@@ -32,14 +32,14 @@ export default function ManagerPersonalInfo({
         <Card className="p-6 md:p-8 rounded-3xl shadow-sm border-gray-100">
             <div className="flex justify-between items-center mb-8">
                 <h2 className="text-xl font-bold flex items-center gap-2">
-                    <span className="w-1.5 h-6 bg-blue-600 rounded-full"></span>
+                    <span className="w-1.5 h-6 bg-primaryDip rounded-full"></span>
                     ব্যক্তিগত তথ্য
                 </h2>
                 {!isEditing && (
                     <Button
                         variant="ghost"
                         onClick={onChangePasswordClick}
-                        className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 gap-2 font-bold py-1 px-3 text-sm h-auto"
+                        className="text-primaryDip hover:text-blue-700 hover:bg-blue-50 gap-2 font-bold py-1 px-3 text-sm h-auto"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -58,6 +58,7 @@ export default function ManagerPersonalInfo({
                     <div className="w-full">
                         <label className="text-sm font-medium text-gray-700 mb-1 block">লিঙ্গ (Gender)</label>
                         <select
+                            title="gender"
                             name="gender"
                             value={formData.gender}
                             onChange={handleInputChange}

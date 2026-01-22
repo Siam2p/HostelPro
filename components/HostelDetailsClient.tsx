@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import JsonLd from '@/components/JsonLd';
 import BookingApplicationModal from '@/components/BookingApplicationModal';
+import { ApplicationDetails } from '@/lib/types';
 
 export default function HostelDetailsClient({ initialHostelId }: { initialHostelId: number }) {
     const router = useRouter();
@@ -66,7 +67,7 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
         }
     };
 
-    const handleApplicationSubmit = (applicationData: any) => {
+    const handleApplicationSubmit = (applicationData: ApplicationDetails) => {
         if (!currentUser || !hostel || !selectedRoomId || !selectedBedId) return;
 
         addBooking({
@@ -351,7 +352,7 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
                                 <div className="mt-6 p-6 bg-blue-50 rounded-2xl border border-blue-100">
                                     <h3 className="font-bold text-blue-900 mb-2">ম্যানেজারের সাথে যোগাযোগ</h3>
                                     <p className="text-blue-700 text-sm mb-4">যেকোনো তথ্যের জন্য সরাসরি কল করুন</p>
-                                    <a href={`tel:${hostel.contact}`} className="flex items-center justify-center gap-2 w-full py-3 bg-white text-blue-600 font-bold rounded-xl border border-blue-200 hover:bg-blue-600 hover:text-white transition-colors">
+                                    <a href={`tel:${hostel.contact}`} className="flex items-center justify-center gap-2 w-full py-3 bg-white text-primaryDip font-bold rounded-xl border border-blue-200 hover:bg-primaryDip hover:text-white transition-colors">
                                         📞 {hostel.contact}
                                     </a>
                                 </div>

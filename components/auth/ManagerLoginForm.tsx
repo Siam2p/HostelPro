@@ -46,7 +46,7 @@ export const ManagerLoginForm: React.FC = () => {
 
             <div className="flex justify-end">
                 <div className="text-sm text-right">
-                    <Link href="/manager/forgot-password" title="পাসওয়ার্ড ভুলে গেছেন" className="font-medium text-blue-600 hover:text-blue-500 transition-colors">
+                    <Link href="/manager/forgot-password" title="পাসওয়ার্ড ভুলে গেছেন" className="font-medium text-primaryDip hover:text-primaryLight transition-colors">
                         পাসওয়ার্ড ভুলে গেছেন?
                     </Link>
                 </div>
@@ -56,7 +56,7 @@ export const ManagerLoginForm: React.FC = () => {
                 <Button
                     type="submit"
                     fullWidth
-                    className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all active:scale-[0.98] py-3 font-medium rounded-lg"
+                    className="bg-primaryDip hover:bg-blue-700 text-white shadow-lg transition-all active:scale-[0.98] py-3 font-medium rounded-lg"
                 >
                     ড্যাশবোর্ডে প্রবেশ করুন
                 </Button>

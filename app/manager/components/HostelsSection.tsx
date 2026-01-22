@@ -3,6 +3,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
+import { Hostel } from '@/lib/types';
 
 interface HostelsSectionProps {
     selectedHostelId: number | null;
@@ -47,7 +48,7 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
         });
     };
 
-    const toggleHostelStatus = (hostel: any) => {
+    const toggleHostelStatus = (hostel: Hostel) => {
         let newStatus: 'pending' | 'inactive';
         let actionText: string;
 
@@ -148,7 +149,7 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                                     <p className="text-sm text-gray-500 mb-4 flex items-center gap-1">📍 {hostel.location}</p>
                                     <div className="flex items-center justify-between pt-4 border-t border-gray-50">
                                         <span className="font-bold text-primary">৳{hostel.price}/মাস</span>
-                                        <span className="text-xs text-blue-600 font-medium group-hover:underline">ম্যানেজ করুন →</span>
+                                        <span className="text-xs text-primaryDip font-medium group-hover:underline">ম্যানেজ করুন →</span>
                                     </div>
                                 </div>
                             </div>
@@ -210,6 +211,7 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                                                         {editingRoomId === room.id ? (
                                                             <div className="flex items-center gap-2">
                                                                 <input
+                                                                    title={`occupied-${room.id}`}
                                                                     id={`occupied-${room.id}`}
                                                                     defaultValue={room.occupied.length}
                                                                     className="w-12 p-1 border rounded text-center"
@@ -219,6 +221,7 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                                                                 />
                                                                 <span>/</span>
                                                                 <input
+                                                                    title={`capacity-${room.id}`}
                                                                     id={`capacity-${room.id}`}
                                                                     defaultValue={room.capacity}
                                                                     className="w-12 p-1 border rounded text-center"
@@ -233,6 +236,7 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                                                     <td className="px-3 py-4 whitespace-nowrap text-gray-500">
                                                         {editingRoomId === room.id ? (
                                                             <input
+                                                                title={`price-${room.id}`}
                                                                 id={`price-${room.id}`}
                                                                 defaultValue={room.price}
                                                                 className="w-20 p-1 border rounded"
@@ -269,7 +273,7 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                                                                 Save
                                                             </button>
                                                         ) : (
-                                                            <button onClick={() => setEditingRoomId(room.id)} className="text-blue-600 hover:text-blue-900 mr-4">এডিট</button>
+                                                            <button onClick={() => setEditingRoomId(room.id)} className="text-primaryDip hover:text-blue-900 mr-4">এডিট</button>
                                                         )}
                                                         <button onClick={() => handleDeleteRoom(room.id)} className="text-red-600 hover:text-red-900">ডিলিট</button>
                                                     </td>

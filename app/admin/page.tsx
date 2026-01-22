@@ -62,10 +62,10 @@ function AdminDashboardContent() {
 
             {/* Mobile Navigation */}
             <div className="lg:hidden fixed bottom-0 left-0 w-full bg-slate-950 text-white z-50 p-4 flex justify-around items-center border-t border-white/10">
-                <button onClick={() => setActiveView('overview')} className={`p-2 rounded-xl ${activeView === 'overview' ? 'text-blue-500' : 'text-slate-400'}`}>📊</button>
-                <button onClick={() => setActiveView('users')} className={`p-2 rounded-xl ${activeView === 'users' ? 'text-blue-500' : 'text-slate-400'}`}>👥</button>
-                <button onClick={() => setActiveView('hostels')} className={`p-2 rounded-xl ${activeView === 'hostels' ? 'text-blue-500' : 'text-slate-400'}`}>🏨</button>
-                <button onClick={() => setActiveView('profile')} className={`p-2 rounded-xl ${activeView === 'profile' ? 'text-blue-500' : 'text-slate-400'}`}>👤</button>
+                <button onClick={() => setActiveView('overview')} className={`p-2 rounded-xl ${activeView === 'overview' ? 'text-primaryLight' : 'text-slate-400'}`}>📊</button>
+                <button onClick={() => setActiveView('users')} className={`p-2 rounded-xl ${activeView === 'users' ? 'text-primaryLight' : 'text-slate-400'}`}>👥</button>
+                <button onClick={() => setActiveView('hostels')} className={`p-2 rounded-xl ${activeView === 'hostels' ? 'text-primaryLight' : 'text-slate-400'}`}>🏨</button>
+                <button onClick={() => setActiveView('profile')} className={`p-2 rounded-xl ${activeView === 'profile' ? 'text-primaryLight' : 'text-slate-400'}`}>👤</button>
             </div>
 
             {/* Main Viewport */}

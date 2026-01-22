@@ -97,7 +97,7 @@ export default function EditResidentModal({ isOpen, onClose, residentId }: EditR
                     <div className="space-y-1">
                         <label className="text-sm font-medium text-gray-700">নাম</label>
                         <input
-                            className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                            className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             placeholder="নাম"
@@ -108,7 +108,7 @@ export default function EditResidentModal({ isOpen, onClose, residentId }: EditR
                     <div className="space-y-1">
                         <label className="text-sm font-medium text-gray-700">ফোন নাম্বার</label>
                         <input
-                            className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                            className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             placeholder="নাম্বার"
@@ -118,7 +118,7 @@ export default function EditResidentModal({ isOpen, onClose, residentId }: EditR
                     <div className="space-y-1">
                         <label className="text-sm font-medium text-gray-700">গার্ডিয়ান কন্টাক্ট</label>
                         <input
-                            className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                            className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                             value={guardianContact}
                             onChange={(e) => setGuardianContact(e.target.value)}
                             placeholder="অভিভাবকের নাম্বার"
@@ -129,7 +129,7 @@ export default function EditResidentModal({ isOpen, onClose, residentId }: EditR
                         <div className="space-y-1">
                             <label className="text-sm font-medium text-gray-700">রুম নং</label>
                             <input
-                                className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                                 value={roomId}
                                 onChange={(e) => setRoomId(e.target.value)}
                                 placeholder="রুম"
@@ -139,7 +139,7 @@ export default function EditResidentModal({ isOpen, onClose, residentId }: EditR
                         <div className="space-y-1">
                             <label className="text-sm font-medium text-gray-700">বেড নং</label>
                             <input
-                                className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none"
                                 value={bedId}
                                 onChange={(e) => setBedId(e.target.value)}
                                 placeholder="বেড"
@@ -151,7 +151,8 @@ export default function EditResidentModal({ isOpen, onClose, residentId }: EditR
                     <div className="space-y-1">
                         <label className="text-sm font-medium text-gray-700">পেমেন্ট স্ট্যাটাস</label>
                         <select
-                            className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-noto-sans-bengali"
+                            title='userStatus'
+                            className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primaryLight outline-none bg-white font-noto-sans-bengali"
                             value={paymentStatus}
                             onChange={(e) => setPaymentStatus(e.target.value as Booking['monthlyFeeStatus'])}
                         >

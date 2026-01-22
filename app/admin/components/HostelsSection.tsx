@@ -37,13 +37,15 @@ export default function HostelsSection() {
                             placeholder="হোস্টেল বা এলাকা খুঁজুন..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full md:w-80 h-12 pl-12 pr-6 rounded-2xl bg-white border border-slate-200 focus:border-blue-500 outline-none transition-all font-medium text-sm"
+                            className="w-full md:w-80 h-12 pl-12 pr-6 rounded-2xl bg-white border border-slate-200 focus:border-primaryLight outline-none transition-all font-medium text-sm"
                         />
                         <span className="absolute left-4 top-1/2 -translate-y-1/2">🔍</span>
                     </div>
                     <select
+                        name='hostelStatus'
+                        title='hostelStatus'
                         value={statusFilter}
-                        onChange={(e) => setStatusFilter(e.target.value as any)}
+                        onChange={(e) => setStatusFilter(e.target.value as 'all' | 'pending' | 'active' | 'inactive' | 'rejected')}
                         className="h-12 px-3 rounded-2xl bg-white border border-slate-200 outline-none font-bold text-sm"
                     >
                         <option value="all">সব স্ট্যাটাস</option>
@@ -86,7 +88,7 @@ export default function HostelsSection() {
                                 </div>
                                 <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">রেটিং</p>
-                                    <p className="text-sm font-black text-blue-600">⭐ {hostel.rating}</p>
+                                    <p className="text-sm font-black text-primaryDip">⭐ {hostel.rating}</p>
                                 </div>
                             </div>
 
@@ -119,7 +121,7 @@ export default function HostelsSection() {
                                 {hostel.status === 'inactive' && (
                                     <Button
                                         onClick={() => handleStatusUpdate(hostel, 'active')}
-                                        className="grow py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-black uppercase tracking-widest"
+                                        className="grow py-3 rounded-2xl bg-primaryDip hover:bg-blue-700 text-white text-xs font-black uppercase tracking-widest"
                                     >
                                         সক্রিয় করুন
                                     </Button>

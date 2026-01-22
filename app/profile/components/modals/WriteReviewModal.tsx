@@ -18,7 +18,7 @@ export function WriteReviewModal({ isOpen, onClose, hostelName, onSubmit }: Writ
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
             <Card className="w-full max-w-lg p-0 rounded-4xl shadow-3xl animate-in zoom-in-95 duration-300 overflow-hidden border-none text-left">
-                <div className="p-8 bg-linear-to-br from-blue-600 to-indigo-700 text-white">
+                <div className="p-8 bg-linear-to-br from-primaryDip to-indigo-700 text-white">
                     <h3 className="text-2xl font-black tracking-tight">রিভিউ দিন</h3>
                     <p className="text-blue-100 text-sm mt-1 font-medium">{hostelName} সম্পর্কে আপনার মতামত জানান</p>
                 </div>
@@ -57,7 +57,7 @@ export function WriteReviewModal({ isOpen, onClose, hostelName, onSubmit }: Writ
                             onSubmit({ rating, comment });
                             onClose();
                         }}
-                        className="w-full sm:grow-2 sm:basis-2/3 rounded-2xl h-14 font-black shadow-xl shadow-blue-200 bg-linear-to-r from-blue-600 to-indigo-600 transition-all uppercase tracking-widest text-xs"
+                        className="w-full sm:grow-2 sm:basis-2/3 rounded-2xl h-14 font-black shadow-xl shadow-blue-200 bg-linear-to-r from-primaryDip to-primaryDipTo transition-all uppercase tracking-widest text-xs"
                     >
                         রিভিউ জমা দিন
                     </Button>

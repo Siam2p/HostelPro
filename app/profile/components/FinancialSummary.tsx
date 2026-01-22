@@ -43,7 +43,7 @@ export default function FinancialSummary({ activeBooking, myHostel, onViewHistor
                 <div className="flex justify-between items-center group">
                     <span className="text-sm font-bold text-gray-500 group-hover:text-gray-700 transition-colors">মাসিক ভাড়া</span>
                     <div className="text-right">
-                        <span className="text-lg font-black text-blue-600">৳{myHostel?.price || 0}</span>
+                        <span className="text-lg font-black text-primaryDip">৳{myHostel?.price || 0}</span>
                         <p className="text-[10px] font-bold text-gray-400 uppercase">ভ্যাট সহ</p>
                     </div>
                 </div>

@@ -18,6 +18,7 @@ export interface User {
 export type DashboardView = 'overview' | 'hostels' | 'bookings' | 'residents' | 'profile';
 export type AdminDashboardView = 'overview' | 'users' | 'hostels' | 'bookings' | 'analytics' | 'settings' | 'profile';
 
+
 export interface Room {
     id: string;
     capacity: number;

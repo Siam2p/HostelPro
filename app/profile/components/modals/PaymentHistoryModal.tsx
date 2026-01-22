@@ -65,7 +65,7 @@ export function PaymentHistoryModal({ isOpen, onClose, paymentHistory }: Payment
                 <div className="p-8 bg-white border-t border-gray-100 flex justify-end">
                     <Button
                         onClick={onClose}
-                        className="px-12 rounded-2xl h-14 font-black shadow-xl shadow-blue-200 bg-linear-to-r from-blue-600 to-indigo-600 hover:scale-105 active:scale-95 transition-all uppercase tracking-widest text-xs"
+                        className="px-12 rounded-2xl h-14 font-black shadow-xl shadow-blue-200 bg-linear-to-r from-primaryDip to-primaryDipTo hover:scale-105 active:scale-95 transition-all uppercase tracking-widest text-xs"
                     >
                         বন্ধ করুন
                     </Button>

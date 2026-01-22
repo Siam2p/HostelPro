@@ -59,7 +59,7 @@ export default function ResidentsSection() {
                         <input
                             type="text"
                             placeholder="শিক্ষার্থী খুঁজুন..."
-                            className="w-full pr-10 pl-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full pr-10 pl-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primaryLight"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -86,7 +86,7 @@ export default function ResidentsSection() {
                                 <tr key={resident.id} className="hover:bg-gray-50">
                                     <td className="px-3 py-4 whitespace-nowrap cursor-pointer" onClick={() => router.push(`/manager/residents/${resident.id}`)}>
                                         <div className="flex items-center">
-                                            <div className="h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold mr-3">
+                                            <div className="h-8 w-8 rounded-full bg-blue-100 text-primaryDip flex items-center justify-center font-bold mr-3">
                                                 {resident.userName.charAt(0)}
                                             </div>
                                             <div>
@@ -106,6 +106,7 @@ export default function ResidentsSection() {
                                     </td>
                                     <td className="px-3 py-4 whitespace-nowrap">
                                         <select
+                                            aria-label={`Update status for ${resident.userName}`}
                                             value={resident.isActive !== false ? 'active' : 'inactive'}
                                             onChange={(e) => handleStatusUpdate(resident, e.target.value === 'active')}
                                             onClick={(e) => e.stopPropagation()}
@@ -122,7 +123,7 @@ export default function ResidentsSection() {
                                     <td className="px-3 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div className="flex justify-end gap-2">
                                             <button
-                                                className="text-blue-600 hover:text-blue-900 px-2 py-1 hover:bg-blue-50 rounded"
+                                                className="text-primaryDip hover:text-blue-900 px-2 py-1 hover:bg-blue-50 rounded"
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     router.push(`/manager/residents/${resident.id}`);
@@ -155,7 +156,7 @@ export default function ResidentsSection() {
                             {residents.length === 0 && (
                                 <tr>
                                     <td colSpan={6} className="px-3 py-8 text-center text-gray-400">
-                                        "{searchTerm}" এর জন্য কোনো শিক্ষার্থী পাওয়া যায়নি
+                                        {searchTerm} এর জন্য কোনো শিক্ষার্থী পাওয়া যায়নি
                                     </td>
                                 </tr>
                             )}

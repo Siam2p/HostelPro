@@ -30,11 +30,11 @@ export function HostelDetailsModal({ isOpen, onClose, hostel, booking }: HostelD
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-100">
                         <div>
                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">রুম নম্বর</p>
-                            <p className="text-2xl font-black text-blue-600">রুম {booking.roomId}</p>
+                            <p className="text-2xl font-black text-primaryDip">রুম {booking.roomId}</p>
                         </div>
                         <div>
                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">বেড নম্বর</p>
-                            <p className="text-2xl font-black text-indigo-600">বেড {booking.bedId}</p>
+                            <p className="text-2xl font-black text-primaryDipTo">বেড {booking.bedId}</p>
                         </div>
                         <div>
                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">ভাড়ার পরিমাণ</p>

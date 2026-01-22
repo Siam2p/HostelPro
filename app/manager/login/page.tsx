@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function ManagerLoginPage() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-blue-50 py-12 px-4 sm:px-3 lg:px-8">
-            <Card className="max-w-md w-full space-y-8 p-10 bg-white shadow-xl rounded-2xl border-t-4 border-blue-600">
+            <Card className="max-w-md w-full space-y-8 p-10 bg-white shadow-xl rounded-2xl border-t-4 border-primaryDip">
                 <div className="text-center">
                     <h1 className="mt-6 text-3xl font-extrabold text-gray-900">
                         ম্যানেজার লগইন
@@ -50,7 +50,7 @@ export default function ManagerLoginPage() {
                 </div>
 
                 <div className="mt-6 text-center text-sm">
-                    <Link href="/login" className="text-gray-500 hover:text-blue-600 transition-colors">
+                    <Link href="/login" className="text-gray-500 hover:text-primaryDip transition-colors">
                         ← ব্যবহারকারী লগইন-এ ফিরে যান
                     </Link>
                 </div>

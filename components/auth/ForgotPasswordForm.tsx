@@ -159,7 +159,7 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ userType
                             error={errors.email}
                         />
                     </div>
-                    <Button type="submit" fullWidth disabled={isLoading} className={`${userType === 'manager' ? 'bg-blue-600 hover:bg-blue-700' : ''} py-3 shadow-lg active:scale-[0.98] transition-all`}>
+                    <Button type="submit" fullWidth disabled={isLoading} className={`${userType === 'manager' ? 'bg-primaryDip hover:bg-blue-700' : ''} py-3 shadow-lg active:scale-[0.98] transition-all`}>
                         {isLoading ? 'পাঠানো হচ্ছে...' : 'OTP কোড পাঠান'}
                     </Button>
                 </form>
@@ -174,7 +174,7 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ userType
                             </p>
                             <p className="text-xs font-mono text-gray-400">Sent to: {email}</p>
 
-                            <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold ${timeLeft < 30 ? 'bg-red-50 text-red-500' : 'bg-blue-50 text-blue-600'}`}>
+                            <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold ${timeLeft < 30 ? 'bg-red-50 text-red-500' : 'bg-blue-50 text-primaryDip'}`}>
                                 <Timer size={14} />
                                 {formatTime(timeLeft)}
                             </div>
@@ -191,7 +191,7 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ userType
                             error={errors.otp}
                         />
                     </div>
-                    <Button type="submit" fullWidth disabled={isLoading || (timeLeft === 0 && otp === '')} className={`${userType === 'manager' ? 'bg-blue-600 hover:bg-blue-700' : ''} py-3 shadow-lg active:scale-[0.98] transition-all`}>
+                    <Button type="submit" fullWidth disabled={isLoading || (timeLeft === 0 && otp === '')} className={`${userType === 'manager' ? 'bg-primaryDip hover:bg-blue-700' : ''} py-3 shadow-lg active:scale-[0.98] transition-all`}>
                         {isLoading ? 'ভেরিফাই করা হচ্ছে...' : 'ভেরিফাই করুন'}
                     </Button>
 
@@ -236,7 +236,7 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ userType
                             error={errors.confirmPassword}
                         />
                     </div>
-                    <Button type="submit" fullWidth disabled={isLoading} className={`${userType === 'manager' ? 'bg-blue-600 hover:bg-blue-700' : ''} py-3 shadow-lg active:scale-[0.98] transition-all`}>
+                    <Button type="submit" fullWidth disabled={isLoading} className={`${userType === 'manager' ? 'bg-primaryDip hover:bg-blue-700' : ''} py-3 shadow-lg active:scale-[0.98] transition-all`}>
                         {isLoading ? 'আপডেট হচ্ছে...' : 'পাসওয়ার্ড সেট করুন'}
                     </Button>
                 </form>

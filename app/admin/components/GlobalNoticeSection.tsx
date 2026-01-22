@@ -44,7 +44,7 @@ export default function GlobalNoticeSection() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                 <Card className="p-10 border-none shadow-2xl shadow-slate-200/60 rounded-[3rem] bg-white">
                     <h3 className="text-xl font-black text-slate-900 mb-8 flex items-center gap-3">
-                        <span className="p-2.5 bg-blue-100 rounded-xl text-blue-600 text-lg">📝</span>
+                        <span className="p-2.5 bg-blue-100 rounded-xl text-primaryDip text-lg">📝</span>
                         নতুন বিজ্ঞপ্তি প্রকাশ করুন
                     </h3>
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -55,7 +55,7 @@ export default function GlobalNoticeSection() {
                                 placeholder="উদা: সার্ভার রক্ষণাবেক্ষণ বিরতি"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
-                                className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-bold text-slate-900"
+                                className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-primaryLight focus:ring-4 focus:ring-primaryLight/10 outline-none transition-all font-bold text-slate-900"
                                 required
                             />
                         </div>
@@ -65,14 +65,14 @@ export default function GlobalNoticeSection() {
                                 placeholder="বিজ্ঞপ্তির বিস্তারিত এখানে লিখুন..."
                                 value={content}
                                 onChange={(e) => setContent(e.target.value)}
-                                className="w-full min-h-[180px] p-6 rounded-3xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium text-slate-700 leading-relaxed"
+                                className="w-full min-h-[180px] p-6 rounded-3xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-primaryLight focus:ring-4 focus:ring-primaryLight/10 outline-none transition-all font-medium text-slate-700 leading-relaxed"
                                 required
                             ></textarea>
                         </div>
                         <Button
                             type="submit"
                             disabled={isPosting}
-                            className="w-full h-14 rounded-2xl bg-linear-to-r from-blue-600 to-indigo-700 text-white font-black uppercase tracking-widest shadow-xl shadow-blue-500/20"
+                            className="w-full h-14 rounded-2xl bg-linear-to-r from-primaryDip to-indigo-700 text-white font-black uppercase tracking-widest shadow-xl shadow-primaryLight/20"
                         >
                             {isPosting ? 'পাবলিশ হচ্ছে...' : 'বিজ্ঞপ্তি পাবলিশ করুন 🚀'}
                         </Button>
@@ -99,7 +99,7 @@ export default function GlobalNoticeSection() {
                                 <p className="text-sm text-slate-600 font-medium leading-relaxed mb-6">{notice.content}</p>
                                 <div className="flex items-center justify-between pt-6 border-t border-slate-50">
                                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">🗓️ {notice.date}</span>
-                                    <Badge variant="outline" className="text-[10px] font-black uppercase tracking-widest border-blue-100 text-blue-600 px-3 py-1">Global</Badge>
+                                    <Badge variant="outline" className="text-[10px] font-black uppercase tracking-widest border-blue-100 text-primaryDip px-3 py-1">Global</Badge>
                                 </div>
                             </Card>
                         ))

@@ -39,6 +39,7 @@ export default function AdminProfileHeader({
                         )}
                         {isEditing && (
                             <button
+                                aria-label='btn'
                                 onClick={() => fileInputRef.current?.click()}
                                 className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                             >
@@ -48,7 +49,7 @@ export default function AdminProfileHeader({
                                 </svg>
                             </button>
                         )}
-                        <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={onPhotoUpload} />
+                        <input type="file" title='img' ref={fileInputRef} className="hidden" accept="image/*" onChange={onPhotoUpload} />
                     </div>
                 </div>
                 <div className="grow pb-2 flex flex-col md:block items-center md:items-start w-full md:w-auto">

@@ -9,6 +9,8 @@ interface CurrentHostelProps {
     onWriteReview: () => void;
 }
 
+
+
 export default function CurrentHostel({ myHostel, activeBooking, onViewDetails, onWriteReview }: CurrentHostelProps) {
     if (!myHostel) return null;
 
@@ -25,7 +27,7 @@ export default function CurrentHostel({ myHostel, activeBooking, onViewDetails, 
             </div>
             <div className="p-6 space-y-5 bg-white">
                 <div className="flex items-center gap-4">
-                    <div className="h-10 w-10 flex items-center justify-center bg-blue-50 text-blue-600 rounded-2xl group-hover/hostel:rotate-12 transition-transform">
+                    <div className="h-10 w-10 flex items-center justify-center bg-blue-50 text-primaryDip rounded-2xl group-hover/hostel:rotate-12 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -37,7 +39,7 @@ export default function CurrentHostel({ myHostel, activeBooking, onViewDetails, 
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
-                    <div className="h-10 w-10 flex items-center justify-center bg-indigo-50 text-indigo-600 rounded-2xl group-hover/hostel:-rotate-12 transition-transform">
+                    <div className="h-10 w-10 flex items-center justify-center bg-indigo-50 text-primaryDipTo rounded-2xl group-hover/hostel:-rotate-12 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
@@ -56,7 +58,7 @@ export default function CurrentHostel({ myHostel, activeBooking, onViewDetails, 
                         বিস্তারিত তথ্য
                     </Button>
                     <Button
-                        className="flex-1 rounded-xl h-11 text-[10px] font-black uppercase tracking-widest bg-blue-600 shadow-lg shadow-blue-100"
+                        className="flex-1 rounded-xl h-11 text-[10px] font-black uppercase tracking-widest bg-primaryDip shadow-lg shadow-blue-100"
                         onClick={onWriteReview}
                     >
                         রিভিউ দিন

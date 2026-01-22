@@ -19,9 +19,9 @@ export function Navbar() {
 
     return (
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-border">
-            <div className={`${pathname.startsWith('/admin') || pathname.startsWith('/manager') ? 'px-3 lg:px-10' : 'container mx-auto px-3'} py-4 flex items-center justify-between`}>
+            <div className={`${currentUser?.role === 'manager' || currentUser?.role === 'admin' ? 'px-3 lg:px-10' : 'container mx-auto px-3'} py-4 flex items-center justify-between`}>
                 {/* Brand */}
-                <Link href="/" className="text-2xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+                <Link href={currentUser?.role === 'manager' ? '/manager' : currentUser?.role === 'admin' ? '/admin' : '/'} className="text-2xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                     Hostel<span className="text-primary">Pro</span>
                 </Link>
 
@@ -107,12 +107,12 @@ export function Navbar() {
 
                                 {currentUser.role === 'manager' && !pathname.startsWith('/manager') && (
                                     <Link href="/manager">
-                                        <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-blue-600 to-indigo-600 shadow-md shadow-blue-100 h-auto">ড্যাশবোর্ড</Button>
+                                        <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-primaryDip to-primaryDipTo shadow-md shadow-blue-100 h-auto">ড্যাশবোর্ড</Button>
                                     </Link>
                                 )}
                                 {currentUser.role === 'admin' && !pathname.startsWith('/admin') && (
                                     <Link href="/admin">
-                                        <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-blue-600 to-indigo-600 shadow-md shadow-blue-100 h-auto">অ্যাডমিন</Button>
+                                        <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-primaryDip to-primaryDipTo shadow-md shadow-blue-100 h-auto">অ্যাডমিন</Button>
                                     </Link>
                                 )}
                             </div>
