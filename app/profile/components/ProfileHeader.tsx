@@ -1,7 +1,7 @@
 import React, { RefObject } from 'react';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { User } from '@/lib/types';
+import { User, Booking } from '@/lib/types';
 
 interface ProfileHeaderProps {
     currentUser: User;
@@ -12,7 +12,7 @@ interface ProfileHeaderProps {
     isSaving: boolean;
     fileInputRef: RefObject<HTMLInputElement | null>;
     onPhotoUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    activeBooking: boolean;
+    activeBooking: Booking | undefined | null;
 }
 
 export default function ProfileHeader({

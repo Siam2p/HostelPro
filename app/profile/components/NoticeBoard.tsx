@@ -1,10 +1,10 @@
 import React from 'react';
 import { Badge } from '@/components/ui/Badge';
-import { Notice } from '@/lib/types';
+import { Notice, Booking } from '@/lib/types';
 
 interface NoticeBoardProps {
     notices: Notice[];
-    activeBooking: { hostelId: number } | null;
+    activeBooking: Booking | undefined | null;
 }
 
 export default function NoticeBoard({ notices, activeBooking }: NoticeBoardProps) {
