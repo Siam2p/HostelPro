@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import AddResidentModal from './AddResidentModal';
 import EditResidentModal from './EditResidentModal';
+import { Booking } from '@/lib/types';
 
 export default function ResidentsSection() {
     const { currentUser } = useAuth();
