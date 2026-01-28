@@ -5,8 +5,8 @@ import NextImage from 'next/image';
 import { Booking, Hostel } from '@/lib/types';
 
 interface CurrentHostelProps {
-    myHostel: Hostel | null;
-    activeBooking: Booking | null;
+    myHostel: Hostel | null | undefined;
+    activeBooking: Booking | null | undefined;
     onViewDetails: () => void;
     onWriteReview: () => void;
 }

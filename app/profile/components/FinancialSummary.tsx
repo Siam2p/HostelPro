@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/Button';
 import { Booking, Hostel } from '@/lib/types';
 
 interface FinancialSummaryProps {
-    activeBooking: Booking | null;
-    myHostel: Hostel | null;
+    activeBooking: Booking | null | undefined;
+    myHostel: Hostel | null | undefined;
     onViewHistory: () => void;
 }
 

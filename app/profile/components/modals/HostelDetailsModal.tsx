@@ -8,12 +8,12 @@ import { Hostel, Booking } from '@/lib/types';
 interface HostelDetailsModalProps {
     isOpen: boolean;
     onClose: () => void;
-    hostel: Hostel | null;
-    booking: Booking | null;
+    hostel: Hostel | null | undefined;
+    booking: Booking | null | undefined;
 }
 
 export function HostelDetailsModal({ isOpen, onClose, hostel, booking }: HostelDetailsModalProps) {
-    if (!isOpen || !hostel) return null;
+    if (!isOpen || !hostel || !booking) return null;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
@@ -57,7 +57,7 @@ export function HostelDetailsModal({ isOpen, onClose, hostel, booking }: HostelD
                                 সুযোগ-সুবিধা
                             </h4>
                             <div className="flex flex-wrap gap-2">
-                                {(hostel.facilities || hostel.features || ['Free WiFi', 'CCTV', 'Meals', 'Security']).map((f: string, i: number) => (
+                                {(hostel.features || ['Free WiFi', 'CCTV', 'Meals', 'Security']).map((f: string, i: number) => (
                                     <span key={i} className="px-3 py-1 bg-gray-50 text-gray-600 rounded-full text-[10px] font-black border border-gray-100 uppercase tracking-wider">{f}</span>
                                 ))}
                             </div>
@@ -87,10 +87,10 @@ export function HostelDetailsModal({ isOpen, onClose, hostel, booking }: HostelD
                             <div className="bg-gray-50/50 p-4 rounded-2xl border border-gray-100">
                                 <p className="text-sm text-gray-600 leading-relaxed font-medium">
                                     <span className="block font-bold text-gray-900 mb-1">{hostel.location}</span>
-                                    {hostel.address || `${hostel.upazila}, ${hostel.district}, ${hostel.division}`}<br />
+                                    {`${hostel.upazila}, ${hostel.district}, ${hostel.division}`}<br />
                                 </p>
                                 <div className="mt-3 pt-3 border-t border-gray-200/50 flex flex-col gap-1">
-                                    <p className="text-xs text-gray-400">ম্যানেজার: <span className="font-bold text-gray-700">{hostel.managerName || 'সিস্টেম অ্যাডমিন'}</span></p>
+                                    <p className="text-xs text-gray-400">ম্যানেজার আইডি: <span className="font-bold text-gray-700">{hostel.managerId || 'সিস্টেম অ্যাডমিন'}</span></p>
                                     <p className="text-xs text-gray-400">ফোন: <span className="font-bold text-gray-700">{hostel.contact || '০১৬XXXXXXXX'}</span></p>
                                 </div>
                             </div>
