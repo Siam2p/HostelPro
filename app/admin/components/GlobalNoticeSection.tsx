@@ -55,7 +55,7 @@ export default function GlobalNoticeSection() {
                                 placeholder="উদা: সার্ভার রক্ষণাবেক্ষণ বিরতি"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
-                                className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-primaryLight focus:ring-4 focus:ring-primaryLight/10 outline-none transition-all font-bold text-slate-900"
+                                className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-primary-light focus:ring-4 focus:ring-primary-light/10 outline-none transition-all font-bold text-slate-900"
                                 required
                             />
                         </div>
@@ -72,7 +72,7 @@ export default function GlobalNoticeSection() {
                         <Button
                             type="submit"
                             disabled={isPosting}
-                            className="w-full h-14 rounded-2xl bg-linear-to-r from-primaryDip to-indigo-700 text-white font-black uppercase tracking-widest shadow-xl shadow-primaryLight/20"
+                            className="w-full h-14 rounded-2xl bg-linear-to-r from-primary-dip to-primary-dipto text-white font-black uppercase tracking-widest shadow-xl shadow-primary-light/20"
                         >
                             {isPosting ? 'পাবলিশ হচ্ছে...' : 'বিজ্ঞপ্তি পাবলিশ করুন 🚀'}
                         </Button>

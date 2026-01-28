@@ -17,7 +17,7 @@ export default function NoticeBoard({ notices, activeBooking }: NoticeBoardProps
         <div>
             <h2 className="text-2xl font-bold mb-6 flex items-center justify-between">
                 হোস্টেল বুলেটিন (নোটিশ)
-                <Badge className="bg-indigo-100 text-indigo-700 border-none px-3 font-bold">নতুন</Badge>
+                <Badge className="bg-bg-highlight text-primary-hover border-none px-3 font-bold">নতুন</Badge>
             </h2>
             <div className="space-y-4">
                 {relevantNotices.length === 0 ? (
@@ -32,9 +32,9 @@ export default function NoticeBoard({ notices, activeBooking }: NoticeBoardProps
                     </div>
                 ) : (
                     relevantNotices.map(notice => (
-                        <div key={notice.id} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all relative overflow-hidden group border-l-4 border-l-primaryDip">
+                        <div key={notice.id} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all relative overflow-hidden group border-l-4 border-l-primary-dip">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                                <h4 className="font-black text-gray-900 group-hover:text-primaryDip transition-colors uppercase tracking-tight">{notice.title}</h4>
+                                <h4 className="font-black text-gray-900 group-hover:text-primary-dip transition-colors uppercase tracking-tight">{notice.title}</h4>
                                 <Badge variant="default" className="text-[10px] uppercase font-black tracking-widest text-gray-400 border border-gray-100 bg-transparent">
                                     {notice.date}
                                 </Badge>

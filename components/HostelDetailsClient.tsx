@@ -267,7 +267,7 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
                                                                 ? 'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200'
                                                                 : isSelected
                                                                     ? 'bg-primary text-white shadow-lg shadow-primary/30 scale-105 ring-2 ring-primary ring-offset-2'
-                                                                    : 'bg-white border-2 border-gray-200 text-gray-600 hover:border-primary hover:text-primary hover:bg-blue-50/50'
+                                                                    : 'bg-white border-2 border-gray-200 text-gray-600 hover:border-primary hover:text-primary hover:bg-bg-subtle/50'
                                                             }
                                                         `}
                                                     >
@@ -349,10 +349,10 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
                             </Card>
 
                             {hostel.contact && (
-                                <div className="mt-6 p-6 bg-blue-50 rounded-2xl border border-blue-100">
-                                    <h3 className="font-bold text-blue-900 mb-2">ম্যানেজারের সাথে যোগাযোগ</h3>
-                                    <p className="text-blue-700 text-sm mb-4">যেকোনো তথ্যের জন্য সরাসরি কল করুন</p>
-                                    <a href={`tel:${hostel.contact}`} className="flex items-center justify-center gap-2 w-full py-3 bg-white text-primaryDip font-bold rounded-xl border border-blue-200 hover:bg-primaryDip hover:text-white transition-colors">
+                                <div className="mt-6 p-6 bg-bg-subtle rounded-2xl border border-border-subtle">
+                                    <h3 className="font-bold text-text-subtle mb-2">ম্যানেজারের সাথে যোগাযোগ</h3>
+                                    <p className="text-primary-hover text-sm mb-4">যেকোনো তথ্যের জন্য সরাসরি কল করুন</p>
+                                    <a href={`tel:${hostel.contact}`} className="flex items-center justify-center gap-2 w-full py-3 bg-white text-primary-dip font-bold rounded-xl border border-border-emerald hover:bg-primary-dip hover:text-white transition-colors">
                                         📞 {hostel.contact}
                                     </a>
                                 </div>

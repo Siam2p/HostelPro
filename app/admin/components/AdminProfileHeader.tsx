@@ -1,4 +1,5 @@
 import React, { RefObject } from 'react';
+import NextImage from 'next/image';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { User } from '@/lib/types';
@@ -31,7 +32,7 @@ export default function AdminProfileHeader({
                 <div className="mx-auto md:mx-0">
                     <div className="h-32 w-32 md:h-40 md:w-40 rounded-full border-4 border-white shadow-xl bg-white overflow-hidden relative group">
                         {formData.profileImage ? (
-                            <img src={formData.profileImage} alt={currentUser.name} className="w-full h-full object-cover" />
+                            <NextImage src={formData.profileImage} alt={currentUser.name} width={160} height={160} className="w-full h-full object-cover" />
                         ) : (
                             <div className="w-full h-full bg-slate-50 flex items-center justify-center text-5xl font-bold text-slate-700">
                                 {currentUser.name[0]}

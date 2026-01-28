@@ -37,7 +37,7 @@ export default function UsersSection() {
                             placeholder="নাম বা ইমেইল দিয়ে খুঁজুন..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full md:w-80 h-12 pl-12 pr-6 rounded-2xl bg-white border border-slate-200 focus:border-primaryLight focus:ring-4 focus:ring-primaryLight/10 outline-none transition-all font-medium text-sm"
+                            className="w-full md:w-80 h-12 pl-12 pr-6 rounded-2xl bg-white border border-slate-200 focus:border-primary-light focus:ring-4 focus:ring-primary-light/10 outline-none transition-all font-medium text-sm"
                         />
                         <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
                     </div>
@@ -45,7 +45,7 @@ export default function UsersSection() {
                         title='userRole'
                         value={roleFilter}
                         onChange={(e) => setRoleFilter(e.target.value as 'all' | 'admin' | 'manager' | 'user')}
-                        className="h-12 px-3 rounded-2xl bg-white border border-slate-200 focus:border-primaryLight outline-none transition-all font-bold text-sm text-slate-700"
+                        className="h-12 px-3 rounded-2xl bg-white border border-slate-200 focus:border-primary-light outline-none transition-all font-bold text-sm text-slate-700"
                     >
                         <option value="all">সব রোল</option>
                         <option value="admin">অ্যাডমিন</option>
@@ -71,7 +71,7 @@ export default function UsersSection() {
                                 <tr key={user.id} className="hover:bg-slate-50/30 transition-colors group">
                                     <td className="p-6">
                                         <div className="flex items-center gap-4">
-                                            <div className="h-12 w-12 rounded-2xl bg-linear-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-600 font-black text-lg group-hover:from-primaryDip group-hover:to-primaryDipTo group-hover:text-white transition-all duration-300">
+                                            <div className="h-12 w-12 rounded-2xl bg-linear-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-600 font-black text-lg group-hover:from-primary-dip group-hover:to-primary-dipto group-hover:text-white transition-all duration-300">
                                                 {user.name[0]}
                                             </div>
                                             <div>

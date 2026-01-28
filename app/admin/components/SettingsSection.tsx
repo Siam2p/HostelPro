@@ -40,7 +40,7 @@ export default function SettingsSection() {
                                     id='name'
                                     value={siteName}
                                     onChange={(e) => setSiteName(e.target.value)}
-                                    className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-primaryLight outline-none transition-all font-black text-slate-900"
+                                    className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-primary-light outline-none transition-all font-black text-slate-900"
                                 />
                             </div>
                             <div>
@@ -49,7 +49,7 @@ export default function SettingsSection() {
                                     type="email"
                                     id='email'
                                     defaultValue="admin@hostelpro.com"
-                                    className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-primaryLight outline-none transition-all font-black text-slate-900"
+                                    className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-primary-light outline-none transition-all font-black text-slate-900"
                                 />
                             </div>
                         </div>
@@ -61,7 +61,7 @@ export default function SettingsSection() {
                             </div>
                             <button
                                 onClick={() => setMaintenanceMode(!maintenanceMode)}
-                                className={`w-16 h-8 rounded-full transition-all duration-300 relative ${maintenanceMode ? 'bg-primaryDip' : 'bg-slate-300'}`}
+                                className={`w-16 h-8 rounded-full transition-all duration-300 relative ${maintenanceMode ? 'bg-primary-dip' : 'bg-slate-300'}`}
                             >
                                 <div className={`absolute top-1 w-6 h-6 rounded-full bg-white shadow-md transition-all duration-300 ${maintenanceMode ? 'left-9' : 'left-1'}`}></div>
                             </button>

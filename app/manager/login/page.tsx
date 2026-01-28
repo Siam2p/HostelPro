@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function ManagerLoginPage() {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-blue-50 py-12 px-4 sm:px-3 lg:px-8">
-            <Card className="max-w-md w-full space-y-8 p-10 bg-white shadow-xl rounded-2xl border-t-4 border-primaryDip">
+        <div className="min-h-screen flex items-center justify-center bg-bg-subtle py-12 px-4 sm:px-3 lg:px-8">
+            <Card className="max-w-md w-full space-y-8 p-10 bg-white shadow-xl rounded-2xl border-t-4 border-primary-dip">
                 <div className="text-center">
                     <h1 className="mt-6 text-3xl font-extrabold text-gray-900">
                         ম্যানেজার লগইন
@@ -42,7 +42,7 @@ export default function ManagerLoginPage() {
                             variant="outline"
                             href="/manager/signup"
                             fullWidth
-                            className="border-blue-200 hover:bg-blue-50 text-blue-700"
+                            className="border-emerald-200 hover:bg-emerald-50 text-emerald-700"
                         >
                             নতুন ম্যানেজার একাউন্ট খুলুন
                         </ClientRouterButton>
@@ -50,7 +50,7 @@ export default function ManagerLoginPage() {
                 </div>
 
                 <div className="mt-6 text-center text-sm">
-                    <Link href="/login" className="text-gray-500 hover:text-primaryDip transition-colors">
+                    <Link href="/login" className="text-gray-500 hover:text-primary-dip transition-colors">
                         ← ব্যবহারকারী লগইন-এ ফিরে যান
                     </Link>
                 </div>

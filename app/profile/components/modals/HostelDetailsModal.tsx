@@ -1,13 +1,15 @@
 import React from 'react';
+import NextImage from 'next/image';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { Hostel, Booking } from '@/lib/types';
 
 interface HostelDetailsModalProps {
     isOpen: boolean;
     onClose: () => void;
-    hostel: any;
-    booking: any;
+    hostel: Hostel | null;
+    booking: Booking | null;
 }
 
 export function HostelDetailsModal({ isOpen, onClose, hostel, booking }: HostelDetailsModalProps) {
@@ -17,10 +19,10 @@ export function HostelDetailsModal({ isOpen, onClose, hostel, booking }: HostelD
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
             <Card className="w-full max-w-2xl p-0 rounded-4xl shadow-3xl animate-in zoom-in-95 duration-300 overflow-hidden border-none text-left">
                 <div className="relative h-56">
-                    <img src={hostel.image} alt={hostel.name} className="w-full h-full object-cover" />
+                    <NextImage src={hostel.image} alt={hostel.name} fill className="object-cover" />
                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent flex items-end p-8">
                         <div>
-                            <Badge className="bg-blue-500 text-white border-none mb-2 px-3 py-1 font-black text-[10px] uppercase tracking-widest">বর্তমানে বরাদ্দকৃত</Badge>
+                            <Badge className="bg-primary text-white border-none mb-2 px-3 py-1 font-black text-[10px] uppercase tracking-widest">বর্তমানে বরাদ্দকৃত</Badge>
                             <h3 className="text-3xl font-black text-white tracking-tight">{hostel.name}</h3>
                         </div>
                     </div>
@@ -30,11 +32,11 @@ export function HostelDetailsModal({ isOpen, onClose, hostel, booking }: HostelD
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-100">
                         <div>
                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">রুম নম্বর</p>
-                            <p className="text-2xl font-black text-primaryDip">রুম {booking.roomId}</p>
+                            <p className="text-2xl font-black text-primary-dip">রুম {booking.roomId}</p>
                         </div>
                         <div>
                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">বেড নম্বর</p>
-                            <p className="text-2xl font-black text-primaryDipTo">বেড {booking.bedId}</p>
+                            <p className="text-2xl font-black text-primary-dipto">বেড {booking.bedId}</p>
                         </div>
                         <div>
                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">ভাড়ার পরিমাণ</p>
@@ -51,7 +53,7 @@ export function HostelDetailsModal({ isOpen, onClose, hostel, booking }: HostelD
                     <div className="space-y-6">
                         <div>
                             <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                                <span className="h-2 w-2 rounded-full bg-blue-500"></span>
+                                <span className="h-2 w-2 rounded-full bg-primary"></span>
                                 সুযোগ-সুবিধা
                             </h4>
                             <div className="flex flex-wrap gap-2">
@@ -69,7 +71,9 @@ export function HostelDetailsModal({ isOpen, onClose, hostel, booking }: HostelD
                                 </h4>
                                 <div className="grid grid-cols-3 gap-2">
                                     {hostel.gallery.slice(0, 3).map((imgUrl: string, i: number) => (
-                                        <img key={i} src={imgUrl} className="h-20 w-full object-cover rounded-xl border border-gray-100 shadow-xs" alt={`gallery-${i}`} />
+                                        <div key={i} className="relative h-20 w-full overflow-hidden rounded-xl border border-gray-100 shadow-xs">
+                                            <NextImage src={imgUrl} alt={`gallery-${i}`} fill className="object-cover" />
+                                        </div>
                                     ))}
                                 </div>
                             </div>
@@ -77,7 +81,7 @@ export function HostelDetailsModal({ isOpen, onClose, hostel, booking }: HostelD
 
                         <div>
                             <h4 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-                                <span className="h-2 w-2 rounded-full bg-indigo-500"></span>
+                                <span className="h-2 w-2 rounded-full bg-primary"></span>
                                 যোগাযোগ ও ঠিকানা
                             </h4>
                             <div className="bg-gray-50/50 p-4 rounded-2xl border border-gray-100">

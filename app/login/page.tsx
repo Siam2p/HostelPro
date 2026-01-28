@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Card } from '@/components/ui/Card';
 import { LoginForm } from '@/components/auth/LoginForm';
 import { ClientRouterButton } from '@/components/ui/ClientRouterButton';
+import NextImage from 'next/image';
 
 export const metadata: Metadata = {
     title: 'লগইন | হোস্টেলপ্রো',
@@ -13,8 +14,16 @@ export default function UserLoginPage() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-3 lg:px-8">
             <Card className="max-w-md w-full space-y-8 p-10 bg-white shadow-xl rounded-2xl">
-                <div className="text-center">
-                    <h1 className="mt-6 text-3xl font-extrabold text-gray-900">
+                <div className="text-center flex flex-col items-center">
+                    <div className="relative h-16 w-16 mb-4">
+                        <NextImage
+                            src="/brand/logo.png"
+                            alt="HostelPro Logo"
+                            fill
+                            className="object-contain"
+                        />
+                    </div>
+                    <h1 className="text-3xl font-extrabold text-gray-900">
                         লগইন
                     </h1>
                     <p className="mt-2 text-sm text-gray-600">

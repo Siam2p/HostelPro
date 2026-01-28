@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import NextImage from 'next/image';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -37,7 +38,7 @@ export default function HostelsSection() {
                             placeholder="হোস্টেল বা এলাকা খুঁজুন..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full md:w-80 h-12 pl-12 pr-6 rounded-2xl bg-white border border-slate-200 focus:border-primaryLight outline-none transition-all font-medium text-sm"
+                            className="w-full md:w-80 h-12 pl-12 pr-6 rounded-2xl bg-white border border-slate-200 focus:border-primary-light outline-none transition-all font-medium text-sm"
                         />
                         <span className="absolute left-4 top-1/2 -translate-y-1/2">🔍</span>
                     </div>
@@ -61,7 +62,7 @@ export default function HostelsSection() {
                 {filteredHostels.map(hostel => (
                     <Card key={hostel.id} className="p-0 border-none shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 rounded-[2.5rem] bg-white overflow-hidden flex flex-col">
                         <div className="relative h-48 group">
-                            <img src={hostel.image} alt={hostel.name} className="w-full h-full object-cover" />
+                            <NextImage src={hostel.image} alt={hostel.name} fill className="object-cover" />
                             <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <div className="absolute top-4 right-4">
                                 <Badge variant={
@@ -88,7 +89,7 @@ export default function HostelsSection() {
                                 </div>
                                 <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">রেটিং</p>
-                                    <p className="text-sm font-black text-primaryDip">⭐ {hostel.rating}</p>
+                                    <p className="text-sm font-black text-primary-dip">⭐ {hostel.rating}</p>
                                 </div>
                             </div>
 
@@ -121,7 +122,7 @@ export default function HostelsSection() {
                                 {hostel.status === 'inactive' && (
                                     <Button
                                         onClick={() => handleStatusUpdate(hostel, 'active')}
-                                        className="grow py-3 rounded-2xl bg-primaryDip hover:bg-blue-700 text-white text-xs font-black uppercase tracking-widest"
+                                        className="grow py-3 rounded-2xl bg-primary-dip hover:bg-primary-hover text-white text-xs font-black uppercase tracking-widest"
                                     >
                                         সক্রিয় করুন
                                     </Button>

@@ -32,14 +32,14 @@ export default function PersonalInfo({
         <Card className="p-6 md:p-8 rounded-3xl shadow-sm border-gray-100">
             <div className="flex justify-between items-center mb-8">
                 <h2 className="text-xl font-bold flex items-center gap-2">
-                    <span className="w-1.5 h-6 bg-primaryDip rounded-full"></span>
+                    <span className="w-1.5 h-6 bg-primary-dip rounded-full"></span>
                     ব্যক্তিগত তথ্য
                 </h2>
                 {!isEditing && (
                     <Button
                         variant="ghost"
                         onClick={onChangePasswordClick}
-                        className="text-primaryDip hover:text-blue-700 hover:bg-blue-50 gap-2 font-bold py-1 px-3 text-sm h-auto"
+                        className="text-primary-dip hover:text-primary-hover hover:bg-bg-subtle gap-2 font-bold py-1 px-3 text-sm h-auto"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -109,7 +109,7 @@ export default function PersonalInfo({
                     <div className="md:col-span-2">
                         <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4">সংক্ষিপ্ত জীবনী (Bio)</label>
                         <div className="relative group/bio">
-                            <div className="absolute -inset-1 bg-linear-to-r from-blue-500/10 to-indigo-500/10 rounded-3xl blur opacity-0 group-hover/bio:opacity-100 transition duration-500"></div>
+                            <div className="absolute -inset-1 bg-linear-to-r from-emerald-500/10 to-emerald-700/10 rounded-3xl blur opacity-0 group-hover/bio:opacity-100 transition duration-500"></div>
                             <p className="relative text-gray-700 leading-relaxed italic bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
                                 {currentUser.bio || "নিজেকে অন্যের কাছে পরিচিত করতে কিছু লিখুন!"}
                             </p>

@@ -40,13 +40,13 @@ export const ManagerLoginForm: React.FC = () => {
                     placeholder="পাসওয়ার্ড"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    iconColor="text-blue-400"
+                    iconColor="text-primary-light"
                 />
             </div>
 
             <div className="flex justify-end">
                 <div className="text-sm text-right">
-                    <Link href="/manager/forgot-password" title="পাসওয়ার্ড ভুলে গেছেন" className="font-medium text-primaryDip hover:text-primaryLight transition-colors">
+                    <Link href="/manager/forgot-password" title="পাসওয়ার্ড ভুলে গেছেন" className="font-medium text-primary-dip hover:text-primary-light transition-colors">
                         পাসওয়ার্ড ভুলে গেছেন?
                     </Link>
                 </div>
@@ -56,7 +56,7 @@ export const ManagerLoginForm: React.FC = () => {
                 <Button
                     type="submit"
                     fullWidth
-                    className="bg-primaryDip hover:bg-blue-700 text-white shadow-lg transition-all active:scale-[0.98] py-3 font-medium rounded-lg"
+                    className="bg-primary-dip hover:bg-primary-hover text-white shadow-lg transition-all active:scale-[0.98] py-3 font-medium rounded-lg"
                 >
                     ড্যাশবোর্ডে প্রবেশ করুন
                 </Button>

@@ -36,7 +36,7 @@ export function PaymentHistoryModal({ isOpen, onClose, paymentHistory }: Payment
                 <div className="p-8 bg-gray-50/50 max-h-[75vh] overflow-y-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {paymentHistory.map((item, idx) => (
-                            <div key={idx} className="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md hover:border-blue-100 transition-all duration-300">
+                            <div key={idx} className="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md hover:border-emerald-100 transition-all duration-300">
                                 <div className="flex items-center gap-4">
                                     <div className="h-10 w-10 rounded-2xl bg-gray-50 flex items-center justify-center font-black text-gray-400 text-xs">
                                         {idx + 1}
@@ -65,7 +65,7 @@ export function PaymentHistoryModal({ isOpen, onClose, paymentHistory }: Payment
                 <div className="p-8 bg-white border-t border-gray-100 flex justify-end">
                     <Button
                         onClick={onClose}
-                        className="px-12 rounded-2xl h-14 font-black shadow-xl shadow-blue-200 bg-linear-to-r from-primaryDip to-primaryDipTo hover:scale-105 active:scale-95 transition-all uppercase tracking-widest text-xs"
+                        className="px-12 rounded-2xl h-14 font-black shadow-emerald bg-linear-to-r from-primary-dip to-primary-dipto hover:scale-105 active:scale-95 transition-all uppercase tracking-widest text-xs"
                     >
                         বন্ধ করুন
                     </Button>

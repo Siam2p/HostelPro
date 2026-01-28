@@ -52,6 +52,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: '/brand/logo.png',
+    apple: '/brand/logo.png',
+  },
 };
 
 import { AuthProvider } from "@/context/AuthContext";

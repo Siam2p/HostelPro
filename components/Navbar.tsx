@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import NextImage from 'next/image';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import { Button } from './ui/Button';
@@ -21,8 +22,19 @@ export function Navbar() {
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-border">
             <div className={`${currentUser?.role === 'manager' || currentUser?.role === 'admin' ? 'px-3 lg:px-10' : 'container mx-auto px-3'} py-4 flex items-center justify-between`}>
                 {/* Brand */}
-                <Link href={currentUser?.role === 'manager' ? '/manager' : currentUser?.role === 'admin' ? '/admin' : '/'} className="text-2xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    Hostel<span className="text-primary">Pro</span>
+                <Link href={currentUser?.role === 'manager' ? '/manager' : currentUser?.role === 'admin' ? '/admin' : '/'} className="flex items-center gap-3 hover:opacity-90 transition-opacity group">
+                    <div className="relative h-8 w-8 md:h-10 md:w-10">
+                        <NextImage
+                            src="/brand/logo.png"
+                            alt="HostelPro Logo"
+                            fill
+                            className="object-contain"
+                            priority
+                        />
+                    </div>
+                    <span className="text-xl md:text-2xl font-black text-primary-dip tracking-tight">
+                        Hostel<span className="text-primary">Pro</span>
+                    </span>
                 </Link>
 
                 {/* Desktop Links */}
@@ -107,12 +119,12 @@ export function Navbar() {
 
                                 {currentUser.role === 'manager' && !pathname.startsWith('/manager') && (
                                     <Link href="/manager">
-                                        <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-primaryDip to-primaryDipTo shadow-md shadow-blue-100 h-auto">ড্যাশবোর্ড</Button>
+                                        <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-primary-dip to-primary-dipto shadow-md shadow-emerald h-auto">ড্যাশবোর্ড</Button>
                                     </Link>
                                 )}
                                 {currentUser.role === 'admin' && !pathname.startsWith('/admin') && (
                                     <Link href="/admin">
-                                        <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-primaryDip to-primaryDipTo shadow-md shadow-blue-100 h-auto">অ্যাডমিন</Button>
+                                        <Button className="py-2.5 px-6 text-xs font-black uppercase tracking-widest rounded-full bg-linear-to-r from-primary-dip to-primary-dipto shadow-md shadow-emerald h-auto">অ্যাডমিন</Button>
                                     </Link>
                                 )}
                             </div>

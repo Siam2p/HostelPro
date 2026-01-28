@@ -20,7 +20,7 @@ export default function Sidebar({ activeView, setActiveView }: SidebarProps) {
     return (
         <aside className="hidden lg:flex flex-col w-72 bg-slate-950 text-slate-300 min-h-screen p-6 pt-10 gap-2 sticky top-[73px] h-[calc(100vh-73px)] overflow-y-auto">
             <div className="mb-10 px-2 pt-2">
-                <h1 className="text-2xl font-black text-primaryLight tracking-tight">
+                <h1 className="text-2xl font-black text-primary-light tracking-tight">
                     Admin
                 </h1>
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mt-2">
@@ -34,7 +34,7 @@ export default function Sidebar({ activeView, setActiveView }: SidebarProps) {
                         key={item.id}
                         onClick={() => setActiveView(item.id)}
                         className={`group flex items-center gap-3.5 px-5 py-4 rounded-2xl font-bold transition-all duration-300 text-sm ${activeView === item.id
-                            ? 'bg-primaryDip text-white shadow-lg shadow-primaryLight/20'
+                            ? 'bg-primary-dip text-white shadow-lg shadow-primary-light/20'
                             : 'hover:bg-slate-900 border border-transparent hover:border-slate-800'
                             }`}
                     >

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import NextImage from 'next/image';
 import dynamic from 'next/dynamic';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
@@ -249,7 +250,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">হোস্টেলের নাম</label>
                             <input
-                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primaryLight outline-none transition-all"
+                                className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-light outline-none transition-all"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="e.g. রূপসী বাংলা ছাত্রাবাস"
@@ -356,7 +357,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                     type="button"
                                     onClick={() => execCommand('bold')}
                                     onMouseDown={(e) => e.preventDefault()}
-                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.bold ? 'bg-blue-100 text-primaryDip' : 'text-gray-600'}`}
+                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.bold ? 'bg-bg-highlight text-primary-dip' : 'text-gray-600'}`}
                                     title="Bold (Ctrl+B)"
                                 >
                                     <span className="font-bold">B</span>
@@ -366,7 +367,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                     type="button"
                                     onClick={() => execCommand('italic')}
                                     onMouseDown={(e) => e.preventDefault()}
-                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.italic ? 'bg-blue-100 text-primaryDip' : 'text-gray-600'}`}
+                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.italic ? 'bg-bg-highlight text-primary-dip' : 'text-gray-600'}`}
                                     title="Italic (Ctrl+I)"
                                 >
                                     <span className="italic">I</span>
@@ -376,7 +377,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                     type="button"
                                     onClick={() => execCommand('underline')}
                                     onMouseDown={(e) => e.preventDefault()}
-                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.underline ? 'bg-blue-100 text-primaryDip' : 'text-gray-600'}`}
+                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.underline ? 'bg-bg-highlight text-primary-dip' : 'text-gray-600'}`}
                                     title="Underline (Ctrl+U)"
                                 >
                                     <span className="underline">U</span>
@@ -389,7 +390,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                     type="button"
                                     onClick={() => execCommand('insertUnorderedList')}
                                     onMouseDown={(e) => e.preventDefault()}
-                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.insertUnorderedList ? 'bg-blue-100 text-primaryDip' : 'text-gray-600'}`}
+                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.insertUnorderedList ? 'bg-bg-highlight text-primary-dip' : 'text-gray-600'}`}
                                     title="Bullet List"
                                 >
                                     • List
@@ -399,7 +400,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                     type="button"
                                     onClick={() => execCommand('insertOrderedList')}
                                     onMouseDown={(e) => e.preventDefault()}
-                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.insertOrderedList ? 'bg-blue-100 text-primaryDip' : 'text-gray-600'}`}
+                                    className={`p-2 rounded-lg hover:bg-gray-200 transition-colors ${activeFormats.insertOrderedList ? 'bg-bg-highlight text-primary-dip' : 'text-gray-600'}`}
                                     title="Numbered List"
                                 >
                                     1. List
@@ -482,8 +483,8 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                         }
                                     }}
                                     className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border ${features.includes(suggestion)
-                                        ? 'bg-primaryDip text-white border-primaryDip'
-                                        : 'bg-white text-gray-600 border-gray-200 hover:border-blue-400 hover:text-primaryDip shadow-sm'
+                                        ? 'bg-primary-dip text-white border-primary-dip'
+                                        : 'bg-white text-gray-600 border-gray-200 hover:border-primary-extralight hover:text-primary-dip shadow-sm'
                                         }`}
                                 >
                                     + {suggestion}
@@ -533,7 +534,7 @@ export default function AddHostelModal({ isOpen, onClose, editHostelId }: AddHos
                                         {src.includes('video') || src.endsWith('.mp4') ? (
                                             <video src={src} className="w-full h-full object-cover" />
                                         ) : (
-                                            <img src={src} alt={`Preview ${idx}`} className="w-full h-full object-cover" />
+                                            <NextImage src={src} alt={`Preview ${idx}`} width={200} height={200} className="w-full h-full object-cover" />
                                         )}
                                         <button
                                             type="button"

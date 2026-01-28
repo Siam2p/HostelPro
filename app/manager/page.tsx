@@ -98,14 +98,14 @@ function ManagerDashboardContent() {
             <div className="lg:hidden w-full fixed bottom-0 left-0 bg-white border-t border-gray-200 z-50 px-3 py-3 flex justify-between items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
                 <button
                     onClick={() => setActiveView('overview')}
-                    className={`flex flex-col items-center gap-1 ${activeView === 'overview' ? 'text-primaryDip' : 'text-gray-400'}`}
+                    className={`flex flex-col items-center gap-1 ${activeView === 'overview' ? 'text-primary-dip' : 'text-gray-400'}`}
                 >
                     <span className="text-xl">📊</span>
                     <span className="text-[10px] font-medium">Overview</span>
                 </button>
                 <button
                     onClick={() => setActiveView('hostels')}
-                    className={`flex flex-col items-center gap-1 ${activeView === 'hostels' ? 'text-primaryDip' : 'text-gray-400'}`}
+                    className={`flex flex-col items-center gap-1 ${activeView === 'hostels' ? 'text-primary-dip' : 'text-gray-400'}`}
                 >
                     <span className="text-xl">🏨</span>
                     <span className="text-[10px] font-medium">Hostels</span>
@@ -113,14 +113,14 @@ function ManagerDashboardContent() {
                 <div className="relative -top-6">
                     <button
                         onClick={handleCreateHostel}
-                        className="h-14 w-14 bg-primaryDip rounded-full text-white shadow-lg shadow-blue-300 flex items-center justify-center text-2xl hover:bg-blue-700 transition-colors"
+                        className="h-14 w-14 bg-primary-dip rounded-full text-white shadow-lg shadow-emerald flex items-center justify-center text-2xl hover:bg-primary-hover transition-colors"
                     >
                         +
                     </button>
                 </div>
                 <button
                     onClick={() => setActiveView('bookings')}
-                    className={`flex flex-col items-center gap-1 relative ${activeView === 'bookings' ? 'text-primaryDip' : 'text-gray-400'}`}
+                    className={`flex flex-col items-center gap-1 relative ${activeView === 'bookings' ? 'text-primary-dip' : 'text-gray-400'}`}
                 >
                     <span className="text-xl">📝</span>
                     <span className="text-[10px] font-medium">Bookings</span>
@@ -132,14 +132,14 @@ function ManagerDashboardContent() {
                 </button>
                 <button
                     onClick={() => setActiveView('residents')}
-                    className={`flex flex-col items-center gap-1 ${activeView === 'residents' ? 'text-primaryDip' : 'text-gray-400'}`}
+                    className={`flex flex-col items-center gap-1 ${activeView === 'residents' ? 'text-primary-dip' : 'text-gray-400'}`}
                 >
                     <span className="text-xl">👥</span>
                     <span className="text-[10px] font-medium">Residents</span>
                 </button>
                 <button
                     onClick={() => setActiveView('profile')}
-                    className={`flex flex-col items-center gap-1 ${activeView === 'profile' ? 'text-primaryDip' : 'text-gray-400'}`}
+                    className={`flex flex-col items-center gap-1 ${activeView === 'profile' ? 'text-primary-dip' : 'text-gray-400'}`}
                 >
                     <span className="text-xl">👤</span>
                     <span className="text-[10px] font-medium">Profile</span>

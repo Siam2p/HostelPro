@@ -66,7 +66,7 @@ export default function BookingsSection() {
                                         {booking.applicationDetails && (
                                             <button
                                                 onClick={() => handleViewApplication(booking)}
-                                                className="mt-2 text-[10px] font-bold text-primaryDip bg-blue-50 px-2 py-1 rounded hover:bg-blue-100 transition-colors"
+                                                className="mt-2 text-[10px] font-bold text-primary-dip bg-bg-highlight px-2 py-1 rounded hover:bg-border-subtle transition-colors"
                                             >
                                                 আবেদন দেখুন
                                             </button>
@@ -74,7 +74,7 @@ export default function BookingsSection() {
                                     </td>
                                     <td className="p-6">
                                         <p className="text-sm font-bold text-slate-700">{booking.hostelName}</p>
-                                        <p className="text-xs text-primaryLight font-black">রুম: {booking.roomId} | বেড: {booking.bedId}</p>
+                                        <p className="text-xs text-primary-light font-black">রুম: {booking.roomId} | বেড: {booking.bedId}</p>
                                     </td>
                                     <td className="p-6">
                                         <div className="flex flex-col gap-2">

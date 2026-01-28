@@ -96,7 +96,7 @@ export default function HostelListClient() {
           <div className="max-w-4xl mx-auto text-center mb-12">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-3 tracking-tight leading-tight text-slate-900">
               খুঁজে নিন আপনার <br />
-              <span className="bg-linear-to-r from-primary via-primaryDip to-secondary bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-primary via-primary-dip to-secondary bg-clip-text text-transparent">
                 সেরা হোস্টেলটি
               </span>
             </h1>
@@ -121,7 +121,7 @@ export default function HostelListClient() {
                 </div>
                 <Button
                   onClick={handleSearch}
-                  className="shrink-0 rounded-xl md:rounded-full px-5 md:px-10 py-3 md:py-4 text-sm md:text-lg group bg-linear-to-r from-primary to-primaryDip hover:shadow-glow transition-all active:scale-95 text-white"
+                  className="shrink-0 rounded-xl md:rounded-full px-5 md:px-10 py-3 md:py-4 text-sm md:text-lg group bg-linear-to-r from-primary to-primary-dip hover:shadow-glow transition-all active:scale-95 text-white"
                 >
                   <span className="hidden sm:inline">খুঁজুন</span>
                   <Search size={20} className="sm:hidden" />
@@ -137,18 +137,16 @@ export default function HostelListClient() {
                 <Button
                   variant="outline"
                   onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
-                  className={`grow flex items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition-all ${
-                    isMobileFilterOpen
+                  className={`grow flex items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition-all ${isMobileFilterOpen
                       ? "bg-primary/5 border-primary text-primary"
                       : "bg-gray-50/50"
-                  }`}
+                    }`}
                 >
                   <Filter size={14} />
                   ফিল্টার
                   <span
-                    className={`ml-auto transition-transform duration-300 ${
-                      isMobileFilterOpen ? "rotate-180" : ""
-                    }`}
+                    className={`ml-auto transition-transform duration-300 ${isMobileFilterOpen ? "rotate-180" : ""
+                      }`}
                   >
                     <ArrowRight size={12} className="rotate-90" />
                   </span>
@@ -172,11 +170,10 @@ export default function HostelListClient() {
 
               {/* Row 2: Secondary Filters - Desktop Grid / Mobile Stack */}
               <div
-                className={`${
-                  isMobileFilterOpen
+                className={`${isMobileFilterOpen
                     ? "flex flex-col animate-fade-in"
                     : "hidden"
-                } md:grid md:grid-cols-4 gap-3 md:gap-4`}
+                  } md:grid md:grid-cols-4 gap-3 md:gap-4`}
               >
                 {/* Category Picker */}
                 <div className="space-y-1.5 md:space-y-0">
@@ -188,7 +185,7 @@ export default function HostelListClient() {
                       <Users size={18} />
                     </div>
                     <select
-                        title="category"
+                      title="category"
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-gray-50/50 md:bg-gray-50/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer text-slate-700"
                       value={draftCategory}
                       onChange={(e) => setDraftCategory(e.target.value as 'all' | 'Male' | 'Female')}
@@ -210,7 +207,7 @@ export default function HostelListClient() {
                       <MapPin size={18} />
                     </div>
                     <select
-                    title="division"
+                      title="division"
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-gray-50/50 md:bg-gray-50/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer text-slate-700"
                       value={draftDivision}
                       onChange={handleDivisionChange}
@@ -235,7 +232,7 @@ export default function HostelListClient() {
                       <MapPin size={18} />
                     </div>
                     <select
-                    title="district"
+                      title="district"
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-gray-50/50 md:bg-gray-50/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer disabled:opacity-50 text-slate-700"
                       value={draftDistrict}
                       onChange={handleDistrictChange}
@@ -261,7 +258,7 @@ export default function HostelListClient() {
                       <MapPin size={18} />
                     </div>
                     <select
-                    title="upazila"
+                      title="upazila"
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-100 bg-gray-50/50 md:bg-gray-50/50 text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all appearance-none cursor-pointer disabled:opacity-50 text-slate-700"
                       value={draftUpazila}
                       onChange={(e) => setDraftUpazila(e.target.value)}

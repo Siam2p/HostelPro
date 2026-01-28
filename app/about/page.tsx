@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Target, Heart, ShieldCheck, Award, Users, CheckCircle2, ArrowRight } from 'lucide-react';
+import NextImage from 'next/image';
 
 export const metadata: Metadata = {
     title: 'আমাদের সম্পর্কে | HostelPro',
@@ -21,7 +22,7 @@ export default function AboutPage() {
                     <div className="max-w-4xl mx-auto">
                         <h1 className="text-4xl md:text-7xl font-black mb-8 tracking-tight leading-tight">
                             আমাদের সম্পর্কে <br />
-                            <span className="bg-linear-to-r from-primary via-primaryDip to-secondary bg-clip-text text-transparent">
+                            <span className="text-primary">
                                 কিছু কথা
                             </span>
                         </h1>
@@ -82,8 +83,13 @@ export default function AboutPage() {
                                     {/* Glass Overlay Card */}
                                     <div className="absolute bottom-8 left-8 right-8 bg-white/80 backdrop-blur-xl p-6 rounded-3xl border border-white/50 shadow-xl">
                                         <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">
-                                                H
+                                            <div className="relative w-12 h-12">
+                                                <NextImage
+                                                    src="/brand/logo.png"
+                                                    alt="HostelPro Team"
+                                                    fill
+                                                    className="object-contain"
+                                                />
                                             </div>
                                             <div>
                                                 <div className="font-bold text-text-main">HostelPro Team</div>
@@ -126,11 +132,11 @@ export default function AboutPage() {
 
             {/* CTA Section */}
             <section className="pt-6 container mx-auto px-3">
-                <div className="relative rounded-[3rem] overflow-hidden bg-linear-to-r from-primary via-primaryDip to-secondary p-12 md:p-24 text-center text-white">
+                <div className="relative rounded-[3rem] overflow-hidden bg-linear-to-br from-primary-dip via-primary to-primary p-12 md:p-24 text-center text-white shadow-2xl">
                     {/* Background decorations */}
-                    <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                        <div className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] bg-white opacity-5 rounded-full blur-[100px]" />
-                        <div className="absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px] bg-black opacity-5 rounded-full blur-[80px]" />
+                    <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+                        <div className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] bg-primary-dipto rounded-full blur-[120px]" />
+                        <div className="absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px] bg-primary-dip rounded-full blur-[100px]" />
                     </div>
 
                     <div className="relative z-10 max-w-3xl mx-auto space-y-10">

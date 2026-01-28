@@ -111,7 +111,7 @@ export default function HomeClient() {
                     <div className="max-w-4xl mx-auto text-center mb-12">
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tight leading-tight">
                             আপনার পছন্দের <br />
-                            <span className="bg-linear-to-r from-primary via-primaryDip to-secondary bg-clip-text text-transparent">
+                            <span className="bg-linear-to-r from-primary via-primary-dip to-secondary bg-clip-text text-transparent">
                                 সেরা হোস্টেলটি
                             </span> খুঁজে নিন
                         </h1>
@@ -136,7 +136,7 @@ export default function HomeClient() {
                                 </div>
                                 <Button
                                     onClick={handleSearch}
-                                    className="shrink-0 rounded-xl md:rounded-full px-5 md:px-10 py-3 md:py-4 text-sm md:text-lg group bg-linear-to-r from-primary to-primaryDip hover:shadow-glow transition-all active:scale-95"
+                                    className="shrink-0 rounded-xl md:rounded-full px-5 md:px-10 py-3 md:py-4 text-sm md:text-lg group bg-linear-to-r from-primary to-primary-dip hover:shadow-glow transition-all active:scale-95"
                                 >
                                     <span className="hidden sm:inline">খুঁজুন</span>
                                     <Search size={20} className="sm:hidden" />

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NextImage from 'next/image';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
 import { Button } from '@/components/ui/Button';
@@ -125,7 +126,7 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                 <>
                     <div className="flex justify-between items-center">
                         <h2 className="text-2xl font-bold text-gray-800">আমার হোস্টেলসমূহ</h2>
-                        <Button onClick={() => setShowAddModal(true)} className="gap-2 shadow-lg shadow-blue-200">
+                        <Button onClick={() => setShowAddModal(true)} className="gap-2 shadow-emerald">
                             + নতুন হোস্টেল
                         </Button>
                     </div>
@@ -133,7 +134,7 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                         {myHostels.map(hostel => (
                             <div key={hostel.id} className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => setSelectedHostelId(hostel.id)}>
                                 <div className="h-48 overflow-hidden relative">
-                                    <img src={hostel.image} alt={hostel.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <NextImage src={hostel.image} alt={hostel.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                                     <div className="absolute top-4 right-4 flex flex-col gap-2 items-end">
                                         <div className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-800 shadow-sm">
                                             {hostel.totalRooms} রুম
@@ -149,7 +150,7 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                                     <p className="text-sm text-gray-500 mb-4 flex items-center gap-1">📍 {hostel.location}</p>
                                     <div className="flex items-center justify-between pt-4 border-t border-gray-50">
                                         <span className="font-bold text-primary">৳{hostel.price}/মাস</span>
-                                        <span className="text-xs text-primaryDip font-medium group-hover:underline">ম্যানেজ করুন →</span>
+                                        <span className="text-xs text-primary-dip font-medium group-hover:underline">ম্যানেজ করুন →</span>
                                     </div>
                                 </div>
                             </div>
@@ -273,7 +274,7 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                                                                 Save
                                                             </button>
                                                         ) : (
-                                                            <button onClick={() => setEditingRoomId(room.id)} className="text-primaryDip hover:text-blue-900 mr-4">এডিট</button>
+                                                            <button onClick={() => setEditingRoomId(room.id)} className="text-primary-dip hover:text-primary-dipto mr-4">এডিট</button>
                                                         )}
                                                         <button onClick={() => handleDeleteRoom(room.id)} className="text-red-600 hover:text-red-900">ডিলিট</button>
                                                     </td>

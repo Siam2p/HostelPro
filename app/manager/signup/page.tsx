@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 
 export default function ManagerSignupPage() {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-blue-50 py-12 px-4 sm:px-3 lg:px-8">
-            <Card className="max-w-md w-full space-y-8 p-10 bg-white shadow-xl rounded-2xl border-t-4 border-blue-600">
+        <div className="min-h-screen flex items-center justify-center bg-bg-subtle py-12 px-4 sm:px-3 lg:px-8">
+            <Card className="max-w-md w-full space-y-8 p-10 bg-white shadow-xl rounded-2xl border-t-4 border-primary">
                 <div className="text-center">
                     <h1 className="mt-6 text-3xl font-extrabold text-gray-900">
                         ম্যানেজার রেজিস্ট্রেশন
@@ -27,7 +27,7 @@ export default function ManagerSignupPage() {
                 <div className="mt-6 text-center">
                     <p className="text-sm text-gray-600">
                         ইতিমধ্যে অ্যাকাউন্ট আছে?{' '}
-                        <Link href="/manager/login" className="font-medium text-blue-600 hover:text-blue-500 transition-colors">
+                        <Link href="/manager/login" className="font-medium text-primary hover:text-primary-hover transition-colors">
                             লগইন করুন
                         </Link>
                     </p>

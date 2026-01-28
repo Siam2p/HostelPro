@@ -119,7 +119,7 @@ export const ManagerSignupForm: React.FC = () => {
                         if (errors.password) setErrors({ ...errors, password: '' });
                     }}
                     error={errors.password}
-                    iconColor="text-blue-400"
+                    iconColor="text-primary-light"
                 />
             </div>
 
@@ -128,7 +128,7 @@ export const ManagerSignupForm: React.FC = () => {
                     type="submit"
                     fullWidth
                     disabled={isLoading}
-                    className="bg-primaryDip hover:bg-blue-700 text-white shadow-lg transition-all active:scale-[0.98] py-3 font-medium rounded-lg"
+                    className="bg-primary-dip hover:bg-primary-hover text-white shadow-lg transition-all active:scale-[0.98] py-3 font-medium rounded-lg"
                 >
                     {isLoading ? 'প্রসেস করা হচ্ছে...' : 'রেজিস্ট্রেশন করুন'}
                 </Button>

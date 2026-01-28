@@ -42,7 +42,7 @@ export default function ResidentsSection() {
         }
     };
 
-    const handleStatusUpdate = (resident: any, status: boolean) => {
+    const handleStatusUpdate = (resident: Booking, status: boolean) => {
         updateBooking({
             ...resident,
             isActive: status
@@ -59,7 +59,7 @@ export default function ResidentsSection() {
                         <input
                             type="text"
                             placeholder="শিক্ষার্থী খুঁজুন..."
-                            className="w-full pr-10 pl-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primaryLight"
+                            className="w-full pr-10 pl-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-light"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -82,11 +82,11 @@ export default function ResidentsSection() {
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                            {residents.map((resident, idx) => (
+                            {residents.map((resident) => (
                                 <tr key={resident.id} className="hover:bg-gray-50">
                                     <td className="px-3 py-4 whitespace-nowrap cursor-pointer" onClick={() => router.push(`/manager/residents/${resident.id}`)}>
                                         <div className="flex items-center">
-                                            <div className="h-8 w-8 rounded-full bg-blue-100 text-primaryDip flex items-center justify-center font-bold mr-3">
+                                            <div className="h-8 w-8 rounded-full bg-bg-highlight text-primary-dip flex items-center justify-center font-bold mr-3">
                                                 {resident.userName.charAt(0)}
                                             </div>
                                             <div>
@@ -123,7 +123,7 @@ export default function ResidentsSection() {
                                     <td className="px-3 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div className="flex justify-end gap-2">
                                             <button
-                                                className="text-primaryDip hover:text-blue-900 px-2 py-1 hover:bg-blue-50 rounded"
+                                                className="text-primary-dip hover:text-primary-dipto px-2 py-1 hover:bg-bg-subtle rounded"
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     router.push(`/manager/residents/${resident.id}`);

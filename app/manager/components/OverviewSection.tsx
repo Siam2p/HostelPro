@@ -57,7 +57,7 @@ export default function OverviewSection({ setActiveView, setShowAddModal, setSho
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                <div className="bg-linear-to-br from-primaryDip to-indigo-700 rounded-2xl p-4 sm:p-6 text-white shadow-xl shadow-blue-200 relative overflow-hidden transform transition hover:scale-105">
+                <div className="bg-linear-to-br from-primary-dip to-primary-dipto rounded-2xl p-4 sm:p-6 text-white shadow-emerald relative overflow-hidden transform transition hover:scale-105">
                     <div className="text-blue-100 text-sm font-medium mb-1">মোট আয় (এই মাস)</div>
                     <div className="text-3xl font-bold">৳{totalRevenue.toLocaleString()}</div>
                     <div className="mt-4 text-xs bg-white/20 inline-block px-2 py-1 rounded-lg">Last 30 days</div>
@@ -67,7 +67,7 @@ export default function OverviewSection({ setActiveView, setShowAddModal, setSho
                     <div className="text-3xl font-bold text-gray-800">{myHostels.length}</div>
                     <div className="mt-4 text-xs text-green-600 bg-green-50 inline-block px-2 py-1 rounded-lg">All Active</div>
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary/20 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
                 </div>
                 <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 transform transition hover:scale-105">
                     <div className="text-gray-500 text-sm font-medium mb-1">বর্তমান বাসিন্দা</div>
@@ -100,7 +100,7 @@ export default function OverviewSection({ setActiveView, setShowAddModal, setSho
                                 />
                                 {/* Paid Segment (Green) */}
                                 <path
-                                    className="text-emerald-500 drop-shadow-md"
+                                    className="text-primary drop-shadow-md"
                                     strokeDasharray={`${(totalOccupants > 0 ? ((totalOccupants - (myBookings.filter(b => b.monthlyFeeStatus === 'unpaid').length)) / totalOccupants) * 100 : 0)}, 100`}
                                     d="M18 2.0845
                                         a 15.9155 15.9155 0 0 1 0 31.831
@@ -134,13 +134,13 @@ export default function OverviewSection({ setActiveView, setShowAddModal, setSho
                                 return (
                                     <>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-100">
+                                            <div className="p-4 rounded-2xl bg-bg-subtle border border-border-subtle">
                                                 <div className="flex items-center gap-2 mb-1">
-                                                    <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
-                                                    <span className="text-xs font-bold text-emerald-800 uppercase">পরিশোধিত (Paid)</span>
+                                                    <div className="h-2 w-2 rounded-full bg-primary"></div>
+                                                    <span className="text-xs font-bold text-text-subtle uppercase">পরিশোধিত (Paid)</span>
                                                 </div>
-                                                <div className="text-2xl font-bold text-emerald-700">{paidCount} জন</div>
-                                                <div className="text-xs text-emerald-600 mt-1">
+                                                <div className="text-2xl font-bold text-primary-hover">{paidCount} জন</div>
+                                                <div className="text-xs text-primary-hover mt-1">
                                                     {totalOccupants > 0 ? Math.round((paidCount / totalOccupants) * 100) : 0}% Complete
                                                 </div>
                                             </div>

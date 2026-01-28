@@ -2,10 +2,11 @@ import React from 'react';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { Booking, Hostel } from '@/lib/types';
 
 interface FinancialSummaryProps {
-    activeBooking: any;
-    myHostel: any;
+    activeBooking: Booking | null;
+    myHostel: Hostel | null;
     onViewHistory: () => void;
 }
 
@@ -14,7 +15,7 @@ export default function FinancialSummary({ activeBooking, myHostel, onViewHistor
 
     return (
         <Card className="p-8 rounded-3xl shadow-sm border-gray-100 bg-linear-to-br from-white to-gray-50 relative overflow-hidden">
-            <div className="absolute -right-4 -top-4 w-24 h-24 bg-blue-500/5 rounded-full blur-3xl"></div>
+            <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/5 rounded-full blur-3xl"></div>
             <h2 className="text-lg font-bold mb-6 flex items-center gap-3">
                 <div className="p-2 bg-green-100 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,7 +44,7 @@ export default function FinancialSummary({ activeBooking, myHostel, onViewHistor
                 <div className="flex justify-between items-center group">
                     <span className="text-sm font-bold text-gray-500 group-hover:text-gray-700 transition-colors">মাসিক ভাড়া</span>
                     <div className="text-right">
-                        <span className="text-lg font-black text-primaryDip">৳{myHostel?.price || 0}</span>
+                        <span className="text-lg font-black text-primary-dip">৳{myHostel?.price || 0}</span>
                         <p className="text-[10px] font-bold text-gray-400 uppercase">ভ্যাট সহ</p>
                     </div>
                 </div>
