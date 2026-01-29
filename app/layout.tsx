@@ -76,6 +76,30 @@ export default function RootLayout({
         suppressHydrationWarning={true}
         className={`${hindSiliguri.variable} ${outfit.variable} antialiased flex flex-col min-h-screen font-[family-name:var(--font-outfit),var(--font-hind-siliguri),sans-serif]`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Hostel Pro",
+              "url": "https://hostel-pro.vercel.app",
+              "logo": "https://hostel-pro.vercel.app/brand/logo.png",
+              "description": "বাংলাদেশের সেরা ছাত্র হোস্টেল বুকিং প্ল্যাটফর্ম। নিরাপদ পরিবেশ, ভালো খাবার এবং সাশ্রয়ী মূল্যে সিট বুক করুন।",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "মিরপুর-১০",
+                "addressLocality": "ঢাকা",
+                "addressCountry": "BD"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+৮৮০ ১২৩৪ ৫৬৭৮৯০",
+                "contactType": "customer service"
+              }
+            })
+          }}
+        />
         <AuthProvider>
           <DataProvider>
             <Suspense fallback={<div className="h-16" />}>

@@ -36,11 +36,41 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function HostelDetailsPage({ params }: Props) {
     const { id } = await params;
+    const hostel = initialData.hostels.find(h => h.id === Number(id));
 
-    // Pass the initial ID to custom client component to handle the rest
-    // We could pass the full hostel object if we wanted to avoid "useData" reliance for the initial paint,
-    // but the Client Component logic already relies on context for "addBooking".
-    // For now, passing ID is sufficient to bridge the gap, and we keep using Context in client.
-    // However, for pure SEO, the client component will hydrate.
-    return <HostelDetailsClient initialHostelId={Number(id)} />;
+    return (
+        <>
+            {hostel && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "Accommodation",
+                            "name": hostel.name,
+                            "description": hostel.description,
+                            "image": hostel.image,
+                            "address": {
+                                "@type": "PostalAddress",
+                                "addressLocality": hostel.location,
+                                "addressCountry": "BD"
+                            },
+                            "offers": {
+                                "@type": "Offer",
+                                "price": hostel.price,
+                                "priceCurrency": "BDT",
+                                "availability": "https://schema.org/InStock"
+                            },
+                            "aggregateRating": {
+                                "@type": "AggregateRating",
+                                "ratingValue": hostel.rating,
+                                "reviewCount": "10"
+                            }
+                        })
+                    }}
+                />
+            )}
+            <HostelDetailsClient initialHostelId={Number(id)} />
+        </>
+    );
 }

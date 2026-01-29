@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: ['/admin/', '/manager/'],
         },
-        sitemap: 'https://hostel-pro-2xl2.vercel.app/sitemap.xml',
+        sitemap: 'https://hostel-pro.vercel.app/sitemap.xml',
     }
 }

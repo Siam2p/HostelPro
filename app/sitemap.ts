@@ -1,25 +1,28 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://hostel-pro-2xl2.vercel.app'
-    return [
-        {
-            url: baseUrl,
-            lastModified: new Date(),
-            changeFrequency: 'daily',
-            priority: 1,
-        },
-        {
-            url: `${baseUrl}/hostels`,
-            lastModified: new Date(),
-            changeFrequency: 'daily',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/login`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.5,
-        },
+    const baseUrl = 'https://hostel-pro.vercel.app'
+    const pages = [
+        '',
+        '/hostels',
+        '/about',
+        '/contact',
+        '/faq',
+        '/guide',
+        '/help',
+        '/privacy',
+        '/terms',
+        '/refund',
+        '/cookies',
+        '/report',
+        '/login',
+        '/signup',
     ]
+
+    return pages.map((page) => ({
+        url: `${baseUrl}${page}`,
+        lastModified: new Date(),
+        changeFrequency: page === '' || page === '/hostels' ? 'daily' : 'monthly',
+        priority: page === '' ? 1 : page === '/hostels' ? 0.9 : 0.7,
+    }))
 }
