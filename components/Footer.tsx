@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import NextImage from 'next/image';
 import Link from 'next/link';
@@ -9,15 +11,19 @@ import {
     Mail,
     Phone,
     MapPin,
-    ArrowRight,
     Send,
     Download,
     ShieldCheck,
     Globe
 } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 export function Footer() {
+    const { currentUser } = useAuth();
     const currentYear = new Date().getFullYear();
+
+    // No footer for Admin
+    if (currentUser?.role === 'admin') return null;
 
     const footerLinks = {
         hostels: [
@@ -48,39 +54,70 @@ export function Footer() {
         ]
     };
 
+    const containerPadding = currentUser?.role === 'manager' ? 'px-3 lg:px-10' : 'container mx-auto px-3';
+
+    // Simplified footer for Manager
+    if (currentUser?.role === 'manager') {
+        return (
+            <footer className="bg-white border-t border-border py-8 mt-auto">
+                <div className={containerPadding}>
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                        <p className="text-text-muted text-sm font-bold">
+                            © {currentYear} <span className="text-primary-dip font-black tracking-tight">Hostel<span className="text-primary">Pro</span></span>. All rights reserved.
+                        </p>
+                        <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
+                            {footerLinks.legal.map((link) => (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    className="text-text-muted hover:text-primary text-xs font-black uppercase tracking-widest transition-all"
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        );
+    }
+
+    // Full premium footer for others
     return (
         <footer className="relative mt-20 border-t border-border bg-white overflow-hidden">
             {/* Premium Decorative elements */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 pointer-events-none" />
 
             {/* Newsletter Section */}
-            <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-20">
-                <div className="bg-[#0D4D3B] rounded-3xl p-8 md:p-12 shadow-2xl shadow-emerald-900/40 overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 blur-2xl group-hover:scale-110 transition-transform duration-700" />
-                    <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-                        <div className="text-center lg:text-left">
-                            <h2 className="text-2xl md:text-3xl font-black text-white mb-2">নতুন আপডেট পেতে ইমেইল দিন</h2>
-                            <p className="text-emerald-100/80 text-sm md:text-base font-medium">প্রতি সপ্তাহে সেরা হোস্টেল ডিল এবং নিউজলেটার পান।</p>
-                        </div>
-                        <form className="w-full lg:w-auto flex flex-col sm:flex-row gap-3">
-                            <div className="relative flex-1 sm:w-80">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
-                                <input
-                                    type="email"
-                                    placeholder="আপনার ইমেইল অ্যাড্রেস"
-                                    className="w-full h-14 px-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-emerald-400/30 backdrop-blur-md transition-all font-medium"
-                                />
+            <div className="relative z-10 py-20">
+                <div className={containerPadding}>
+                    <div className="bg-[#0D4D3B] rounded-3xl p-8 md:p-12 shadow-2xl shadow-emerald-900/40 overflow-hidden group">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 blur-2xl group-hover:scale-110 transition-transform duration-700" />
+                        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+                            <div className="text-center lg:text-left">
+                                <h2 className="text-2xl md:text-3xl font-black text-white mb-2">নতুন আপডেট পেতে ইমেইল দিন</h2>
+                                <p className="text-emerald-100/80 text-sm md:text-base font-medium">প্রতি সপ্তাহে সেরা হোস্টেল ডিল এবং নিউজলেটার পান।</p>
                             </div>
-                            <button className="h-14 px-8 bg-white hover:bg-emerald-50 text-[#0D4D3B] font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg group/btn">
-                                সাবস্ক্রাইব করুন
-                                <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </button>
-                        </form>
+                            <form className="w-full lg:w-auto flex flex-col sm:flex-row gap-3">
+                                <div className="relative flex-1 sm:w-80">
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
+                                    <input
+                                        type="email"
+                                        placeholder="আপনার ইমেইল অ্যাড্রেস"
+                                        className="w-full h-14 px-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-emerald-400/30 backdrop-blur-md transition-all font-medium"
+                                    />
+                                </div>
+                                <button className="h-14 px-8 bg-white hover:bg-emerald-50 text-[#0D4D3B] font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg group/btn">
+                                    সাবস্ক্রাইব করুন
+                                    <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 md:px-6 pb-16">
+            <div className={`pb-16 ${containerPadding}`}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12 mb-16">
                     {/* Column 1: Brand */}
                     <div className="lg:col-span-4 lg:pr-10">
@@ -234,7 +271,7 @@ export function Footer() {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="text-text-muted hover:text-primary text-xs font-black uppercase tracking-widest transition-all hover:translate-y-[-1px]"
+                                className="text-text-muted hover:text-primary text-xs font-black uppercase tracking-widest transition-all hover:-translate-y-px"
                             >
                                 {link.name}
                             </Link>
