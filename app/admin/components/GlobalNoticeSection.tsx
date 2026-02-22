@@ -5,31 +5,67 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { useData } from '@/context/DataContext';
 import { Badge } from '@/components/ui/Badge';
+import { Notice } from '@/lib/types';
 
 export default function GlobalNoticeSection() {
-    const { addNotice, notices, deleteNotice } = useData();
+    const { addNotice, updateNotice, notices, deleteNotice } = useData();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [audience, setAudience] = useState<'user' | 'manager' | 'both'>('user');
     const [isPosting, setIsPosting] = useState(false);
+    const [editingNoticeId, setEditingNoticeId] = useState<number | null>(null);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!title || !content) return;
 
         setIsPosting(true);
-        const newNotice = {
-            id: Date.now(),
-            hostelId: 0, // 0 for global/admin notices
-            title,
-            content,
-            date: new Date().toISOString().split('T')[0],
-            isGlobal: true
-        };
 
-        addNotice(newNotice);
+        if (editingNoticeId) {
+            const noticeToUpdate = notices.find(n => n.id === editingNoticeId);
+            if (noticeToUpdate) {
+                updateNotice({
+                    ...noticeToUpdate,
+                    title,
+                    content,
+                    audience
+                });
+            }
+            setEditingNoticeId(null);
+        } else {
+            const newNotice = {
+                id: Date.now(),
+                hostelId: 0, // 0 for global/admin notices
+                title,
+                content,
+                date: new Date().toISOString().split('T')[0],
+                isGlobal: true,
+                audience
+            };
+            addNotice(newNotice);
+        }
+
         setTitle('');
         setContent('');
+        setAudience('user');
         setIsPosting(false);
+    };
+
+    const handleEdit = (notice: Notice) => {
+        setEditingNoticeId(notice.id);
+        setTitle(notice.title);
+        setContent(notice.content);
+        setAudience(notice.audience);
+
+        // Scroll to form
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const handleCancel = () => {
+        setEditingNoticeId(null);
+        setTitle('');
+        setContent('');
+        setAudience('user');
     };
 
     const globalNotices = notices.filter(n => n.isGlobal || n.hostelId === 0);
@@ -45,7 +81,7 @@ export default function GlobalNoticeSection() {
                 <Card className="p-10 border-none shadow-2xl shadow-slate-200/60 rounded-[3rem] bg-white">
                     <h3 className="text-xl font-black text-slate-900 mb-8 flex items-center gap-3">
                         <span className="p-2.5 bg-blue-100 rounded-xl text-primaryDip text-lg">📝</span>
-                        নতুন বিজ্ঞপ্তি প্রকাশ করুন
+                        {editingNoticeId ? 'বিজ্ঞপ্তিটি আপডেট করুন' : 'নতুন বিজ্ঞপ্তি প্রকাশ করুন'}
                     </h3>
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
@@ -69,13 +105,37 @@ export default function GlobalNoticeSection() {
                                 required
                             ></textarea>
                         </div>
-                        <Button
-                            type="submit"
-                            disabled={isPosting}
-                            className="w-full h-14 rounded-2xl bg-linear-to-r from-primary-dip to-primary-dipto text-white font-black uppercase tracking-widest shadow-xl shadow-primary-light/20"
-                        >
-                            {isPosting ? 'পাবলিশ হচ্ছে...' : 'বিজ্ঞপ্তি পাবলিশ করুন 🚀'}
-                        </Button>
+                        <div>
+                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block px-2">কাকে পাঠাতে চান?</label>
+                            <select
+                                value={audience}
+                                onChange={(e) => setAudience(e.target.value as 'user' | 'manager' | 'both')}
+                                className="w-full h-14 px-3 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-primary-light focus:ring-4 focus:ring-primary-light/10 outline-none transition-all font-bold text-slate-900 cursor-pointer"
+                            >
+                                <option value="user">ইউজার (Users)</option>
+                                <option value="manager">ম্যানেজার (Managers)</option>
+                                <option value="both">উভয় (Both)</option>
+                            </select>
+                        </div>
+                        <div className="flex gap-3">
+                            {editingNoticeId && (
+                                <Button
+                                    type="button"
+                                    onClick={handleCancel}
+                                    variant="outline"
+                                    className="grow h-14 rounded-2xl border-slate-200 text-slate-500 font-bold uppercase tracking-widest"
+                                >
+                                    বাতিল করুন
+                                </Button>
+                            )}
+                            <Button
+                                type="submit"
+                                disabled={isPosting}
+                                className={`${editingNoticeId ? 'grow-2' : 'w-full'} h-14 rounded-2xl bg-linear-to-r from-primary-dip to-primary-dipto text-white font-black uppercase tracking-widest shadow-xl shadow-primary-light/20`}
+                            >
+                                {isPosting ? 'প্রসেসিং...' : editingNoticeId ? 'আপডেট করুন ✨' : 'বিজ্ঞপ্তি পাবলিশ করুন 🚀'}
+                            </Button>
+                        </div>
                     </form>
                 </Card>
 
@@ -89,17 +149,34 @@ export default function GlobalNoticeSection() {
                             <Card key={notice.id} className="p-8 border-none shadow-xl shadow-slate-200/40 rounded-[2.5rem] bg-white group hover:-translate-x-1 transition-all duration-300">
                                 <div className="flex justify-between items-start mb-4">
                                     <h4 className="font-black text-slate-900 text-lg">{notice.title}</h4>
-                                    <button
-                                        onClick={() => deleteNotice(notice.id)}
-                                        className="p-2 text-slate-300 hover:text-rose-500 transition-colors"
-                                    >
-                                        🗑️
-                                    </button>
+                                    <div className="flex gap-1">
+                                        <button
+                                            onClick={() => handleEdit(notice)}
+                                            className="p-2 text-slate-300 hover:text-blue-500 transition-colors"
+                                            title="Edit Notice"
+                                        >
+                                            ✏️
+                                        </button>
+                                        <button
+                                            onClick={() => deleteNotice(notice.id)}
+                                            className="p-2 text-slate-300 hover:text-rose-500 transition-colors"
+                                            title="Delete Notice"
+                                        >
+                                            🗑️
+                                        </button>
+                                    </div>
                                 </div>
                                 <p className="text-sm text-slate-600 font-medium leading-relaxed mb-6">{notice.content}</p>
                                 <div className="flex items-center justify-between pt-6 border-t border-slate-50">
-                                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">🗓️ {notice.date}</span>
-                                    <Badge variant="outline" className="text-[10px] font-black uppercase tracking-widest border-blue-100 text-primaryDip px-3 py-1">Global</Badge>
+                                    <div className="flex flex-col gap-1">
+                                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">🗓️ {notice.date}</span>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <Badge variant="outline" className="text-[10px] font-black uppercase tracking-widest border-blue-100 text-primaryDip px-3 py-1">
+                                            {notice.audience === 'both' ? '👥 Both' : notice.audience === 'manager' ? '💼 Manager' : '👤 User'}
+                                        </Badge>
+                                        <Badge variant="outline" className="text-[10px] font-black uppercase tracking-widest border-slate-100 text-slate-400 px-3 py-1">Global</Badge>
+                                    </div>
                                 </div>
                             </Card>
                         ))

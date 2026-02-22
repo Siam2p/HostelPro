@@ -11,6 +11,12 @@ import { Card } from '@/components/ui/Card';
 import JsonLd from '@/components/JsonLd';
 import BookingApplicationModal from '@/components/BookingApplicationModal';
 import { ApplicationDetails } from '@/lib/types';
+import dynamic from 'next/dynamic';
+
+const MapPicker = dynamic(() => import('@/components/MapPicker'), {
+    ssr: false,
+    loading: () => <div className="h-full w-full bg-gray-100 animate-pulse rounded-xl flex items-center justify-center text-gray-400">ম্যাপ লোড হচ্ছে...</div>
+});
 
 export default function HostelDetailsClient({ initialHostelId }: { initialHostelId: number }) {
     const router = useRouter();
@@ -157,6 +163,19 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Main Content */}
                     <div className="grow space-y-12">
+                        {/* Admin Note for Users */}
+                        {hostel.adminNote && (hostel.adminNote.audience === 'user' || hostel.adminNote.audience === 'both') && (
+                            <div className="bg-amber-50 p-6 md:p-8 rounded-2xl border-l-4 border-amber-500 shadow-sm relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-4 opacity-5 text-6xl pointer-events-none">📌</div>
+                                <h2 className="text-2xl font-bold text-amber-900 mb-3 flex items-center gap-2 relative z-10">
+                                    <span>🔔</span> গুরুত্বপূর্ণ নোটিশ
+                                </h2>
+                                <p className="text-amber-800 relative z-10 text-lg leading-relaxed whitespace-pre-line">
+                                    {hostel.adminNote.message}
+                                </p>
+                            </div>
+                        )}
+
                         {/* Features */}
                         <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
                             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
@@ -214,6 +233,10 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
                                 </h2>
                                 <p className="text-gray-600 mb-6">{hostel.location}</p>
 
+                                <div className="h-[300px] w-full mb-4 rounded-xl overflow-hidden border border-gray-200">
+                                    <MapPicker initialLocation={hostel.coordinates} readOnly={true} />
+                                </div>
+
                                 <a
                                     href={`https://www.google.com/maps/search/?api=1&query=${hostel.coordinates.lat},${hostel.coordinates.lng}`}
                                     target="_blank"
@@ -221,7 +244,7 @@ export default function HostelDetailsClient({ initialHostelId }: { initialHostel
                                     className="inline-flex items-center justify-center gap-2 w-full py-4 bg-white border-2 border-primary/20 text-primary font-bold rounded-xl hover:bg-primary/5 hover:border-primary transition-all group"
                                 >
                                     <span className="text-2xl group-hover:scale-110 transition-transform">🗺️</span>
-                                    <span>গুগল ম্যাপে লোকেশন দেখুন</span>
+                                    <span>গুগল ম্যাপে বিস্তারিত দেখুন</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                     </svg>

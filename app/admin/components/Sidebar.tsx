@@ -13,6 +13,7 @@ export default function Sidebar({ activeView, setActiveView }: SidebarProps) {
         { id: 'overview', label: 'ওভারভিউ', icon: '📊' },
         { id: 'users', label: 'ব্যবহারকারী', icon: '👥' },
         { id: 'hostels', label: 'হোস্টেলসমূহ', icon: '🏨' },
+        { id: 'bookings', label: 'বুকিং', icon: '📅' },
         { id: 'settings', label: 'সেটিংস', icon: '⚙️' },
         { id: 'profile', label: 'প্রোফাইল', icon: '👤' },
     ];
@@ -33,12 +34,13 @@ export default function Sidebar({ activeView, setActiveView }: SidebarProps) {
                     <button
                         key={item.id}
                         onClick={() => setActiveView(item.id)}
+                        aria-label={`Navigate to ${item.label}`}
                         className={`group flex items-center gap-3.5 px-5 py-4 rounded-2xl font-bold transition-all duration-300 text-sm ${activeView === item.id
                             ? 'bg-primary-dip text-white shadow-lg shadow-primary-light/20'
                             : 'hover:bg-slate-900 border border-transparent hover:border-slate-800'
                             }`}
                     >
-                        <span className={`text-xl transition-transform duration-300 ${activeView === item.id ? 'scale-110' : 'group-hover:scale-110'}`}>
+                        <span aria-hidden="true" className={`text-xl transition-transform duration-300 ${activeView === item.id ? 'scale-110' : 'group-hover:scale-110'}`}>
                             {item.icon}
                         </span>
                         {item.label}

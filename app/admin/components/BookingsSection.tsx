@@ -10,13 +10,20 @@ import ApplicationDetailsModal from '@/components/ApplicationDetailsModal';
 export default function BookingsSection() {
     const { bookings, updateBookingStatus, deleteBooking } = useData();
     const [searchTerm, setSearchTerm] = useState('');
+    const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all');
+    const [paymentFilter, setPaymentFilter] = useState<'all' | 'paid' | 'unpaid' | 'pending'>('all');
     const [selectedApplication, setSelectedApplication] = useState<Booking['applicationDetails'] | null>(null);
     const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
-    const filteredBookings = bookings.filter(booking =>
-        booking.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        booking.hostelName.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredBookings = bookings.filter(booking => {
+        const matchesSearch = booking.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            booking.hostelName.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesStatus = statusFilter === 'all' || booking.status === statusFilter;
+        // monthlyFeeStatus can be undefined, handle it carefully
+        const matchesPayment = paymentFilter === 'all' || booking.monthlyFeeStatus === paymentFilter || (paymentFilter === 'unpaid' && !booking.monthlyFeeStatus);
+
+        return matchesSearch && matchesStatus && matchesPayment;
+    });
 
     const handleViewApplication = (booking: Booking) => {
         if (booking.applicationDetails) {
@@ -32,17 +39,42 @@ export default function BookingsSection() {
             <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
                     <h2 className="text-3xl font-black text-slate-900 tracking-tight mb-2">গ্লোবাল বুকিং খতিয়ান</h2>
-                    <p className="text-slate-500 font-medium">পুরো সিস্টেমের সকল বুকিং স্ট্যাটাস এবং হিস্টোরি মনিটর করুন।</p>
+                    <p className="text-slate-500 font-medium">পুরো সিস্টেমের সকল বুকিং স্ট্যাটাস এবং হিস্টোরি মনিটর করুন। মোট: <strong className="text-primary-dip font-black">{filteredBookings.length}</strong> টি বুকিং</p>
                 </div>
-                <div className="relative">
-                    <input
-                        type="text"
-                        placeholder="ইউজার বা হোস্টেল খুঁজুন..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full md:w-80 h-12 pl-12 pr-6 rounded-2xl bg-white border border-slate-200 outline-none transition-all font-medium text-sm"
-                    />
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2">🔍</span>
+                <div className="flex flex-wrap items-center gap-3">
+                    <div className="relative w-full md:w-auto">
+                        <input
+                            type="search"
+                            aria-label="ইউজার বা হোস্টেল খুঁজুন"
+                            placeholder="ইউজার বা হোস্টেল খুঁজুন..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="w-full md:w-80 h-12 pl-12 pr-6 rounded-2xl bg-white border border-slate-200 outline-none transition-all font-medium text-sm"
+                        />
+                        <span aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2">🔍</span>
+                    </div>
+                    <select
+                        aria-label="বুকিং স্ট্যাটাস ফিল্টার করুন"
+                        value={statusFilter}
+                        onChange={(e) => setStatusFilter(e.target.value as 'all' | 'pending' | 'approved' | 'rejected')}
+                        className="h-12 px-3 rounded-2xl bg-white border border-slate-200 outline-none font-bold text-sm text-slate-700"
+                    >
+                        <option value="all">সব স্ট্যাটাস</option>
+                        <option value="pending">পেন্ডিং</option>
+                        <option value="approved">অনুমোদিত</option>
+                        <option value="rejected">প্রত্যাখ্যাত</option>
+                    </select>
+                    <select
+                        aria-label="পেমেন্ট স্ট্যাটাস ফিল্টার করুন"
+                        value={paymentFilter}
+                        onChange={(e) => setPaymentFilter(e.target.value as 'all' | 'paid' | 'unpaid' | 'pending')}
+                        className="h-12 px-3 rounded-2xl bg-white border border-slate-200 outline-none font-bold text-sm text-slate-700"
+                    >
+                        <option value="all">সব পেমেন্ট</option>
+                        <option value="paid">পেইড</option>
+                        <option value="unpaid">আনপেইড</option>
+                        <option value="pending">পেন্ডিং</option>
+                    </select>
                 </div>
             </header>
 
@@ -66,6 +98,7 @@ export default function BookingsSection() {
                                         {booking.applicationDetails && (
                                             <button
                                                 onClick={() => handleViewApplication(booking)}
+                                                aria-label={`আবেদন দেখুন - ${booking.userName}`}
                                                 className="mt-2 text-[10px] font-bold text-primary-dip bg-bg-highlight px-2 py-1 rounded hover:bg-border-subtle transition-colors"
                                             >
                                                 আবেদন দেখুন
@@ -94,20 +127,22 @@ export default function BookingsSection() {
                                             {booking.status === 'pending' && (
                                                 <button
                                                     onClick={() => updateBookingStatus(booking.id, 'approved')}
+                                                    aria-label="Approve Booking"
                                                     className="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all shadow-sm"
                                                     title="Approve"
                                                 >
-                                                    ✅
+                                                    <span aria-hidden="true">✅</span>
                                                 </button>
                                             )}
                                             <button
                                                 onClick={() => {
                                                     if (confirm('বুকিংটি ডিলিট করতে চান?')) deleteBooking(booking.id);
                                                 }}
+                                                aria-label="Delete Booking"
                                                 className="p-2.5 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white transition-all shadow-sm"
                                                 title="Delete"
                                             >
-                                                🗑️
+                                                <span aria-hidden="true">🗑️</span>
                                             </button>
                                         </div>
                                     </td>

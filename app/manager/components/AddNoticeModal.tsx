@@ -11,6 +11,7 @@ export default function AddNoticeModal({ isOpen, onClose }: AddNoticeModalProps)
     const { addNotice } = useData();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [audience, setAudience] = useState<'user' | 'manager' | 'both'>('user');
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -21,7 +22,9 @@ export default function AddNoticeModal({ isOpen, onClose }: AddNoticeModalProps)
             hostelId: 0,
             title: title,
             content: content,
-            date: new Date().toISOString()
+            date: new Date().toISOString(),
+            isGlobal: true,
+            audience: audience
         });
 
         setTitle('');
@@ -55,14 +58,16 @@ export default function AddNoticeModal({ isOpen, onClose }: AddNoticeModalProps)
                         />
                     </div>
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-700">বিস্তারিত (Content)</label>
-                        <textarea
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-light outline-none transition-all min-h-[100px]"
-                            value={content}
-                            onChange={(e) => setContent(e.target.value)}
-                            placeholder="বিস্তারিত লিখুন..."
-                            required
-                        />
+                        <label className="text-sm font-medium text-gray-700">কার জন্য? (Audience)</label>
+                        <select
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-light outline-none transition-all cursor-pointer"
+                            value={audience}
+                            onChange={(e) => setAudience(e.target.value as 'user' | 'manager' | 'both')}
+                        >
+                            <option value="user">শুধুমাত্র ইউজার</option>
+                            <option value="manager">শুধুমাত্র ম্যানেজার</option>
+                            <option value="both">উভয় (ইউজার ও ম্যানেজার)</option>
+                        </select>
                     </div>
 
                     <div className="flex justify-end gap-3 pt-4">

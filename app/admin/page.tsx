@@ -10,6 +10,7 @@ import Sidebar from './components/Sidebar';
 import OverviewSection from './components/OverviewSection';
 import UsersSection from './components/UsersSection';
 import HostelsSection from './components/HostelsSection';
+import BookingsSection from './components/BookingsSection';
 import SettingsSection from './components/SettingsSection';
 import ProfileSection from './components/ProfileSection';
 import GlobalNoticeSection from './components/GlobalNoticeSection';
@@ -30,7 +31,7 @@ function AdminDashboardContent() {
 
     useEffect(() => {
         const view = searchParams.get('view') as AdminDashboardView;
-        if (view && ['overview', 'users', 'hostels', 'settings', 'profile'].includes(view)) {
+        if (view && ['overview', 'users', 'hostels', 'bookings', 'settings', 'profile'].includes(view)) {
             setActiveView(view);
         }
     }, [searchParams]);
@@ -49,6 +50,7 @@ function AdminDashboardContent() {
             case 'overview': return <OverviewSection />;
             case 'users': return <UsersSection />;
             case 'hostels': return <HostelsSection />;
+            case 'bookings': return <BookingsSection />;
             case 'settings': return <SettingsSection />;
             case 'profile': return <ProfileSection />;
             default: return <OverviewSection />;
@@ -62,10 +64,11 @@ function AdminDashboardContent() {
 
             {/* Mobile Navigation */}
             <div className="lg:hidden fixed bottom-0 left-0 w-full bg-slate-950 text-white z-50 p-4 flex justify-around items-center border-t border-white/10">
-                <button onClick={() => setActiveView('overview')} className={`p-2 rounded-xl ${activeView === 'overview' ? 'text-primaryLight' : 'text-slate-400'}`}>📊</button>
-                <button onClick={() => setActiveView('users')} className={`p-2 rounded-xl ${activeView === 'users' ? 'text-primaryLight' : 'text-slate-400'}`}>👥</button>
-                <button onClick={() => setActiveView('hostels')} className={`p-2 rounded-xl ${activeView === 'hostels' ? 'text-primaryLight' : 'text-slate-400'}`}>🏨</button>
-                <button onClick={() => setActiveView('profile')} className={`p-2 rounded-xl ${activeView === 'profile' ? 'text-primaryLight' : 'text-slate-400'}`}>👤</button>
+                <button aria-label="Overview" onClick={() => setActiveView('overview')} className={`p-2 rounded-xl transition-colors ${activeView === 'overview' ? 'text-primaryLight bg-slate-900' : 'text-slate-400 hover:text-slate-200'}`}><span aria-hidden="true">📊</span></button>
+                <button aria-label="Users" onClick={() => setActiveView('users')} className={`p-2 rounded-xl transition-colors ${activeView === 'users' ? 'text-primaryLight bg-slate-900' : 'text-slate-400 hover:text-slate-200'}`}><span aria-hidden="true">👥</span></button>
+                <button aria-label="Hostels" onClick={() => setActiveView('hostels')} className={`p-2 rounded-xl transition-colors ${activeView === 'hostels' ? 'text-primaryLight bg-slate-900' : 'text-slate-400 hover:text-slate-200'}`}><span aria-hidden="true">🏨</span></button>
+                <button aria-label="Bookings" onClick={() => setActiveView('bookings')} className={`p-2 rounded-xl transition-colors ${activeView === 'bookings' ? 'text-primaryLight bg-slate-900' : 'text-slate-400 hover:text-slate-200'}`}><span aria-hidden="true">📅</span></button>
+                <button aria-label="Profile" onClick={() => setActiveView('profile')} className={`p-2 rounded-xl transition-colors ${activeView === 'profile' ? 'text-primaryLight bg-slate-900' : 'text-slate-400 hover:text-slate-200'}`}><span aria-hidden="true">👤</span></button>
             </div>
 
             {/* Main Viewport */}

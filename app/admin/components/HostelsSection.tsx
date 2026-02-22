@@ -7,17 +7,27 @@ import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { useData } from '@/context/DataContext';
 import { Hostel } from '@/lib/types';
+import { AdminHostelDetailsModal } from './AdminHostelDetailsModal';
 
 export default function HostelsSection() {
     const { hostels, deleteHostel, updateHostel } = useData();
+    const [selectedHostel, setSelectedHostel] = useState<Hostel | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'active' | 'inactive' | 'rejected'>('all');
+    const [sortBy, setSortBy] = useState<'default' | 'price-asc' | 'price-desc' | 'rating'>('default');
 
-    const filteredHostels = hostels.filter(hostel => {
+    let filteredHostels = hostels.filter(hostel => {
         const matchesSearch = hostel.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             hostel.location.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesStatus = statusFilter === 'all' || hostel.status === statusFilter;
         return matchesSearch && matchesStatus;
+    });
+
+    filteredHostels = filteredHostels.sort((a, b) => {
+        if (sortBy === 'price-asc') return a.price - b.price;
+        if (sortBy === 'price-desc') return b.price - a.price;
+        if (sortBy === 'rating') return b.rating - a.rating;
+        return 0;
     });
 
     const handleStatusUpdate = (hostel: Hostel, newStatus: Hostel['status']) => {
@@ -29,21 +39,23 @@ export default function HostelsSection() {
             <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
                     <h2 className="text-3xl font-black text-slate-900 tracking-tight mb-2">হোস্টেল ব্যবস্থাপনা</h2>
-                    <p className="text-slate-500 font-medium">হোস্টেলসমূহ অনুমোদন করুন এবং সিস্টেম-ওয়াইড ম্যানেজ করুন।</p>
+                    <p className="text-slate-500 font-medium">হোস্টেলসমূহ অনুমোদন করুন এবং সিস্টেম-ওয়াইড ম্যানেজ করুন। মোট: <strong className="text-primary-dip font-black">{filteredHostels.length}</strong> টি হোস্টেল</p>
                 </div>
-                <div className="flex items-center gap-3">
-                    <div className="relative">
+                <div className="flex flex-wrap items-center gap-3">
+                    <div className="relative w-full md:w-auto">
                         <input
-                            type="text"
+                            type="search"
+                            aria-label="হোস্টেল বা এলাকা খুঁজুন"
                             placeholder="হোস্টেল বা এলাকা খুঁজুন..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="w-full md:w-80 h-12 pl-12 pr-6 rounded-2xl bg-white border border-slate-200 focus:border-primary-light outline-none transition-all font-medium text-sm"
                         />
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2">🔍</span>
+                        <span aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2">🔍</span>
                     </div>
                     <select
                         name='hostelStatus'
+                        aria-label="হোস্টেল স্ট্যাটাস ফিল্টার করুন"
                         title='hostelStatus'
                         value={statusFilter}
                         onChange={(e) => setStatusFilter(e.target.value as 'all' | 'pending' | 'active' | 'inactive' | 'rejected')}
@@ -55,13 +67,25 @@ export default function HostelsSection() {
                         <option value="inactive">নিষ্ক্রিয়</option>
                         <option value="rejected">প্রত্যাখ্যাত</option>
                     </select>
+                    <select
+                        aria-label="হোস্টেল সর্ট করুন"
+                        title='hostelSort'
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value as 'default' | 'price-asc' | 'price-desc' | 'rating')}
+                        className="h-12 px-3 rounded-2xl bg-white border border-slate-200 outline-none font-bold text-sm"
+                    >
+                        <option value="default">ডিফল্ট</option>
+                        <option value="price-asc">ভাড়া (কম থেকে বেশি)</option>
+                        <option value="price-desc">ভাড়া (বেশি থেকে কম)</option>
+                        <option value="rating">সর্বোচ্চ রেটিং</option>
+                    </select>
                 </div>
             </header>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredHostels.map(hostel => (
-                    <Card key={hostel.id} className="p-0 border-none shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 rounded-[2.5rem] bg-white overflow-hidden flex flex-col">
-                        <div className="relative h-48 group">
+                    <Card key={hostel.id} className="p-0 border-none shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 rounded-[2.5rem] bg-white overflow-hidden flex flex-col group cursor-pointer" onClick={() => setSelectedHostel(hostel)}>
+                        <div className="relative h-48">
                             <NextImage src={hostel.image} alt={hostel.name} fill className="object-cover" />
                             <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <div className="absolute top-4 right-4">
@@ -93,7 +117,7 @@ export default function HostelsSection() {
                                 </div>
                             </div>
 
-                            <div className="mt-auto flex items-center justify-between gap-2">
+                            <div className="mt-auto flex items-center justify-between gap-2" onClick={(e) => e.stopPropagation()}>
                                 {hostel.status === 'pending' && (
                                     <div className="flex grow gap-2">
                                         <Button
@@ -122,6 +146,7 @@ export default function HostelsSection() {
                                 {hostel.status === 'inactive' && (
                                     <Button
                                         onClick={() => handleStatusUpdate(hostel, 'active')}
+                                        aria-label="সক্রিয় করুন"
                                         className="grow py-3 rounded-2xl bg-primary-dip hover:bg-primary-hover text-white text-xs font-black uppercase tracking-widest"
                                     >
                                         সক্রিয় করুন
@@ -133,10 +158,11 @@ export default function HostelsSection() {
                                             deleteHostel(hostel.id);
                                         }
                                     }}
+                                    aria-label={`ডিলিট হোস্টেল ${hostel.name}`}
                                     className="p-3.5 rounded-2xl bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white transition-all duration-300"
                                     title="Delete Hostel"
                                 >
-                                    🗑️
+                                    <span aria-hidden="true">🗑️</span>
                                 </button>
                             </div>
                         </div>
@@ -151,6 +177,14 @@ export default function HostelsSection() {
                     <p className="text-slate-400 font-medium">আপনার সার্চ বা ফিল্টার পরিবর্তন করে পুনরায় চেষ্টা করুন।</p>
                 </div>
             )}
+
+            {/* Admin Hostel Details Modal */}
+            <AdminHostelDetailsModal
+                key={selectedHostel?.id || 'admin-modal'}
+                isOpen={!!selectedHostel}
+                onClose={() => setSelectedHostel(null)}
+                hostel={selectedHostel}
+            />
         </div>
     );
 }

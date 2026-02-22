@@ -34,10 +34,13 @@ const icon = L.icon({
 // TypeScript Interface for the Props (Properties) passed to the MapPicker component
 interface MapPickerProps {
     // Function prop to send the selected Latitude (lat) and Longitude (lng) back to the parent component
-    onLocationSelect: (lat: number, lng: number) => void;
+    onLocationSelect?: (lat: number, lng: number) => void;
 
     // Optional prop for the initial location if editing an existing location
     initialLocation?: { lat: number, lng: number };
+
+    // Optional prop to make the map view-only
+    readOnly?: boolean;
 }
 // ----------------------------------------------------------------------
 
@@ -51,7 +54,7 @@ function MapInvalidator() {
     useEffect(() => {
         // Invalidate size immediately
         map.invalidateSize();
-        
+
         // And/or after a short timeout to account for modal animations
         const timer = setTimeout(() => {
             map.invalidateSize();
@@ -67,7 +70,7 @@ function MapInvalidator() {
 // Internal Component: LocationMarker
 // This component handles the click event on the map and places the marker.
 // It is separate because it needs access to the map instance via `useMapEvents` hook, which must be inside `MapContainer`.
-function LocationMarker({ onSelect, initialPos }: { onSelect: (lat: number, lng: number) => void, initialPos?: L.LatLng | null }) {
+function LocationMarker({ onSelect, initialPos, readOnly }: { onSelect?: (lat: number, lng: number) => void, initialPos?: L.LatLng | null, readOnly?: boolean }) {
     // State to hold the current position of the marker. 
     // initialized with initialPos if provided, otherwise null (no marker initially)
     const [position, setPosition] = useState<L.LatLng | null>(initialPos || null);
@@ -76,8 +79,9 @@ function LocationMarker({ onSelect, initialPos }: { onSelect: (lat: number, lng:
     useMapEvents({
         // 'click' event handler: triggers when user clicks anywhere on the map
         click(e) {
+            if (readOnly) return;
             setPosition(e.latlng); // Update local state to show the marker at clicked position
-            onSelect(e.latlng.lat, e.latlng.lng); // Call the parent function to return the selected coordinates
+            if (onSelect) onSelect(e.latlng.lat, e.latlng.lng); // Call the parent function to return the selected coordinates
         },
     });
 
@@ -92,7 +96,7 @@ function LocationMarker({ onSelect, initialPos }: { onSelect: (lat: number, lng:
 // ----------------------------------------------------------------------
 // Main Exported Component: MapPicker
 // This is the component used by other parts of the application.
-export default function MapPicker({ onLocationSelect, initialLocation }: MapPickerProps) {
+export default function MapPicker({ onLocationSelect, initialLocation, readOnly }: MapPickerProps) {
     // Determine the default center of the map.
     // If an initialLocation is provided, use that.
     // Otherwise, default to Dhaka coordinates [23.8103, 90.4125].
@@ -115,7 +119,7 @@ export default function MapPicker({ onLocationSelect, initialLocation }: MapPick
             style={{ height: "100%", width: "100%", borderRadius: "0.5rem" }}
         >
             <MapInvalidator />
-            
+
             {/* LayersControl allows the user to switch between different map styles (Satellite vs Street) */}
             <LayersControl position="topright">
 
@@ -140,7 +144,7 @@ export default function MapPicker({ onLocationSelect, initialLocation }: MapPick
 
             {/* Render our internal LocationMarker component to handle clicks and show the pin */}
             {/* We pass the initialLatLng so the marker appears if editing */}
-            <LocationMarker onSelect={onLocationSelect} initialPos={initialLatLng} />
+            <LocationMarker onSelect={onLocationSelect} initialPos={initialLatLng} readOnly={readOnly} />
         </MapContainer>
     );
 }

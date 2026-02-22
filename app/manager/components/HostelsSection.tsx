@@ -186,6 +186,19 @@ export default function HostelsSection({ selectedHostelId, setSelectedHostelId, 
                                 </div>
                             </div>
 
+                            {/* Admin Note for Manager */}
+                            {selectedHostel.adminNote && (selectedHostel.adminNote.audience === 'manager' || selectedHostel.adminNote.audience === 'both') && (
+                                <div className="bg-amber-50 p-6 rounded-2xl border-l-4 border-amber-500 shadow-sm relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 p-4 opacity-5 text-6xl pointer-events-none">📌</div>
+                                    <h2 className="text-xl font-bold text-amber-900 mb-2 flex items-center gap-2 relative z-10">
+                                        <span>🔔</span> অ্যাডমিন থেকে বার্তা
+                                    </h2>
+                                    <p className="text-amber-800 relative z-10 text-sm leading-relaxed whitespace-pre-line">
+                                        {selectedHostel.adminNote.message}
+                                    </p>
+                                </div>
+                            )}
+
                             {/* Rooms Manager */}
                             <div>
                                 <div className="flex justify-between items-center mb-6">

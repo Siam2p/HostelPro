@@ -10,12 +10,25 @@ export default function UsersSection() {
     const { users, deleteUser, updateUser } = useData();
     const [searchTerm, setSearchTerm] = useState('');
     const [roleFilter, setRoleFilter] = useState<'all' | 'admin' | 'manager' | 'user'>('all');
+    const [sortBy, setSortBy] = useState<'name-asc' | 'name-desc' | 'role'>('name-asc');
 
-    const filteredUsers = users.filter(user => {
+    let filteredUsers = users.filter(user => {
         const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             user.email.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesRole = roleFilter === 'all' || user.role === roleFilter;
         return matchesSearch && matchesRole;
+    });
+
+    filteredUsers = filteredUsers.sort((a, b) => {
+        if (sortBy === 'name-asc') {
+            return a.name.localeCompare(b.name);
+        } else if (sortBy === 'name-desc') {
+            return b.name.localeCompare(a.name);
+        } else if (sortBy === 'role') {
+            const roleWeight = { admin: 1, manager: 2, user: 3 };
+            return roleWeight[a.role] - roleWeight[b.role];
+        }
+        return 0;
     });
 
     const handleToggleBlock = (user: User) => {
@@ -28,20 +41,22 @@ export default function UsersSection() {
             <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
                     <h2 className="text-3xl font-black text-slate-900 tracking-tight mb-2">ব্যবহারকারী ব্যবস্থাপনা</h2>
-                    <p className="text-slate-500 font-medium">সিস্টেমের ব্যবহারকারী নিয়ন্ত্রণ করুন এবং প্রয়োজনে অ্যাক্সেস বন্ধ করুন।</p>
+                    <p className="text-slate-500 font-medium">সিস্টেমের ব্যবহারকারী নিয়ন্ত্রণ করুন এবং প্রয়োজনে অ্যাক্সেস বন্ধ করুন। মোট: <strong className="text-primary-dip font-black">{filteredUsers.length}</strong> জন</p>
                 </div>
-                <div className="flex items-center gap-3">
-                    <div className="relative">
+                <div className="flex flex-wrap items-center gap-3">
+                    <div className="relative w-full md:w-auto">
                         <input
-                            type="text"
+                            type="search"
+                            aria-label="ব্যবহারকারী খুঁজুন"
                             placeholder="নাম বা ইমেইল দিয়ে খুঁজুন..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="w-full md:w-80 h-12 pl-12 pr-6 rounded-2xl bg-white border border-slate-200 focus:border-primary-light focus:ring-4 focus:ring-primary-light/10 outline-none transition-all font-medium text-sm"
                         />
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
+                        <span aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
                     </div>
                     <select
+                        aria-label="ব্যবহারকারীর রোল ফিল্টার করুন"
                         title='userRole'
                         value={roleFilter}
                         onChange={(e) => setRoleFilter(e.target.value as 'all' | 'admin' | 'manager' | 'user')}
@@ -51,6 +66,17 @@ export default function UsersSection() {
                         <option value="admin">অ্যাডমিন</option>
                         <option value="manager">ম্যানেজার</option>
                         <option value="user">ইউজার</option>
+                    </select>
+                    <select
+                        aria-label="ব্যবহারকারীদের সর্ট করুন"
+                        title='userSort'
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value as 'name-asc' | 'name-desc' | 'role')}
+                        className="h-12 px-3 rounded-2xl bg-white border border-slate-200 focus:border-primary-light outline-none transition-all font-bold text-sm text-slate-700"
+                    >
+                        <option value="name-asc">নাম (A-Z)</option>
+                        <option value="name-desc">নাম (Z-A)</option>
+                        <option value="role">রোল অনুযায়ী</option>
                     </select>
                 </div>
             </header>
@@ -104,13 +130,14 @@ export default function UsersSection() {
                                             {user.role !== 'admin' && (
                                                 <button
                                                     onClick={() => handleToggleBlock(user)}
+                                                    aria-label={user.status === 'blocked' ? 'Unblock User' : 'Block User'}
                                                     className={`p-2.5 rounded-xl transition-all duration-300 ${user.status === 'blocked'
                                                         ? 'bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white'
                                                         : 'bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white'
                                                         }`}
                                                     title={user.status === 'blocked' ? 'Unblock User' : 'Block User'}
                                                 >
-                                                    {user.status === 'blocked' ? '🔓' : '🚫'}
+                                                    <span aria-hidden="true">{user.status === 'blocked' ? '🔓' : '🚫'}</span>
                                                 </button>
                                             )}
 
@@ -120,10 +147,11 @@ export default function UsersSection() {
                                                         deleteUser(user.id);
                                                     }
                                                 }}
+                                                aria-label="Delete User"
                                                 className="p-2.5 rounded-xl bg-slate-100 text-slate-400 hover:bg-rose-600 hover:text-white transition-all duration-300"
                                                 title="Delete User"
                                             >
-                                                🗑️
+                                                <span aria-hidden="true">🗑️</span>
                                             </button>
                                         </div>
                                     </td>

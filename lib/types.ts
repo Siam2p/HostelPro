@@ -49,6 +49,10 @@ export interface Hostel {
     district?: string;
     upazila?: string;
     status?: 'pending' | 'active' | 'inactive' | 'rejected';
+    adminNote?: {
+        message: string;
+        audience: 'manager' | 'user' | 'both';
+    };
 }
 
 export interface Booking {
@@ -83,6 +87,7 @@ export interface Notice {
     content: string;
     title: string;
     isGlobal?: boolean;
+    audience: 'user' | 'manager' | 'both';
 }
 
 

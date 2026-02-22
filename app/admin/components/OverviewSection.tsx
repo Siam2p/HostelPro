@@ -23,10 +23,10 @@ export default function OverviewSection() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
                 {stats.map((stat, idx) => (
-                    <Card key={idx} className="p-6 border-none shadow-xl shadow-slate-200/50 rounded-4xl bg-white relative overflow-hidden group">
+                    <Card key={idx} tabIndex={0} aria-label={`${stat.label}: ${stat.value}. Trend: ${stat.trend}`} className="p-6 border-none shadow-xl shadow-slate-200/50 rounded-4xl bg-white relative overflow-hidden group focus-visible:ring-2 focus-visible:ring-primary-dip outline-none">
                         <div className={`absolute top-0 right-0 w-24 h-24 ${stat.color} opacity-5 rounded-bl-[4rem] transition-transform duration-500 group-hover:scale-110`}></div>
                         <div className="flex justify-between items-start mb-4">
-                            <div className={`${stat.color} p-4 rounded-2xl text-white text-2xl shadow-lg ${stat.color === 'bg-primary-light' ? 'shadow-primary-light/20' : 'shadow-primary/20'}`}>
+                            <div aria-hidden="true" className={`${stat.color} p-4 rounded-2xl text-white text-2xl shadow-lg ${stat.color === 'bg-primary-light' ? 'shadow-primary-light/20' : 'shadow-primary/20'}`}>
                                 {stat.icon}
                             </div>
                             <span className={`text-xs font-black px-2 py-1 rounded-lg ${stat.trend.startsWith('+') ? 'bg-bg-subtle text-primary' : 'bg-rose-50 text-rose-600'}`}>

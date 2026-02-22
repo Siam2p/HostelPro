@@ -170,11 +170,13 @@ function ManagerDashboardContent() {
                 </div>
             </main>
 
-            <AddHostelModal
-                isOpen={showAddModal}
-                onClose={handleCloseAddModal}
-                editHostelId={editHostelId}
-            />
+            {showAddModal && (
+                <AddHostelModal
+                    key={`${showAddModal}-${editHostelId}`}
+                    onClose={handleCloseAddModal}
+                    editHostelId={editHostelId}
+                />
+            )}
 
             <AddNoticeModal
                 isOpen={showNoticeModal}

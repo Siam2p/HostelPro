@@ -15,6 +15,7 @@ interface DataContextType {
     updateHostel: (hostel: Hostel) => void;
     deleteHostel: (id: number) => void;
     addNotice: (notice: Notice) => void;
+    updateNotice: (notice: Notice) => void;
     deleteNotice: (id: number) => void;
     deleteBooking: (id: number) => void;
     updateBooking: (booking: Booking) => void;
@@ -99,6 +100,10 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         setNotices(prev => [notice, ...prev]);
     };
 
+    const updateNotice = (notice: Notice) => {
+        setNotices(prev => prev.map(n => n.id === notice.id ? notice : n));
+    };
+
     const deleteNotice = (id: number) => {
         setNotices(prev => prev.filter(n => n.id !== id));
     };
@@ -120,7 +125,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
             users, hostels, bookings, notices,
             addBooking, updateBookingStatus, updateBooking, deleteBooking,
             addHostel, updateHostel, deleteHostel,
-            addNotice, deleteNotice,
+            addNotice, updateNotice, deleteNotice,
             addUser, updateUser, deleteUser
         }}>
             {children}

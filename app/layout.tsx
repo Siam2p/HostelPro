@@ -62,6 +62,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { DataProvider } from "@/context/DataContext";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import GlobalNoticeBar from "@/components/GlobalNoticeBar";
 
 // ... imports
 
@@ -102,6 +103,7 @@ export default function RootLayout({
         />
         <AuthProvider>
           <DataProvider>
+            <GlobalNoticeBar />
             <Suspense fallback={<div className="h-16" />}>
               <Navbar />
             </Suspense>
